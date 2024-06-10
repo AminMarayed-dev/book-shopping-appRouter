@@ -4,6 +4,8 @@ import {
   Box,
   Button,
   Card,
+  CardContent,
+  CardMedia,
   Divider,
   IconButton,
   ImageList,
@@ -21,11 +23,15 @@ import React from "react";
 import CustomButton from "@/components/button/CustomButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterIcon from "@mui/icons-material/Twitter";
 function SingleProduct() {
   const [number, setNumber] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
-
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false); // State for description toggle
+  const toggleDescription = () => {
+    setIsDescriptionOpen(!isDescriptionOpen);
+  };
   function addTobasket() {}
 
   const toggleFavorite = () => {
@@ -46,12 +52,59 @@ function SingleProduct() {
     id: "5",
     imageURL: "https://www.30book.com/Media/Book/84633.jpg",
     detail:
-      "ین کتاب راجب حسابان استین کتاب راجب حسابان است ین کتاب راجب حسابان است کتاب راجب ب حسابان است کتاب راجب ب حسابان است کتاب راجب ب حسابان است کتاب راجب ب حسابان است کتاب راجب ب حسابان است  ب حسابان است کتاب راجب حسابان است",
+      "ین کتاب راجب حسابان استین کتاب راجب حسابان است ین کتاب راجب حسابان است کتاب راجب ب  کتاب راجب حسابان است",
     price: 5000,
     role: "کاربر",
     genre: "ترسناک",
     Ages: "نوجوان",
     detsail: "",
+  };
+
+  const books = [
+    {
+      name: "Book 1",
+      price: 1000,
+      detail: "Detail 1",
+      genre: "Genre 1",
+      imageURL:
+        "https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg",
+    },
+    {
+      name: "Book 2",
+      price: 2000,
+      detail: "Detail 2",
+      genre: "Genre 2",
+      imageURL:
+        "https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg",
+    },
+    {
+      name: "Book 3",
+      price: 3000,
+      detail: "Detail 3",
+      genre: "Genre 3",
+      imageURL:
+        "https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg",
+    },
+    {
+      name: "Book 4",
+      price: 4000,
+      detail: "Detail 4",
+      genre: "Genre 4",
+      imageURL:
+        "https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg",
+    },
+  ];
+
+  const nextBooks = () => {
+    if (currentIndex + 2 < books.length) {
+      setCurrentIndex((prevIndex) => prevIndex + 2);
+    }
+  };
+
+  const prevBooks = () => {
+    if (currentIndex - 2 >= 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 2);
+    }
   };
 
   return (
@@ -85,103 +138,221 @@ function SingleProduct() {
       </Box>
 
       {/* description */}
-      <Box sx={{ boxShadow: 2, px: 2, borderRadius: "4px", backgroundColor: "white" , mx:2 , mt:2}}>
-    <Box>
-        <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
-          {data.name}
-        </Typography>
-      </Box>
-      {/* rate */}
-      <Box sx={{ display: "flex", gap: "20px", mt: "10px", mb: "20px" }}>
-        {" "}
-        <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-        <Typography sx={{ color: "gray" }}>دیدگاه 0 کاربر</Typography>
-      </Box>
-      {/* price */}
-      <Typography sx={{ color: "blue", fontSize: "20px", fontWeight: "bold" }}>
-        {data.price + " "} ریال
-      </Typography>
-      {/* detail */}
-      <Typography sx={{ color: "gray", mt: "10px" }}>{data.detail}</Typography>
-
-      {/* add basket */}
-      <Box sx={{display : "flex" , gap : "10px" , my:"10px"}}>
+      <Box
+        sx={{
+          boxShadow: 2,
+          px: 2,
+          borderRadius: "4px",
+          backgroundColor: "white",
+          mx: 2,
+          mt: 2,
+        }}
+      >
+        <Box>
+          <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+            {data.name}
+          </Typography>
+        </Box>
+        {/* rate */}
         <Box
           sx={{
             display: "flex",
             flexDirection: "row",
-            border: "1px solid #000", 
-            borderRadius: "4px", 
-            backgroundColor: "white", 
+            alignItems: "center", // Center vertically
+            gap: "10px",
+            mt: "10px",
+            mb: "20px",
           }}
         >
+          <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
           <Box
             sx={{
-              borderRight: "1px solid #000",
-              padding: "8px",
-              "&:hover": { backgroundColor: "blue", color: "white" },
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <CustomButton text="-" handleClick={subtractFromNumber} sx={{"&:hover":{color : "white"}}}/>
+            <Typography sx={{ color: "gray" }}>(دیدگاه 0 کاربر)</Typography>
           </Box>
+        </Box>
+        {/* price */}
+        <Typography
+          sx={{ color: "blue", fontSize: "20px", fontWeight: "bold" }}
+        >
+          {data.price + " "} ریال
+        </Typography>
+        {/* detail */}
+        <Typography sx={{ color: "gray", mt: "10px" }}>
+          {data.detail}
+        </Typography>
+
+        {/* add basket */}
+        <Box sx={{ display: "flex", gap: "10px", my: "10px" }}>
           <Box
             sx={{
-              padding: "8px",
+              display: "flex",
+              flexDirection: "row",
+              border: "1px solid gray",
+              borderRadius: "4px",
+              backgroundColor: "white",
+            }}
+          >
+            <Box
+              sx={{
+                width: "40px",
+
+                borderRight: "1px solid gray",
+                padding: "8px",
+                justifyContent: "center",
+                display: "flex",
+
+                "&:hover": { backgroundColor: "blue", color: "white" },
+              }}
+            >
+              <CustomButton
+                text="-"
+                handleClick={subtractFromNumber}
+                sx={{ color: "gray", "&:hover": { color: "white" } }}
+              />
+            </Box>
+
+            <Box
+              sx={{
+                padding: "8px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="h5" sx={{ color: "gray" }}>
+                {number}
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                width: "40px",
+                borderLeft: "1px solid gray",
+                display: "flex",
+                justifyContent: "center",
+                "&:hover": { backgroundColor: "blue", color: "white" },
+              }}
+            >
+              <CustomButton
+                text="+"
+                handleClick={addToNumber}
+                sx={{
+                  color: "gray",
+                  width: "100%",
+                  display: "flex",
+                  "&:hover": { color: "white" },
+                }}
+              />
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              bgcolor: "blue",
+              color: "white",
+              p: "5px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Typography variant="h5">{number}</Typography>
-          </Box>
-          <Box
-            sx={{
-              borderLeft: "1px solid #000",
-              padding: "8px",
-              "&:hover": { backgroundColor: "blue", color: "white" },
-            }}
-          >
-            <CustomButton text="+" handleClick={addToNumber} sx={{"&:hover":{color : "white"}}}/>
+            {" "}
+            <CustomButton
+              text={"افزودن به سبد خرید"}
+              handleClick={addTobasket}
+              sx={{ fontSize: "15px", fontWeight: "bold", color: "white" }}
+            />
           </Box>
         </Box>
 
-        <Box sx={{bgcolor:"blue" , color : "white" , p : "5px"  ,    display: "flex",
-              alignItems: "center",
-              justifyContent: "center",}}>
-          {" "}
-          <CustomButton text={"افزودن به سبد خرید"} handleClick={addTobasket} sx={{fontSize: "15px", fontWeight: "bold" , color: "white"}} />
+        {/* wishlist */}
+        <Box sx={{ display: "flex", gap: "5px", alignItems: "center" }}>
+          <IconButton onClick={toggleFavorite}>
+            {isFavorite ? (
+              <FavoriteIcon sx={{ color: "red" }} />
+            ) : (
+              <FavoriteBorderIcon sx={{ color: "black" }} />
+            )}
+          </IconButton>
+          <Typography>افزودن به علاقه مندی</Typography>
+        </Box>
+
+        <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
+
+        <Box sx={{ display: "flex", gap: "5px" }}>
+          <Typography sx={{ fontWeight: "bold" }}>دسته :</Typography>
+          <Typography sx={{}}>ژانر {data.genre} </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "5px",
+            alignItems: "center",
+            mt: "10px",
+            mb: "30px",
+          }}
+        >
+          <Typography sx={{ fontWeight: "bold" }}>دنبال کنید :</Typography>
+          <TwitterIcon />
         </Box>
       </Box>
+      <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
-
-{/* wishlist */}
-     <Box sx={{display : "flex" , gap:"5px" , alignItems:"center"}}>
-     <IconButton onClick={toggleFavorite}>
-        {isFavorite ? (
-          <FavoriteIcon sx={{ color: "red" }} />
-        ) : (
-          <FavoriteBorderIcon sx={{ color: "black" }} />
+      <Box>
+        <Typography variant="body1" onClick={toggleDescription}>
+          توضیحات
+        </Typography>
+        {isDescriptionOpen && (
+          <Typography variant="body2">
+            کتاب تک جلدی هارلی کویین یکی از بهترین آثار در دنیای دی سی به قلم
+            پاول دینی و پت کدیگنروانه بازار شده است.
+          </Typography>
         )}
-      </IconButton>
-      <Typography>افزودن به علاقه مندی</Typography>
-     </Box>
+      </Box>
+      <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
-     <Divider sx={{width:"80%" , mx:"auto" , my:"20px"}}/>
+      <Typography sx={{ fontWeight: "bold", fontSize: "25px", mt: "10px" }}>
+        محصولات مرتبط
+      </Typography>
 
-
-<Box sx={{display : "flex" , gap:"5px"}}>
-  <Typography sx={{fontWeight:"bold"}}>دسته :</Typography>
-  <Typography sx={{}}>ژانر {data.genre}  </Typography>
-</Box>
-<Box sx={{display : "flex" , gap:"5px" , alignItems:"center", mt:"10px" , mb:"30px"}}>
-  <Typography sx={{fontWeight:"bold" }}>دنبال کنید :</Typography>
-  <TwitterIcon/>  
-</Box>
-
-    </Box>
-
-
-<Typography sx={{fontWeight: "bold" , fontSize:"25px",mt:"10px"}}>محصولات مرتبط</Typography>
+      {/*  swiper image*/}
+      <Box sx={{ display: "flex", alignItems: "center" }}>
+        <IconButton onClick={prevBooks} disabled={currentIndex === 0}>
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+        <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
+          {books.slice(currentIndex, currentIndex + 2).map((book, index) => (
+            <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={book.imageURL}
+                alt={book.name}
+              />
+              <CardContent>
+                <Typography variant="h6">{book.name}</Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {book.detail}
+                </Typography>
+                <Typography variant="h6" color="primary">
+                  {book.price} ریال
+                </Typography>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
+        <IconButton
+          onClick={nextBooks}
+          disabled={currentIndex + 2 >= books.length}
+        >
+          <KeyboardArrowRightIcon />
+        </IconButton>
+      </Box>
     </Box>
   );
 }
