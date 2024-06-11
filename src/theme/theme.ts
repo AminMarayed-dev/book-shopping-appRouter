@@ -1,3 +1,4 @@
+import { pink } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
 
 
@@ -18,6 +19,12 @@ const theme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
+  },
+  palette: {
+    primary: {
+      main: '#fff',
+    },
+    secondary: pink,
   },
 });
 
