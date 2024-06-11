@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ThemeContextProvider from "@/context/ThemeContextProvider";
-
-
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { CssBaseline } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,12 @@ export default function RootLayout({
   return (
     <html lang="fn" dir="rtl">
       <body>
-        <ThemeContextProvider>{children}</ThemeContextProvider>
+        <ThemeContextProvider>
+          <CssBaseline/>
+          <Header />
+          {children}
+          <Footer />
+        </ThemeContextProvider>
       </body>
     </html>
   );
