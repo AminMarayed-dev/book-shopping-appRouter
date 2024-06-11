@@ -18,17 +18,24 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import GridViewIcon from "@mui/icons-material/GridView";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import CustomButton from "@/components/button/CustomButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 function SingleProduct() {
   const [number, setNumber] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false); // State for description toggle
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [mainImage, setMainImage] = useState("");
+
+  const handleImageClick = (image) => {
+    setMainImage(image);
+  };
   const toggleDescription = () => {
     setIsDescriptionOpen(!isDescriptionOpen);
   };
@@ -38,19 +45,20 @@ function SingleProduct() {
     setIsFavorite((prevFavorite) => !prevFavorite);
   };
   const subtractFromNumber = () => {
-    console.log("first");
     setNumber((prevNumber) => prevNumber - 1);
   };
 
   const addToNumber = () => {
-    console.log("first");
-
     setNumber((prevNumber) => prevNumber + 1);
   };
   const data = {
     name: "کتاب بسه دیگه اثر احسان محمدی",
     id: "5",
-    imageURL: "https://www.30book.com/Media/Book/84633.jpg",
+    imageURL: [
+      "https://www.30book.com/Media/Book/84633.jpg",
+      "https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg",
+      "https://www.30book.com/Media/Book/84633.jpg",
+    ],
     detail:
       "ین کتاب راجب حسابان استین کتاب راجب حسابان است ین کتاب راجب حسابان است کتاب راجب ب  کتاب راجب حسابان است",
     price: 5000,
@@ -59,6 +67,12 @@ function SingleProduct() {
     Ages: "نوجوان",
     detsail: "",
   };
+
+  useEffect(() => {
+    if (data && data.imageURL && data.imageURL.length > 0) {
+      setMainImage(data.imageURL[0]);
+    }
+  }, [data.name]);
 
   const books = [
     {
@@ -110,11 +124,29 @@ function SingleProduct() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box
-        sx={{ display: "flex", justifyContent: "space-between", mb: "10px" }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          mb: "10px",
+          alignItems: "center",
+        }}
       >
-        <Box>
-          خانه / رده سنی {data.Ages} / ژانر {data.genre}
+        <Box sx={{ display: "flex" }}>
+          <Typography sx={{ fontSize: "13.3px" }}>خانه</Typography>
+          <Typography sx={{ fontSize: "13.3px" }}>/</Typography>
+          <Typography sx={{ fontSize: "13.3px", textWrap: "nowrap" }}>
+            {" "}
+            رده سنی {data.Ages}
+          </Typography>
+          <Typography sx={{ fontSize: "13.3px" }}>/</Typography>
+          <Typography
+            sx={{ fontSize: "13.3px", textWrap: "nowrap", fontWeight: "bold" }}
+          >
+            {" "}
+            ژانر {data.genre}
+          </Typography>
         </Box>
+
         <Box>
           <KeyboardArrowRightIcon />
           <GridViewIcon />
@@ -124,7 +156,7 @@ function SingleProduct() {
       </Box>
 
       {/* image */}
-      <Box sx={{ mb: "40px" }}>
+      {/* <Box sx={{ mb: "40px" }}>
         <ImageList
           sx={{
             objectFit: "cover",
@@ -135,6 +167,27 @@ function SingleProduct() {
         >
           <img src="https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg" />
         </ImageList>
+      </Box> */}
+
+      <Box sx={{ mb: "20px", width: "100%", textAlign: "center" }}>
+        <img
+          src={mainImage}
+          alt="main product"
+          style={{ width: "100%", height: "auto" }}
+        />
+      </Box>
+
+      {/* Thumbnail images */}
+      <Box sx={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+        {data.imageURL.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`thumbnail ${index}`}
+            style={{ width: "100px", height: "100px", cursor: "pointer" }}
+            onClick={() => handleImageClick(image)}
+          />
+        ))}
       </Box>
 
       {/* description */}
@@ -149,10 +202,11 @@ function SingleProduct() {
         }}
       >
         <Box>
-          <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>
+          <Typography sx={{ fontSize: "18px", fontWeight: "bold" }}>
             {data.name}
           </Typography>
         </Box>
+
         {/* rate */}
         <Box
           sx={{
@@ -172,22 +226,32 @@ function SingleProduct() {
               alignItems: "center",
             }}
           >
-            <Typography sx={{ color: "gray" }}>(دیدگاه 0 کاربر)</Typography>
+            <Typography sx={{ color: "gray" , fontSize:"14px" }}>(دیدگاه 0 کاربر)</Typography>
           </Box>
         </Box>
+
         {/* price */}
         <Typography
-          sx={{ color: "blue", fontSize: "20px", fontWeight: "bold" }}
+          sx={{ color: "blue", fontSize: "18px", fontWeight: "bold" }}
         >
           {data.price + " "} ریال
         </Typography>
+
         {/* detail */}
-        <Typography sx={{ color: "gray", mt: "10px" }}>
+        <Typography sx={{ color: "gray", mt: "10px", fontSize: "14px" }}>
           {data.detail}
         </Typography>
 
         {/* add basket */}
-        <Box sx={{ display: "flex", gap: "10px", my: "10px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            my: "10px",
+            height: "30px",
+            textAlign: "center",
+          }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -212,7 +276,7 @@ function SingleProduct() {
               <CustomButton
                 text="-"
                 handleClick={subtractFromNumber}
-                sx={{ color: "gray", "&:hover": { color: "white" } }}
+                sx={{ fontSize: "13px" ,  color: "gray", "&:hover": { color: "white" } }}
               />
             </Box>
 
@@ -222,9 +286,19 @@ function SingleProduct() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                textAlign: "center",
               }}
             >
-              <Typography variant="h5" sx={{ color: "gray" }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  width: "20px",
+                  fontSize: "14px",
+                  color: "gray",
+                  textAlign: "center",
+                  m: "auto",
+                }}
+              >
                 {number}
               </Typography>
             </Box>
@@ -241,7 +315,7 @@ function SingleProduct() {
               <CustomButton
                 text="+"
                 handleClick={addToNumber}
-                sx={{
+                sx={{fontSize: "13px",
                   color: "gray",
                   width: "100%",
                   display: "flex",
@@ -265,7 +339,7 @@ function SingleProduct() {
             <CustomButton
               text={"افزودن به سبد خرید"}
               handleClick={addTobasket}
-              sx={{ fontSize: "15px", fontWeight: "bold", color: "white" }}
+              sx={{ fontSize: "13px", fontWeight: "bold", color: "white" }}
             />
           </Box>
         </Box>
@@ -279,15 +353,16 @@ function SingleProduct() {
               <FavoriteBorderIcon sx={{ color: "black" }} />
             )}
           </IconButton>
-          <Typography>افزودن به علاقه مندی</Typography>
+          <Typography sx={{fontSize: "14px"}}>افزودن به علاقه مندی</Typography>
         </Box>
 
         <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
         <Box sx={{ display: "flex", gap: "5px" }}>
-          <Typography sx={{ fontWeight: "bold" }}>دسته :</Typography>
-          <Typography sx={{}}>ژانر {data.genre} </Typography>
+          <Typography sx={{ fontSize: "14px",fontWeight: "bold" }}>دسته :</Typography>
+          <Typography sx={{fontSize: "14px",color : "gray"}}>ژانر {data.genre} </Typography>
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -297,23 +372,47 @@ function SingleProduct() {
             mb: "30px",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>دنبال کنید :</Typography>
+          <Typography sx={{fontSize: "14px", fontWeight: "bold" }}>دنبال کنید :</Typography>
           <TwitterIcon />
         </Box>
       </Box>
+
       <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
-      <Box>
-        <Typography variant="body1" onClick={toggleDescription}>
-          توضیحات
-        </Typography>
+      {/* description */}
+      <Box
+        sx={{
+          display: "flex",
+          cursor: "pointer",
+          flexDirection: "column",
+          mt: "10px",
+          mb: "10px",
+          borderRadius: "4px",
+          padding: "8px",
+          gap: "10px",
+          backgroundColor: "#f0f0f0",
+          mx: "20px",
+        }}
+      >
+        <Box sx={{ display: "flex" }}>
+          {isDescriptionOpen ? <ExpandLessIcon  sx={{color:"gray"}} /> : <ExpandMoreIcon  sx={{color:"gray"}}/>}
+
+          <Typography
+            variant="body1"
+            sx={{ fontSize: "16px",color: "blue" }}
+            onClick={toggleDescription}
+          >
+            توضیحات
+          </Typography>
+        </Box>
         {isDescriptionOpen && (
-          <Typography variant="body2">
+          <Typography variant="body2" sx={{}}>
             کتاب تک جلدی هارلی کویین یکی از بهترین آثار در دنیای دی سی به قلم
             پاول دینی و پت کدیگنروانه بازار شده است.
           </Typography>
         )}
       </Box>
+
       <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
       <Typography sx={{ fontWeight: "bold", fontSize: "25px", mt: "10px" }}>
