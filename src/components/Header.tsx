@@ -11,10 +11,13 @@ import InputBase from "@mui/material/InputBase";
 import PersonIcon from "@mui/icons-material/Person";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import Image from "next/image";
+import { Drawer } from "@mui/material";
+import { useState } from "react";
+import DrawerList from "./home/DrawerList";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
-  justifyContent:'center',
+  justifyContent: "center",
   paddingTop: theme.spacing(1),
   paddingBottom: theme.spacing(2),
   // Override media queries injected by theme.mixins.toolbar
@@ -37,7 +40,7 @@ const Search = styled("div")(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: "auto",
   },
-  marginTop:'1rem'
+  marginTop: "1rem",
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -66,6 +69,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function Header() {
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
@@ -76,10 +84,23 @@ function Header() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
-          <Box sx={{ flexGrow: 1, display: "flex",flexDirection:'column', alignItems: "center", ml:3, mt:.5 }}>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            <DrawerList toggleDrawer={toggleDrawer}/>
+          </Drawer>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              ml: 3,
+              mt: 0.5,
+            }}
+          >
             <Image
               src="https://vidapub.com/wp-content/uploads/2021/05/logo-6.png"
               alt="Landscape picture"
