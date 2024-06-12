@@ -4,6 +4,7 @@ import ThemeContextProvider from "@/context/ThemeContextProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CssBaseline } from "@mui/material";
+import QueryContextProvider from "@/context/QueryContextProvider";
 
 export const metadata: Metadata = {
   title: "کتاب ویدا",
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="fn" dir="rtl">
       <body>
-        <ThemeContextProvider>
-          <CssBaseline/>
-          <Header />
-          {children}
-          <Footer />
-        </ThemeContextProvider>
+        <QueryContextProvider>
+          <ThemeContextProvider>
+            <CssBaseline />
+            <Header />
+            {children}
+            <Footer />
+          </ThemeContextProvider>
+        </QueryContextProvider>
       </body>
     </html>
   );
