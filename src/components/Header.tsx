@@ -68,14 +68,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <StyledToolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2, bgcolor: "primary" }}
+            sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>
