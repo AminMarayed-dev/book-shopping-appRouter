@@ -23,8 +23,10 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#fff',
+      dark:'#EFEFEF85'
     },
     secondary: pink,
+    
   },
 });
 
