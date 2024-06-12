@@ -6,7 +6,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "vidapub.com",
         port: "",
-        pathname: "/wp-content/uploads/2021/05/**",
+        pathname: "/wp-content/uploads/****/**/**",
       },
     ],
   },
