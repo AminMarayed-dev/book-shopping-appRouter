@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, ChangeEvent } from "react";
+import Image, { StaticImageData } from "next/image";
 import {
   Container,
   Typography,
@@ -13,33 +14,48 @@ import {
   TableRow,
   Paper,
   TablePagination,
+  Box,
+  IconButton,
 } from "@mui/material";
+import logo from "../../../public/redlogo.svg";
+import { Logout, Home } from "@mui/icons-material";
 import axios from "axios";
 
 interface Book {
   name: string;
   writer: string;
-  price: number;
+  price: string;
   genre: string;
   ageGroup: string;
-  isbn: number;
-  imageUrl: string;
+  isbn: string;
+  imageUrl: string[];
   description: string;
 }
 
+const myLogo: StaticImageData = logo;
 const Dashboard: React.FC = () => {
+  useEffect(() => {
+    // Set the background color when the component mounts
+    document.body.style.backgroundColor = "#162e54";
+    // Cleanup function to reset the background color when the component unmounts
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
+  }, []);
+
   const [books, setBooks] = useState<Book[]>([]);
   const [newBook, setNewBook] = useState<Book>({
     name: "",
     writer: "",
-    price: 0,
+    price: "",
     genre: "",
     ageGroup: "",
-    isbn: 0,
-    imageUrl: "",
+    isbn: "",
+    imageUrl: [],
     description: "",
   });
   const [page, setPage] = useState(0);
+  const [uploadSuccess, setUploadSuccess] = useState<string[]>(["", "", ""]);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -61,6 +77,50 @@ const Dashboard: React.FC = () => {
     });
   };
 
+  const inputStyle = {
+    backgroundColor: "white",
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
+    "& .MuiInputBase-input": {
+      color: "#162e54",
+    },
+    "& .MuiInputLabel-root": {
+      color: "#162e54",
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "red",
+    },
+  };
+
+  const handleFileUpload = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        const updatedImageUrls = [...newBook.imageUrl];
+        updatedImageUrls[index] = base64String;
+        setNewBook({
+          ...newBook,
+          imageUrl: updatedImageUrls,
+        });
+        const updatedUploadSuccess = [...uploadSuccess];
+        updatedUploadSuccess[index] = "Upload successful!";
+        setUploadSuccess(updatedUploadSuccess);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddBook = async () => {
     try {
       const response = await axios.post("http://localhost:3000/books", newBook);
@@ -68,13 +128,14 @@ const Dashboard: React.FC = () => {
       setNewBook({
         name: "",
         writer: "",
-        price: 0,
+        price: "",
         genre: "",
         ageGroup: "",
-        isbn: 0,
-        imageUrl: "",
+        isbn: "",
+        imageUrl: [],
         description: "",
       });
+      setUploadSuccess(["", "", ""]);
     } catch (error) {
       console.error("There was an error adding the book!", error);
     }
@@ -82,129 +143,191 @@ const Dashboard: React.FC = () => {
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
+    console.log(event);
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        داشبورد کتاب فروشی
-      </Typography>
-
-      <TableContainer component={Paper} sx={{ marginBottom: 4 }}>
-        <Table sx={{ backgroundColor: "pink" }}>
-          <TableHead>
-            <TableRow>
-              <TableCell>نام کتاب</TableCell>
-              <TableCell>نویسنده</TableCell>
-              <TableCell>ژانر</TableCell>
-              <TableCell>گروه سنی</TableCell>
-              <TableCell>شابک</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {books.slice(page * 5, page * 5 + 5).map((book, index) => (
-              <TableRow key={index}>
-                <TableCell>{book.name}</TableCell>
-                <TableCell>{book.writer}</TableCell>
-                <TableCell>{book.genre}</TableCell>
-                <TableCell>{book.ageGroup}</TableCell>
-                <TableCell>{book.isbn}</TableCell>
+    <>
+      <Box
+        sx={{
+          backgroundColor: "#162e54",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          color: "#db3249",
+        }}
+      >
+        <Box display="flex" alignItems="center" m={2}>
+          <Image src={myLogo} alt="Example Image" width={50} />
+          <Typography>دَشبورد</Typography>
+        </Box>
+        <Box ml={3}>
+          <IconButton aria-label="logout" onClick={() => (location.href = "/")}>
+            <Home style={{ color: "#db3249" }} />
+          </IconButton>
+          <IconButton
+            aria-label="logout"
+            onClick={() => (location.href = "/register")}
+          >
+            <Logout style={{ color: "#db3249" }} />
+          </IconButton>
+        </Box>
+      </Box>
+      <Container>
+        <Typography variant="h6" color="white" my={2}>
+          لیست کتاب های موجود در سایت
+        </Typography>
+      </Container>
+      <Container>
+        <TableContainer component={Paper} sx={{ mb: 4, margin: "auto" }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>نام کتاب</TableCell>
+                <TableCell>نویسنده</TableCell>
+                <TableCell>ژانر</TableCell>
+                <TableCell>گروه سنی</TableCell>
+                <TableCell>شابک</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[]}
-          component="div"
-          count={books.length}
-          rowsPerPage={5}
-          page={page}
-          onPageChange={handleChangePage}
-        />
-      </TableContainer>
-
-      <Typography variant="h5" gutterBottom>
-        افزودن کتاب جدید
-      </Typography>
-      <form>
-        <TextField
-          label="نام"
-          name="name"
-          value={newBook.name}
-          onChange={handleInputChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="نویسنده"
-          name="writer"
-          value={newBook.writer}
-          onChange={handleInputChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="قیمت"
-          name="price"
-          value={newBook.price}
-          onChange={handleInputChange}
-          type="number"
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="ژانر"
-          name="genre"
-          value={newBook.genre}
-          onChange={handleInputChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="گروه سنی"
-          name="ageGroup"
-          value={newBook.ageGroup}
-          onChange={handleInputChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="شابک"
-          name="isbn"
-          value={newBook.isbn}
-          onChange={handleInputChange}
-          type="number"
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="آدرس تصویر"
-          name="imageUrl"
-          value={newBook.imageUrl}
-          onChange={handleInputChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="توضیحات"
-          name="description"
-          value={newBook.description}
-          onChange={handleInputChange}
-          fullWidth
-          margin="normal"
-          multiline
-          rows={4}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleAddBook}
-          sx={{ margin: 2 }}
-        >
-          افزودن کتاب
-        </Button>
-      </form>
-    </Container>
+            </TableHead>
+            <TableBody>
+              {books.slice(page * 5, page * 5 + 5).map((book, index) => (
+                <TableRow key={index}>
+                  <TableCell>{book.name}</TableCell>
+                  <TableCell>{book.writer}</TableCell>
+                  <TableCell>{book.genre}</TableCell>
+                  <TableCell>{book.ageGroup}</TableCell>
+                  <TableCell>{book.isbn}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[]}
+            component="div"
+            count={books.length}
+            rowsPerPage={5}
+            page={page}
+            onPageChange={handleChangePage}
+          />
+        </TableContainer>
+      </Container>
+      <Container
+        sx={{
+          backgroundColor: "#162e54",
+          my: "2rem",
+          py: "2rem",
+          border: "5px solid",
+          borderColor: "#db3249",
+        }}
+      >
+        <Typography variant="h5" gutterBottom color="white">
+          افزودن کتاب جدید
+        </Typography>
+        <form>
+          <Box display="flex" flexDirection="column" alignItems="flex-start">
+            <TextField
+              label="نام"
+              name="name"
+              value={newBook.name}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={inputStyle}
+            />
+            <TextField
+              label="نویسنده"
+              name="writer"
+              value={newBook.writer}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={inputStyle}
+            />
+            <TextField
+              label="قیمت"
+              name="price"
+              value={newBook.price}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={inputStyle}
+            />
+            <TextField
+              label="ژانر"
+              name="genre"
+              value={newBook.genre}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={inputStyle}
+            />
+            <TextField
+              label="گروه سنی"
+              name="ageGroup"
+              value={newBook.ageGroup}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={inputStyle}
+            />
+            <TextField
+              label="شابک"
+              name="isbn"
+              value={newBook.isbn}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              sx={inputStyle}
+            />
+            <TextField
+              label="توضیحات"
+              name="description"
+              value={newBook.description}
+              onChange={handleInputChange}
+              fullWidth
+              margin="normal"
+              multiline
+              rows={4}
+              sx={inputStyle}
+            />
+            <Typography mt={2} mb={1} color="white">
+              عکس اصلی را بارگذاری کنید:
+            </Typography>
+            <input type="file" onChange={(e) => handleFileUpload(e, 0)} />
+            {uploadSuccess[0] && (
+              <Typography color="green">{uploadSuccess[0]}</Typography>
+            )}
+            <Typography mt={3} mb={1} color="white">
+              عکس روی جلد را بارگذاری کنید:
+            </Typography>
+            <input type="file" onChange={(e) => handleFileUpload(e, 1)} />
+            {uploadSuccess[1] && (
+              <Typography color="green">{uploadSuccess[1]}</Typography>
+            )}
+            <Typography mt={3} mb={1} color="white">
+              عکس پشت جلد را بارگذاری کنید:
+            </Typography>
+            <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
+            {uploadSuccess[2] && (
+              <Typography color="green">{uploadSuccess[2]}</Typography>
+            )}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleAddBook}
+              sx={{
+                backgroundColor: "#db3249",
+                mt: "3rem",
+                "&:hover": { backgroundColor: "#db3249d6" },
+              }}
+            >
+              افزودن کتاب
+            </Button>
+          </Box>
+        </form>
+      </Container>
+    </>
   );
 };
 
