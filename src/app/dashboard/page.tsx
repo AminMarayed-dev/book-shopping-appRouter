@@ -18,7 +18,7 @@ import {
   IconButton,
 } from "@mui/material";
 import logo from "../../../public/redlogo.svg";
-import { Logout, Home} from "@mui/icons-material";
+import { Logout, Home } from "@mui/icons-material";
 import axios from "axios";
 
 interface Book {
@@ -76,15 +76,13 @@ const Dashboard: React.FC = () => {
     });
   };
   const inputStyle = {
+    backgroundColor: "white",
     "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        backgroundColor: "white",
-      },
       "&:hover fieldset": {
-        borderColor: "#162e54",
+        borderColor: "white",
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#162e54",
+        borderColor: "white",
       },
     },
     "& .MuiInputBase-input": {
