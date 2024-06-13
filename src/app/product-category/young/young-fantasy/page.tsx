@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Divider,
   Grid,
   ImageList,
   Typography,
@@ -14,9 +15,12 @@ import { useEffect, useState } from "react";
 
 function page() {
   const [books, setBooks] = useState([]);
-
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const handleCardHover = (index) => {
+    setHoveredIndex(index);
+  };
   async function GetBook() {
-    const res = await axios.get("http://localhost:3000/books?ageGroup=جوان&genre=عاشقانه");
+    const res = await axios.get("http://localhost:3000/books?ageGroup=جوان&genre=فانتزی");
     console.log(res.data)
     return res.data;
   }
@@ -30,21 +34,23 @@ function page() {
 
   return (
     <Box>
-         <Box sx={{ display: "flex" }}>
-          <Typography sx={{ fontSize: "13.3px" }}>خانه</Typography>
-          <Typography sx={{ fontSize: "13.3px" }}>/</Typography>
-          <Typography sx={{ fontSize: "13.3px", textWrap: "nowrap" }}>
-            {" "}
-            رده سنی {books.ageGroup}
+      <Box sx={{ display: "flex" , gap:1 , mt:2 , mx:2}}>
+         <Typography sx={{ fontSize: "13.3px" , color:"gray"}} onClick={()=>location.href="/"}>خانه</Typography>
+          <Typography sx={{ fontSize: "13.3px", color:"gray" }}>/</Typography>
+          
+          <Typography sx={{ fontSize: "13.3px", textWrap: "nowrap", color:"gray" }} onClick={()=>location.href="/product-category/young"}>
+            رده سنی جوان
           </Typography>
-          <Typography sx={{ fontSize: "13.3px" }}>/</Typography>
+          <Typography sx={{ fontSize: "13.3px" , color:"gray"}}>/</Typography>
           <Typography
             sx={{ fontSize: "13.3px", textWrap: "nowrap", fontWeight: "bold" }}
           >
             {" "}
-            ژانر {books.genre}
+            ژانر فانتزی
           </Typography>
         </Box>
+        <Divider sx={{my:2}}/>
+
       {/* cards */}
       <Box
         sx={{
@@ -55,22 +61,29 @@ function page() {
         }}
       >
         {books.map((book, index) => (
-          <Card
-            key={index}
-            sx={{
-              flex: "0 0 45%",
-              margin: "10px",
-              boxShadow: "none",
-              textAlign: "center",
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="80px"
-              width="80px"
-              image={book.imageUrl[0]}
-              alt={book.name}
-            />
+         <Card
+         key={index}
+         sx={{
+           flex: "0 0 45%",
+           margin: "10px",
+           boxShadow: "none",
+           textAlign: "center",
+         }}  
+            onMouseEnter={() => handleCardHover(index)}
+         onMouseLeave={() => handleCardHover(-1)}
+       >
+    
+         <CardMedia
+           component="img"
+           height="80px"
+           width="80px"
+           image={hoveredIndex === index ? book.imageUrl[1] : book.imageUrl[0]}
+           alt={book.name}
+           sx={{
+             transition: 'transform 0.3s', 
+             transform: hoveredIndex === index ? 'scale(1.1)' : 'scale(1)', 
+           }}            
+         />
             <CardContent>
               <Typography variant="h6" sx={{ fontSize: "14px" }}>
                 {book.name}

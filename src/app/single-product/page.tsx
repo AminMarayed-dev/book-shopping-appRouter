@@ -159,19 +159,7 @@ function SingleProduct() {
         <Box></Box>
       </Box>
 
-      {/* image */}
-      {/* <Box sx={{ mb: "40px" }}>
-        <ImageList
-          sx={{
-            objectFit: "cover",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Image src={logo}></Image>{" "}
-        </ImageList>
-      </Box> */}
+
 
       <Box sx={{ mb: "20px", width: "100%", textAlign: "center" }}>
         <img
