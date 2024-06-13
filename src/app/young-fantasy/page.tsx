@@ -16,7 +16,8 @@ function page() {
   const [books, setBooks] = useState([]);
 
   async function GetBook() {
-    const res = await axios.get(`http://localhost:3000/books?genre=فانتزی`);
+    const res = await axios.get(`http://localhost:3000/books?genre=وحشت`);
+    console.log(res.data)
     return res.data;
   }
 
@@ -52,7 +53,7 @@ function page() {
               component="img"
               height="80px"
               width="80px"
-              image={book.imageUrl}
+              image={book.imageUrl[0]}
               alt={book.name}
             />
             <CardContent>
@@ -74,7 +75,7 @@ function page() {
 
       {/* Description */}
       <Box sx={{ px:2}}>
-        <Typography sx={{fontSize:"36px" ,color:"blue" , textAlign:"center"}}>کتاب داستان فانتزی جوان انتشارات ویدا</Typography>
+        <Typography sx={{fontSize:"36px" ,color:"blue" , textAlign:"center", py:6}}>کتاب داستان فانتزی جوان انتشارات ویدا</Typography>
 
         <Box
           sx={{fontSize:"18px" ,
@@ -88,7 +89,7 @@ function page() {
               alt=""
             />
           <Box>
-            <Typography sx={{ fontSize: "18px", color: "gray", textAlign: "justify" ,px:2 }}>
+            <Typography sx={{ fontSize: "18px", color: "gray", textAlign: "justify" ,px:2, pt:2 }}>
               کتاب داستان فانتزی جوان به داستان هایی گفته می شود که اتفاقات یا
               دنیاهایی را به تصویر می کشند که یا حقیقی نیستند و یا تا سال ها به
               حقیقت نخواهند پیوست و در جهان بی انتهای اندیشه و رویای نویسنده
@@ -103,10 +104,10 @@ function page() {
               تلاششان را می کنند تا آن ها را از پای در بیاورند. کتاب داستان
               فانتزی جوان ژانری است که شما را به عالم ذهن نویسنده می برد.
             </Typography>{" "}
-            <Typography sx={{ fontWeight: "bold", fontSize: "24px" ,px:2 }}>
+            <Typography sx={{ fontWeight: "bold", fontSize: "24px" ,px:2 , py:2}}>
               بهترین کتاب های فانتزی
             </Typography>
-            <Typography sx={{ fontSize: "18px", color: "gray" , textAlign: "justify",px:2 }}>
+            <Typography sx={{ fontSize: "18px", color: "gray" , textAlign: "justify",px:2 , pb:2}}>
               جی آر آر تالکین، این نویسنده قدر و محبوب را می توان پدربزرگ ژانر
               فانتزی مدرن دانست. او کتاب داستان فانتزی جوان خود را به گونه نوشت
               که تبدیل به یک شاهکار شد. او در حالی که داشت برگه‌ی یکی از
@@ -134,10 +135,10 @@ function page() {
           </Box>
           <Box>
             {" "}
-            <Typography sx={{ fontWeight: "bold", fontSize: "24px" ,px:2 }}>
+            <Typography sx={{ fontWeight: "bold", fontSize: "24px" ,px:2 , py:2}}>
               ژانر فانتزی پرورش دهنده تخیلات و خلاقیت
             </Typography>
-            <Typography sx={{ fontSize: "18px", color: "gray", textAlign: "justify" ,px:2 }}>
+            <Typography sx={{ fontSize: "18px", color: "gray", textAlign: "justify" ,px:2 , pb:2}}>
               قوانین و منطق این جهان ها با قوانین و منطق جهان ما عموما متفاوت
               است ولی هنوز هم قوانین و محدودیت هایی دارند تا قهرمانان و نقش های
               منفی داستان با هم روبرو شوند و بجنگند. کتاب داستان فانتزی جوان با
@@ -167,10 +168,10 @@ function page() {
             />
           <Box>
             {" "}
-            <Typography sx={{ fontWeight: "bold", fontSize: "24px",px:2  }}>
+            <Typography sx={{ fontWeight: "bold", fontSize: "24px",px:2 , py:2 }}>
               دانلود کتاب فانتزی
             </Typography>
-            <Typography sx={{ fontSize: "18px", color: "gray", textAlign: "justify",px:2 }}>
+            <Typography sx={{ fontSize: "18px", color: "gray", textAlign: "justify",px:2 , pb:2}}>
               {" "}
               بی شک در دنیای امروزی ژانر فانتزی بسیار پرطرفدار است و فیلم ها،
               سریال ها و کتاب های بسیاری در این ژانر ارائه شده اند. یک کتاب
