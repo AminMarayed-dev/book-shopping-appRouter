@@ -6,12 +6,13 @@ import Product from "./Product"
 
 
 
+
+
 function ProductWrapper() {
   return (
     <Box>
-        <Product/>
-        <Product/>
-        <Product/>
+        <Product ageGroup="نوجوان"/>
+        <Product ageGroup="جوان"/>
     </Box>
   )
 }
