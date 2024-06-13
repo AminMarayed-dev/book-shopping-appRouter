@@ -26,6 +26,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+
+import logo from "../../assets/image/12.jpg";
+import Image from "next/image";
+
 function SingleProduct() {
   const [number, setNumber] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -165,7 +169,7 @@ function SingleProduct() {
             justifyContent: "center",
           }}
         >
-          <img src="https://vidapub.com/wp-content/uploads/2024/02/harley-quinn-mad-love.jpg" />
+          <Image src={logo}></Image>{" "}
         </ImageList>
       </Box> */}
 
@@ -226,7 +230,9 @@ function SingleProduct() {
               alignItems: "center",
             }}
           >
-            <Typography sx={{ color: "gray" , fontSize:"14px" }}>(دیدگاه 0 کاربر)</Typography>
+            <Typography sx={{ color: "gray", fontSize: "14px" }}>
+              (دیدگاه 0 کاربر)
+            </Typography>
           </Box>
         </Box>
 
@@ -276,7 +282,11 @@ function SingleProduct() {
               <CustomButton
                 text="-"
                 handleClick={subtractFromNumber}
-                sx={{ fontSize: "13px" ,  color: "gray", "&:hover": { color: "white" } }}
+                sx={{
+                  fontSize: "13px",
+                  color: "gray",
+                  "&:hover": { color: "white" },
+                }}
               />
             </Box>
 
@@ -315,7 +325,8 @@ function SingleProduct() {
               <CustomButton
                 text="+"
                 handleClick={addToNumber}
-                sx={{fontSize: "13px",
+                sx={{
+                  fontSize: "13px",
                   color: "gray",
                   width: "100%",
                   display: "flex",
@@ -353,14 +364,20 @@ function SingleProduct() {
               <FavoriteBorderIcon sx={{ color: "black" }} />
             )}
           </IconButton>
-          <Typography sx={{fontSize: "14px"}}>افزودن به علاقه مندی</Typography>
+          <Typography sx={{ fontSize: "14px" }}>
+            افزودن به علاقه مندی
+          </Typography>
         </Box>
 
         <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
         <Box sx={{ display: "flex", gap: "5px" }}>
-          <Typography sx={{ fontSize: "14px",fontWeight: "bold" }}>دسته :</Typography>
-          <Typography sx={{fontSize: "14px",color : "gray"}}>ژانر {data.genre} </Typography>
+          <Typography sx={{ fontSize: "14px", fontWeight: "bold" }}>
+            دسته :
+          </Typography>
+          <Typography sx={{ fontSize: "14px", color: "gray" }}>
+            ژانر {data.genre}{" "}
+          </Typography>
         </Box>
 
         <Box
@@ -372,7 +389,9 @@ function SingleProduct() {
             mb: "30px",
           }}
         >
-          <Typography sx={{fontSize: "14px", fontWeight: "bold" }}>دنبال کنید :</Typography>
+          <Typography sx={{ fontSize: "14px", fontWeight: "bold" }}>
+            دنبال کنید :
+          </Typography>
           <TwitterIcon />
         </Box>
       </Box>
@@ -395,11 +414,15 @@ function SingleProduct() {
         }}
       >
         <Box sx={{ display: "flex" }}>
-          {isDescriptionOpen ? <ExpandLessIcon  sx={{color:"gray"}} /> : <ExpandMoreIcon  sx={{color:"gray"}}/>}
+          {isDescriptionOpen ? (
+            <ExpandLessIcon sx={{ color: "gray" }} />
+          ) : (
+            <ExpandMoreIcon sx={{ color: "gray" }} />
+          )}
 
           <Typography
             variant="body1"
-            sx={{ fontSize: "16px",color: "blue" }}
+            sx={{ fontSize: "16px", color: "blue" }}
             onClick={toggleDescription}
           >
             توضیحات

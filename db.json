@@ -19,7 +19,7 @@
       "genre": "فانتزی",
       "ageGroup": "نوجوان",
       "isbn": 9786225649279,
-      "imageUrl": "https://vidapub.com/wp-content/uploads/2023/05/%D8%A2%D8%B1%DA%86%DB%8C%D8%A8%D8%A7%D9%84%D8%AF%D9%84%D8%A7%DA%A9%D8%B3.jpg",
+      "imageUrl": ["https://vidapub.com/wp-content/uploads/2023/05/%D8%A2%D8%B1%DA%86%DB%8C%D8%A8%D8%A7%D9%84%D8%AF%D9%84%D8%A7%DA%A9%D8%B3.jpg"],
       "description": "کتاب آرچیبالد لاکس 1 – پل بین دنیاها نخستین جلد از مجموعه آرچیبالد لاکس به قلم دارن شان با ترجمه امین بهره‌مند است."
     },
     {
@@ -54,6 +54,50 @@
       "isbn": 9786002912107,
       "imageUrl": "https://vidapub.com/wp-content/uploads/2021/08/eleanor-park-book-buy.jpg",
       "description": "کتاب النور و پارک کتابی در ژانر عاشقانه و مناسب برای رده سنی نوجوان و جوان است. این کتاب به قلم رینبو راول است و فرح بهبهانی آن را به زبان فارسی ترجمه کرده است.\n\n"
+    },
+    {
+      "id": "aafb",
+      "name": "کتاب پنج پادشاهی 4 – مرگ بافان",
+      "writer": "براندون مول",
+      "price": 497000,
+      "genre": "فانتزی",
+      "ageGroup": "نوجوان",
+      "isbn": 9786002915740,
+      "imageUrl": "https://vidapub.com/wp-content/uploads/2022/06/five-kingdoms-4.jpg",
+      "description": "کتاب پنج پادشاهی 4 – مرگ بافان نوشته براندون مول و ترجمه بهاره مدیحی در نشر ویدا است."
+    },
+    {
+      "id": "aafb",
+      "name": "کتاب پنج پادشاهی 4 – مرگ بافان",
+      "writer": "براندون مول",
+      "price": 497000,
+      "genre": "فانتزی",
+      "ageGroup": "نوجوان",
+      "isbn": 9786002915740,
+      "imageUrl": "https://vidapub.com/wp-content/uploads/2022/06/five-kingdoms-4.jpg",
+      "description": "کتاب پنج پادشاهی 4 – مرگ بافان نوشته براندون مول و ترجمه بهاره مدیحی در نشر ویدا است."
+    },
+    {
+      "id": "aafb",
+      "name": "کتاب پنج پادشاهی 4 – مرگ بافان",
+      "writer": "براندون مول",
+      "price": 497000,
+      "genre": "فانتزی",
+      "ageGroup": "نوجوان",
+      "isbn": 9786002915740,
+      "imageUrl": "https://vidapub.com/wp-content/uploads/2022/06/five-kingdoms-4.jpg",
+      "description": "کتاب پنج پادشاهی 4 – مرگ بافان نوشته براندون مول و ترجمه بهاره مدیحی در نشر ویدا است."
+    },
+    {
+      "id": "aafb",
+      "name": "کتاب پنج پادشاهی 4 – مرگ بافان",
+      "writer": "براندون مول",
+      "price": 497000,
+      "genre": "فانتزی",
+      "ageGroup": "نوجوان",
+      "isbn": 9786002915740,
+      "imageUrl": "https://vidapub.com/wp-content/uploads/2022/06/five-kingdoms-4.jpg",
+      "description": "کتاب پنج پادشاهی 4 – مرگ بافان نوشته براندون مول و ترجمه بهاره مدیحی در نشر ویدا است."
     },
     {
       "id": "aafb",
