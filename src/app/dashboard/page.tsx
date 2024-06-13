@@ -18,7 +18,7 @@ import {
   IconButton,
 } from "@mui/material";
 import logo from "../../../public/redlogo.svg";
-import { Logout, Home} from "@mui/icons-material";
+import { Logout, Home } from "@mui/icons-material";
 import axios from "axios";
 
 interface Book {
@@ -28,7 +28,7 @@ interface Book {
   genre: string;
   ageGroup: string;
   isbn: string;
-  imageUrl: string;
+  imageUrl: string[];
   description: string;
 }
 
@@ -51,10 +51,11 @@ const Dashboard: React.FC = () => {
     genre: "",
     ageGroup: "",
     isbn: "",
-    imageUrl: "",
+    imageUrl: [],
     description: "",
   });
   const [page, setPage] = useState(0);
+  const [uploadSuccess, setUploadSuccess] = useState<string[]>(["", "", ""]);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -75,16 +76,15 @@ const Dashboard: React.FC = () => {
       [name]: name === "price" || name === "isbn" ? Number(value) : value,
     });
   };
+
   const inputStyle = {
+    backgroundColor: "white",
     "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        backgroundColor: "white",
-      },
       "&:hover fieldset": {
-        borderColor: "#162e54",
+        borderColor: "white",
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#162e54",
+        borderColor: "white",
       },
     },
     "& .MuiInputBase-input": {
@@ -98,6 +98,29 @@ const Dashboard: React.FC = () => {
     },
   };
 
+  const handleFileUpload = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        const updatedImageUrls = [...newBook.imageUrl];
+        updatedImageUrls[index] = base64String;
+        setNewBook({
+          ...newBook,
+          imageUrl: updatedImageUrls,
+        });
+        const updatedUploadSuccess = [...uploadSuccess];
+        updatedUploadSuccess[index] = "Upload successful!";
+        setUploadSuccess(updatedUploadSuccess);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddBook = async () => {
     try {
       const response = await axios.post("http://localhost:3000/books", newBook);
@@ -109,9 +132,10 @@ const Dashboard: React.FC = () => {
         genre: "",
         ageGroup: "",
         isbn: "",
-        imageUrl: "",
+        imageUrl: [],
         description: "",
       });
+      setUploadSuccess(["", "", ""]);
     } catch (error) {
       console.error("There was an error adding the book!", error);
     }
@@ -270,30 +294,24 @@ const Dashboard: React.FC = () => {
             <Typography mt={2} mb={1} color="white">
               عکس اصلی را بارگذاری کنید:
             </Typography>
-            <input
-              type="file"
-              name="imageUrl"
-              value={newBook.imageUrl}
-              onChange={handleInputChange}
-            />
+            <input type="file" onChange={(e) => handleFileUpload(e, 0)} />
+            {uploadSuccess[0] && (
+              <Typography color="green">{uploadSuccess[0]}</Typography>
+            )}
             <Typography mt={3} mb={1} color="white">
               عکس روی جلد را بارگذاری کنید:
             </Typography>
-            <input
-              type="file"
-              name="imageUrl"
-              value={newBook.imageUrl}
-              onChange={handleInputChange}
-            />
+            <input type="file" onChange={(e) => handleFileUpload(e, 1)} />
+            {uploadSuccess[1] && (
+              <Typography color="green">{uploadSuccess[1]}</Typography>
+            )}
             <Typography mt={3} mb={1} color="white">
               عکس پشت جلد را بارگذاری کنید:
             </Typography>
-            <input
-              type="file"
-              name="imageUrl"
-              value={newBook.imageUrl}
-              onChange={handleInputChange}
-            />
+            <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
+            {uploadSuccess[2] && (
+              <Typography color="green">{uploadSuccess[2]}</Typography>
+            )}
             <Button
               variant="contained"
               color="primary"
