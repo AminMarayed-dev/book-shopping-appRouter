@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect, ChangeEvent } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Image, { StaticImageData } from "next/image";
 import {
   Container,
@@ -136,8 +138,9 @@ const Dashboard: React.FC = () => {
         description: "",
       });
       setUploadSuccess(["", "", ""]);
+      toast("کتاب با موفقیت افزوده شد");
     } catch (error) {
-      console.error("There was an error adding the book!", error);
+      toast("مشکلی پیش آمده!!!");
     }
   };
 
@@ -319,11 +322,13 @@ const Dashboard: React.FC = () => {
               sx={{
                 backgroundColor: "#db3249",
                 mt: "3rem",
+                color: "white",
                 "&:hover": { backgroundColor: "#db3249d6" },
               }}
             >
               افزودن کتاب
             </Button>
+            <ToastContainer autoClose={2000} rtl={true}/>
           </Box>
         </form>
       </Container>
