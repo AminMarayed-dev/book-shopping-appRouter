@@ -20,13 +20,14 @@
     "@tanstack/react-query-devtools": "^5.40.1",
     "@types/stylis": "^4.2.6",
     "axios": "^1.7.2",
-    "json-server": "^1.0.0-beta.1",
+    "json-server": "^0.17.3",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-toastify": "^10.0.5",
     "stylis": "^4.3.2",
     "stylis-plugin-rtl": "^2.1.1",
+    "sweetalert2": "^11.11.1",
     "swiper": "^11.1.4"
   },
   "devDependencies": {
