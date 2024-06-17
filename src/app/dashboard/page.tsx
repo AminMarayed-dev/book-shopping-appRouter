@@ -276,7 +276,12 @@ const Dashboard: React.FC = () => {
               borderColor: "#db3249",
             }}
           >
-            <Typography variant="h4" gutterBottom color="white" sx={{mb:'2rem'}}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              color="white"
+              sx={{ mb: "2rem" }}
+            >
               لیست کتاب های موجود
             </Typography>
             <TableContainer component={Paper} sx={{ mb: 4, margin: "auto" }}>
@@ -347,8 +352,9 @@ const Dashboard: React.FC = () => {
                 flexDirection="column"
                 alignItems="flex-start"
               >
+                <Typography sx={{ mt: "1rem", color: "red" }}>نام</Typography>
                 <TextField
-                  label="نام"
+                  placeholder="نام"
                   name="name"
                   value={newBook.name}
                   onChange={handleInputChange}
@@ -356,8 +362,12 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
+                <Typography sx={{ mt: "1rem", color: "red" }}>
+                  نویسنده
+                </Typography>
+
                 <TextField
-                  label="نویسنده"
+                  placeholder="نویسنده"
                   name="writer"
                   value={newBook.writer}
                   onChange={handleInputChange}
@@ -365,8 +375,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
+                <Typography sx={{ mt: "1rem", color: "red" }}>قیمت</Typography>
                 <TextField
-                  label="قیمت"
+                  placeholder="قیمت"
                   name="price"
                   type="number"
                   value={newBook.price}
@@ -375,8 +386,10 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
+                <Typography sx={{ mt: "1rem", color: "red" }}>ژانر</Typography>
+
                 <TextField
-                  label="ژانر"
+                  placeholder="ژانر"
                   name="genre"
                   value={newBook.genre}
                   onChange={handleInputChange}
@@ -384,8 +397,12 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
+                <Typography sx={{ mt: "1rem", color: "red" }}>
+                  گروه سنی
+                </Typography>
+
                 <TextField
-                  label="گروه سنی"
+                  placeholder="گروه سنی"
                   name="ageGroup"
                   value={newBook.ageGroup}
                   onChange={handleInputChange}
@@ -393,8 +410,10 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
+                <Typography sx={{ mt: "1rem", color: "red" }}>شابک</Typography>
+
                 <TextField
-                  label="شابک"
+                  placeholder="شابک"
                   name="isbn"
                   type="number"
                   value={newBook.isbn}
@@ -403,8 +422,12 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
+                <Typography sx={{ mt: "1rem", color: "red" }}>
+                  توضیحات
+                </Typography>
+
                 <TextField
-                  label="توضیحات"
+                  placeholder="توضیحات"
                   name="description"
                   value={newBook.description}
                   onChange={handleInputChange}
@@ -414,7 +437,7 @@ const Dashboard: React.FC = () => {
                   rows={4}
                   sx={inputStyle}
                 />
-                <Typography mt={2} mb={1} color="white">
+                <Typography mt={2} mb={1} color="red">
                   عکس اصلی را بارگذاری کنید:
                 </Typography>
                 <Box display="flex" alignItems="center" mb={2}>
@@ -429,7 +452,7 @@ const Dashboard: React.FC = () => {
                     />
                   )}
                 </Box>
-                <Typography mt={3} mb={1} color="white">
+                <Typography mt={3} mb={1} color="red">
                   عکس روی جلد را بارگذاری کنید:
                 </Typography>
                 <Box display="flex" alignItems="center" mb={2}>
@@ -444,7 +467,7 @@ const Dashboard: React.FC = () => {
                     />
                   )}
                 </Box>
-                <Typography mt={3} mb={1} color="white">
+                <Typography mt={3} mb={1} color="red">
                   عکس پشت جلد را بارگذاری کنید:
                 </Typography>
                 <Box display="flex" alignItems="center" mb={2}>
