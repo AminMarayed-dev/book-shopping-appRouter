@@ -1,4 +1,3 @@
-"use client";
 function Register() {
   return <div>Register</div>;
 }

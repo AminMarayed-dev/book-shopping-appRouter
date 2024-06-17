@@ -23,7 +23,7 @@ function Product({ageGroup}:{ageGroup:string}) {
   const { data, isLoading, isSuccess, isError, error } = useGetBooksByGroup({ageGroup});
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <div>loading...</div>;
   }
 
   if (isError) {
@@ -69,7 +69,7 @@ function Product({ageGroup}:{ageGroup:string}) {
           ))}
         </Swiper>
         <Box sx={{ mt: 2 }}>
-          <Link href="/" passHref>
+          <Link href={`/product-category/${data?.slug}`} passHref>
             <Button variant="contained" color="primary">
               مشاهده محصولات
             </Button>

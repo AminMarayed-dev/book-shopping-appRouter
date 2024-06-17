@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CssBaseline } from "@mui/material";
 import QueryContextProvider from "@/context/QueryContextProvider";
+import { usePathname } from "next/navigation";
+import LayoutHandler from "@/components/layout";
 
 export const metadata: Metadata = {
   title: "کتاب ویدا",
@@ -22,9 +24,7 @@ export default function RootLayout({
         <QueryContextProvider>
           <ThemeContextProvider>
             <CssBaseline />
-            <Header />
-            {children}
-            <Footer />
+            <LayoutHandler>{children}</LayoutHandler>
           </ThemeContextProvider>
         </QueryContextProvider>
       </body>
