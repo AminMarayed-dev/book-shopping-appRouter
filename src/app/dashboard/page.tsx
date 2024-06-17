@@ -18,6 +18,8 @@ import {
   TablePagination,
   Box,
   IconButton,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import logo from "../../../public/redlogo.svg";
 import { Logout, Home, Delete, Edit } from "@mui/icons-material";
@@ -62,6 +64,7 @@ const Dashboard: React.FC = () => {
   });
   const [page, setPage] = useState(0);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [currentView, setCurrentView] = useState("table");
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -187,17 +190,8 @@ const Dashboard: React.FC = () => {
   const handleEditClick = (book: Book) => {
     setEditingBook(book);
     setNewBook(book);
+    setCurrentView("form");
   };
-
-  // const handleDeleteClick = async (id: number) => {
-  //   try {
-  //     await axios.delete(`http://localhost:3000/books/${id}`);
-  //     setBooks(books.filter((book) => book.id !== id));
-  //     toast("کتاب با موفقیت حذف شد");
-  //   } catch (error) {
-  //     toast("مشکلی پیش آمده!!!");
-  //   }
-  // };
 
   const handleDeleteClick = (id: number) => {
     Swal.fire({
@@ -256,202 +250,233 @@ const Dashboard: React.FC = () => {
           </IconButton>
         </Box>
       </Box>
-      <Container>
+      {/* <Container>
         <Typography variant="h6" color="white" my={2}>
           لیست کتاب های موجود در سایت
         </Typography>
-      </Container>
+      </Container> */}
       <Container>
-        <TableContainer component={Paper} sx={{ mb: 4, margin: "auto" }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>نام کتاب</TableCell>
-                <TableCell>نویسنده</TableCell>
-                <TableCell>ژانر</TableCell>
-                <TableCell>گروه سنی</TableCell>
-                <TableCell>شابک</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {books.slice(page * 5, page * 5 + 5).map((book, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    <IconButton
-                      aria-label="delete"
-                      onClick={() => handleDeleteClick(book.id)}
-                    >
-                      <Delete style={{ color: "#162e54" }} />
-                    </IconButton>
-                    <IconButton
-                      aria-label="edit"
-                      onClick={() => handleEditClick(book)}
-                    >
-                      <Edit style={{ color: "#162e54" }} />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>{book.name}</TableCell>
-                  <TableCell>{book.writer}</TableCell>
-                  <TableCell>{book.genre}</TableCell>
-                  <TableCell>{book.ageGroup}</TableCell>
-                  <TableCell>{book.isbn}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <TablePagination
-            rowsPerPageOptions={[]}
-            component="div"
-            count={books.length}
-            rowsPerPage={5}
-            page={page}
-            onPageChange={handleChangePage}
-          />
-        </TableContainer>
-      </Container>
-      <Container
-        sx={{
-          backgroundColor: "#162e54",
-          my: "2rem",
-          py: "2rem",
-          border: "5px solid",
-          borderColor: "#db3249",
-        }}
-      >
-        <Typography variant="h4" gutterBottom color="white">
-          {editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
-        </Typography>
-        <form>
-          <Box display="flex" flexDirection="column" alignItems="flex-start">
-            <TextField
-              label="نام"
-              name="name"
-              value={newBook.name}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              sx={inputStyle}
-            />
-            <TextField
-              label="نویسنده"
-              name="writer"
-              value={newBook.writer}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              sx={inputStyle}
-            />
-            <TextField
-              label="قیمت"
-              name="price"
-              type="number"
-              value={newBook.price}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              sx={inputStyle}
-            />
-            <TextField
-              label="ژانر"
-              name="genre"
-              value={newBook.genre}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              sx={inputStyle}
-            />
-            <TextField
-              label="گروه سنی"
-              name="ageGroup"
-              value={newBook.ageGroup}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              sx={inputStyle}
-            />
-            <TextField
-              label="شابک"
-              name="isbn"
-              type="number"
-              value={newBook.isbn}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              sx={inputStyle}
-            />
-            <TextField
-              label="توضیحات"
-              name="description"
-              value={newBook.description}
-              onChange={handleInputChange}
-              fullWidth
-              margin="normal"
-              multiline
-              rows={4}
-              sx={inputStyle}
-            />
-            <Typography mt={2} mb={1} color="white">
-              عکس اصلی را بارگذاری کنید:
+        <Tabs
+          value={currentView}
+          onChange={(e, newValue) => setCurrentView(newValue)}
+          textColor="primary"
+          indicatorColor="primary"
+          aria-label="secondary tabs example"
+        >
+          <Tab value="table" label="لیست کتاب ها" />
+          <Tab value="form" label="افزودن کتاب" />
+        </Tabs>
+        {currentView === "table" && (
+          <Container
+            sx={{
+              backgroundColor: "#162e54",
+              my: "2rem",
+              py: "2rem",
+              border: "5px solid",
+              borderColor: "#db3249",
+            }}
+          >
+            <Typography variant="h4" gutterBottom color="white" sx={{mb:'2rem'}}>
+              لیست کتاب های موجود
             </Typography>
-            <Box display="flex" alignItems="center" mb={2}>
-              <input type="file" onChange={(e) => handleFileUpload(e, 0)} />
-              {newBook.imageUrl[0] && (
-                <Image
-                  src={newBook.imageUrl[0]}
-                  alt="Main Image"
-                  width={50}
-                  height={50}
-                  style={{ marginLeft: "10px" }}
-                />
-              )}
-            </Box>
-            <Typography mt={3} mb={1} color="white">
-              عکس روی جلد را بارگذاری کنید:
+            <TableContainer component={Paper} sx={{ mb: 4, margin: "auto" }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell></TableCell>
+                    <TableCell>نام کتاب</TableCell>
+                    <TableCell>نویسنده</TableCell>
+                    <TableCell>ژانر</TableCell>
+                    <TableCell>گروه سنی</TableCell>
+                    <TableCell>شابک</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {books.slice(page * 5, page * 5 + 5).map((book, index) => (
+                    <TableRow key={index}>
+                      <TableCell>
+                        <IconButton
+                          aria-label="delete"
+                          onClick={() => handleDeleteClick(book.id)}
+                        >
+                          <Delete style={{ color: "#162e54" }} />
+                        </IconButton>
+                        <IconButton
+                          aria-label="edit"
+                          onClick={() => handleEditClick(book)}
+                        >
+                          <Edit style={{ color: "#162e54" }} />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell>{book.name}</TableCell>
+                      <TableCell>{book.writer}</TableCell>
+                      <TableCell>{book.genre}</TableCell>
+                      <TableCell>{book.ageGroup}</TableCell>
+                      <TableCell>{book.isbn}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <TablePagination
+                rowsPerPageOptions={[]}
+                component="div"
+                count={books.length}
+                rowsPerPage={5}
+                page={page}
+                onPageChange={handleChangePage}
+              />
+            </TableContainer>
+          </Container>
+        )}
+        {currentView === "form" && (
+          <Container
+            sx={{
+              backgroundColor: "#162e54",
+              my: "2rem",
+              py: "2rem",
+              border: "5px solid",
+              borderColor: "#db3249",
+            }}
+          >
+            <Typography variant="h4" gutterBottom color="white">
+              {editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
             </Typography>
-            <Box display="flex" alignItems="center" mb={2}>
-              <input type="file" onChange={(e) => handleFileUpload(e, 1)} />
-              {newBook.imageUrl[1] && (
-                <Image
-                  src={newBook.imageUrl[1]}
-                  alt="Cover Image"
-                  width={50}
-                  height={50}
-                  style={{ marginLeft: "10px" }}
+            <form>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-start"
+              >
+                <TextField
+                  label="نام"
+                  name="name"
+                  value={newBook.name}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  sx={inputStyle}
                 />
-              )}
-            </Box>
-            <Typography mt={3} mb={1} color="white">
-              عکس پشت جلد را بارگذاری کنید:
-            </Typography>
-            <Box display="flex" alignItems="center" mb={2}>
-              <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
-              {newBook.imageUrl[2] && (
-                <Image
-                  src={newBook.imageUrl[2]}
-                  alt="Back Cover Image"
-                  width={50}
-                  height={50}
-                  style={{ marginLeft: "10px" }}
+                <TextField
+                  label="نویسنده"
+                  name="writer"
+                  value={newBook.writer}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  sx={inputStyle}
                 />
-              )}
-            </Box>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSaveBook}
-              sx={{
-                backgroundColor: "#db3249",
-                mt: "3rem",
-                color: "white",
-                "&:hover": { backgroundColor: "#db3249d6" },
-              }}
-            >
-              {editingBook ? "ویرایش کتاب" : "افزودن کتاب"}
-            </Button>
-            <ToastContainer autoClose={2000} rtl={true} />
-          </Box>
-        </form>
+                <TextField
+                  label="قیمت"
+                  name="price"
+                  type="number"
+                  value={newBook.price}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  sx={inputStyle}
+                />
+                <TextField
+                  label="ژانر"
+                  name="genre"
+                  value={newBook.genre}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  sx={inputStyle}
+                />
+                <TextField
+                  label="گروه سنی"
+                  name="ageGroup"
+                  value={newBook.ageGroup}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  sx={inputStyle}
+                />
+                <TextField
+                  label="شابک"
+                  name="isbn"
+                  type="number"
+                  value={newBook.isbn}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  sx={inputStyle}
+                />
+                <TextField
+                  label="توضیحات"
+                  name="description"
+                  value={newBook.description}
+                  onChange={handleInputChange}
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={4}
+                  sx={inputStyle}
+                />
+                <Typography mt={2} mb={1} color="white">
+                  عکس اصلی را بارگذاری کنید:
+                </Typography>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 0)} />
+                  {newBook.imageUrl[0] && (
+                    <Image
+                      src={newBook.imageUrl[0]}
+                      alt="Main Image"
+                      width={50}
+                      height={50}
+                      style={{ marginLeft: "10px" }}
+                    />
+                  )}
+                </Box>
+                <Typography mt={3} mb={1} color="white">
+                  عکس روی جلد را بارگذاری کنید:
+                </Typography>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 1)} />
+                  {newBook.imageUrl[1] && (
+                    <Image
+                      src={newBook.imageUrl[1]}
+                      alt="Cover Image"
+                      width={50}
+                      height={50}
+                      style={{ marginLeft: "10px" }}
+                    />
+                  )}
+                </Box>
+                <Typography mt={3} mb={1} color="white">
+                  عکس پشت جلد را بارگذاری کنید:
+                </Typography>
+                <Box display="flex" alignItems="center" mb={2}>
+                  <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
+                  {newBook.imageUrl[2] && (
+                    <Image
+                      src={newBook.imageUrl[2]}
+                      alt="Back Cover Image"
+                      width={50}
+                      height={50}
+                      style={{ marginLeft: "10px" }}
+                    />
+                  )}
+                </Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSaveBook}
+                  sx={{
+                    backgroundColor: "#db3249",
+                    mt: "3rem",
+                    color: "white",
+                    "&:hover": { backgroundColor: "#db3249d6" },
+                  }}
+                >
+                  {editingBook ? "ویرایش کتاب" : "افزودن کتاب"}
+                </Button>
+                <ToastContainer autoClose={2000} rtl={true} />
+              </Box>
+            </form>
+          </Container>
+        )}
       </Container>
     </>
   );
