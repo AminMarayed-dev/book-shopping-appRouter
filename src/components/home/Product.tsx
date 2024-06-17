@@ -19,6 +19,14 @@ import "swiper/css/pagination";
 import Link from "next/link";
 import { useGetBooksByGroup } from "@/hooks/useGetBooksByAgeGroup";
 
+
+const slugs = {
+  ageGroup: "جوان",
+  ageGroupEN: "young"
+}
+
+
+
 function Product({ageGroup}:{ageGroup:string}) {
   const { data, isLoading, isSuccess, isError, error } = useGetBooksByGroup({ageGroup});
 
