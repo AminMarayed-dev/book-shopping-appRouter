@@ -14,31 +14,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { api } from "@/api/config.api";
 import { TypeBook } from "@/type";
 import Link from "next/link";
+import { useGetBookSearch } from "../../hook";
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
-  const [listBook, setListBooks] = useState([]);
-
-  async function GetBooksSearch(searchValue: string) {
-    if (searchValue.trim() === "") {
-      setListBooks([]);
-      return;
-    }
-    try {
-      const res = await api.get(`/books?q=${searchValue}`);
-      setListBooks(res.data);
-    } catch (error) {
-      setListBooks([]);
-    }
-  }
-
-  useEffect(() => {
-    GetBooksSearch(searchValue);
-  }, [searchValue]);
+  const [open, setOpen] = useState(false);
+  const { data: listBook } = useGetBookSearch(searchValue);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTimeout(() => {
       setSearchValue(e.target.value);
+      setOpen(true);
     }, 2000);
   };
 
@@ -47,12 +33,21 @@ function SearchBox() {
     getOptionLabel: (option: TypeBook) => option.name,
   };
 
+  const handleOptionSelect = (event: React.ChangeEvent<{}>, value: TypeBook | null) => {
+    setOpen(false);
+    setSearchValue("");
+  };
+
   return (
     <Box sx={{ p: 1 }}>
       <Autocomplete
         {...defaultProps}
         id="disable-close-on-select"
         disableCloseOnSelect
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
+        onChange={handleOptionSelect}
         renderOption={(props, option) => (
           <ListItem {...props} key={option.id}>
             <Link href={`/product/${option.id}`}>
@@ -84,7 +79,7 @@ function SearchBox() {
         )}
         noOptionsText={
           searchValue === ""
-            ? `لطفاً نام کتاب را وارد کنید`
+            ? "لطفاً نام کتاب را وارد کنید"
             : `کتابی با نام "${searchValue}" یافت نشد`
         }
       />
