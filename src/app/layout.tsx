@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ThemeContextProvider from "@/context/ThemeContextProvider";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { CssBaseline } from "@mui/material";
 import QueryContextProvider from "@/context/QueryContextProvider";
-import { usePathname } from "next/navigation";
 import LayoutHandler from "@/components/layout";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "کتاب ویدا",
@@ -24,10 +23,11 @@ export default function RootLayout({
         <QueryContextProvider>
           <ThemeContextProvider>
             <CssBaseline />
-            <LayoutHandler>{children}</LayoutHandler>
+              <LayoutHandler>{children}</LayoutHandler>
           </ThemeContextProvider>
         </QueryContextProvider>
       </body>
     </html>
   );
 }
+

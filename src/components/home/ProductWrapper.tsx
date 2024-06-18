@@ -1,20 +1,15 @@
-"use client"
+"use client";
 
-import { Box } from "@mui/material"
-import Product from "./Product"
-
-
-
-
-
+import { Box } from "@mui/material";
+import Product from "./Product";
 
 function ProductWrapper() {
   return (
-    <Box>
-        <Product ageGroup="نوجوان"/>
-        <Product ageGroup="جوان"/>
+    <Box sx={{ gap: 2 }}>
+      <Product ageGroup="نوجوان" ageGroupEn="teenager" />
+      <Product ageGroup="جوان" ageGroupEn="young" />
     </Box>
-  )
+  );
 }
 
-export default ProductWrapper
+export default ProductWrapper;

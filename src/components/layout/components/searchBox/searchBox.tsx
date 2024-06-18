@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { api } from "@/api/config.api";
 import { TypeBook } from "@/type";
+import Link from "next/link";
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
@@ -54,10 +55,12 @@ function SearchBox() {
         disableCloseOnSelect
         renderOption={(props, option) => (
           <ListItem {...props} key={option.id}>
-            <ListItemAvatar>
-              <Avatar src={option.imageUrl[0]} alt={option.name} />
-            </ListItemAvatar>
-            <ListItemText primary={option.name} secondary={option.writer} />
+            <Link href={`/product/${option.id}`}>
+              <ListItemAvatar>
+                <Avatar src={option.imageUrl[0]} alt={option.name} />
+              </ListItemAvatar>
+              <ListItemText primary={option.name} secondary={option.writer} />
+            </Link>
           </ListItem>
         )}
         renderInput={(params) => (
