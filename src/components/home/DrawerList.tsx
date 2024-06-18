@@ -81,7 +81,7 @@ function DrawerList({ toggleDrawer }: any) {
   const categoryList = [
     {
       category: "رده سنی نوجوانان",
-      categoryEn:'teenager',
+      categoryEn: "teenager",
       items: [
         { text: "فانتزی", url: "fantasy" },
         { text: "وحشت", url: "horror" },
@@ -89,7 +89,7 @@ function DrawerList({ toggleDrawer }: any) {
     },
     {
       category: "رده سنی جوان",
-      categoryEn:'young',
+      categoryEn: "young",
       items: [
         { text: "فانتزی", url: "fantasy" },
         { text: "وحشت", url: "horror" },
@@ -97,7 +97,7 @@ function DrawerList({ toggleDrawer }: any) {
     },
     {
       category: "رده سنی بزرگسال",
-      categoryEn:"adult",
+      categoryEn: "adult",
       items: [
         { text: "فانتزی", url: "fantasy" },
         { text: "وحشت", url: "horror" },
@@ -193,7 +193,9 @@ function DrawerList({ toggleDrawer }: any) {
                       disablePadding
                       onClick={handleListItemClick}
                     >
-                      <Link href={`/product-category/${category.categoryEn}/${category.categoryEn}-${item.url}`}>
+                      <Link
+                        href={`/product-category/${category.categoryEn}/${category.categoryEn}-${item.url}`}
+                      >
                         <ListItemButton>
                           <ListItemText primary={item.text} />
                         </ListItemButton>
