@@ -13,27 +13,29 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { api } from "@/api/config.api";
 import { TypeBook } from "@/type";
+import { useGetBookSearch } from "../../hook";
+import Link from "next/link";
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
-  const [listBook, setListBooks] = useState([]);
+  // const [listBook, setListBooks] = useState([]);
+  const { data: listBook } = useGetBookSearch(searchValue);
+  // async function GetBooksSearch(searchValue: string) {
+  //   if (searchValue.trim() === "") {
+  //     setListBooks([]);
+  //     return;
+  //   }
+  //   try {
+  //     const res = await api.get(`/books?q=${searchValue}`);
+  //     setListBooks(res.data);
+  //   } catch (error) {
+  //     setListBooks([]);
+  //   }
+  // }
 
-  async function GetBooksSearch(searchValue: string) {
-    if (searchValue.trim() === "") {
-      setListBooks([]);
-      return;
-    }
-    try {
-      const res = await api.get(`/books?q=${searchValue}`);
-      setListBooks(res.data);
-    } catch (error) {
-      setListBooks([]);
-    }
-  }
-
-  useEffect(() => {
-    GetBooksSearch(searchValue);
-  }, [searchValue]);
+  // useEffect(() => {
+  //   GetBooksSearch(searchValue);
+  // }, [searchValue]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTimeout(() => {
@@ -54,10 +56,12 @@ function SearchBox() {
         disableCloseOnSelect
         renderOption={(props, option) => (
           <ListItem {...props} key={option.id}>
-            <ListItemAvatar>
-              <Avatar src={option.imageUrl[0]} alt={option.name} />
-            </ListItemAvatar>
-            <ListItemText primary={option.name} secondary={option.writer} />
+            <Link href={`/product/${option.id}`}>
+              <ListItemAvatar>
+                <Avatar src={option.imageUrl[0]} alt={option.name} />
+              </ListItemAvatar>
+              <ListItemText primary={option.name} secondary={option.writer} />
+            </Link>
           </ListItem>
         )}
         renderInput={(params) => (

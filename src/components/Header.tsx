@@ -20,7 +20,7 @@ import DrawerList from "./home/DrawerList";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import { api } from "../api/config.api";
-import SearchBox from "./searchBox/searchBox";
+import SearchBox from "./layout/components/searchBox/searchBox";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
