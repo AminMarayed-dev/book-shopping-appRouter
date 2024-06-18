@@ -16,7 +16,9 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RegisterSchemaSignIN } from "../validation/RegisterSchema";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { Router } from "next/router";
+import { setCookie } from "cookies-next";
 
 // export async function getUserByFilter({
 //     name,
@@ -62,6 +64,8 @@ function SignIn() {
           if (res.length > 0) {
             setIsLogin(true);
             setLocalStorage("role", res[0].role);
+            setCookie("access", true);
+            setCookie("role", res[0].role);
             setTimeout(() => {
               router.push("/");
             }, 2000);
@@ -85,7 +89,8 @@ function SignIn() {
         alignItems: "center",
       }}
     >
-      <Typography component="h1" variant="h3">
+      <VpnKeyIcon sx={{ width: "45px", height: "45px" }} />
+      <Typography component="h1" variant="h4">
         صفحه ورود
       </Typography>
       <Box
@@ -109,15 +114,15 @@ function SignIn() {
             ),
           }}
           sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'gray',
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
               },
-              '&:hover fieldset': {
-                borderColor: 'darkgray',
+              "&:hover fieldset": {
+                borderColor: "darkgray",
               },
-              '&.Mui-focused fieldset': {
-                borderColor: 'black',
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
               },
             },
           }}
@@ -139,15 +144,15 @@ function SignIn() {
             ),
           }}
           sx={{
-            '& .MuiOutlinedInput-root': {
-              '& fieldset': {
-                borderColor: 'gray',
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
               },
-              '&:hover fieldset': {
-                borderColor: 'darkgray',
+              "&:hover fieldset": {
+                borderColor: "darkgray",
               },
-              '&.Mui-focused fieldset': {
-                borderColor: 'black',
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
               },
             },
           }}
@@ -174,7 +179,7 @@ function SignIn() {
         <Grid container>
           <Grid item>
             <Button
-              onClick={() => (router.push('?mode=signup'))}
+              onClick={() => router.push("?mode=signup")}
               color="secondary"
             >
               ثبت نام

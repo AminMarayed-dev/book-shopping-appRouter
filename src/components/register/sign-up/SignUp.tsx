@@ -21,6 +21,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/navigation";
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
 // export async function postUser(user: any) {
 //   const response = await api.post("/users", user);
@@ -51,7 +52,7 @@ function SignUp() {
   });
 
   const onSumbitSignUp = (data) => {
-    postUser(data);
+    postUser({...data, role:'user'});
     setOpen(true);
   };
 
@@ -65,7 +66,8 @@ function SignUp() {
         alignItems: "center",
       }}
     >
-      <Typography component="h1" variant="h3">
+      <AssignmentIndIcon sx={{width:'45px', height:'45px'}}/>
+      <Typography component="h1" variant="h4">
         صفحه ثبت نام
       </Typography>
       <Box

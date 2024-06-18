@@ -74,22 +74,34 @@ function DrawerList({ toggleDrawer }: any) {
     {
       text: role === "admin" || role === "user" ? "خروج" : "",
       icon: role === "admin" || role === "user" ? <LogoutIcon /> : "",
-      url: role === "admin" || role === "user" ? "/" : "",
+      url: role === "admin" || role === "user" ? "register" : "",
     },
   ];
 
   const categoryList = [
     {
       category: "رده سنی نوجوانان",
-      items: ["فانتزی", "وحشت"],
+      categoryEn:'teenager',
+      items: [
+        { text: "فانتزی", url: "fantasy" },
+        { text: "وحشت", url: "horror" },
+      ],
     },
     {
       category: "رده سنی جوان",
-      items: ["فانتزی", "عاشقانه", "علمی تخیلی"],
+      categoryEn:'young',
+      items: [
+        { text: "فانتزی", url: "fantasy" },
+        { text: "وحشت", url: "horror" },
+      ],
     },
     {
       category: "رده سنی بزرگسال",
-      items: ["داستانی", "روانشناسی"],
+      categoryEn:"adult",
+      items: [
+        { text: "فانتزی", url: "fantasy" },
+        { text: "وحشت", url: "horror" },
+      ],
     },
   ];
 
@@ -129,7 +141,7 @@ function DrawerList({ toggleDrawer }: any) {
                     onClick={() => {
                       menu.text === "خروج"
                         ? (setLocalStorage("role", ""),
-                          toggleDrawer(true),
+                          handleListItemClick(),
                           setRoleText(""))
                         : "";
                     }}
@@ -175,15 +187,17 @@ function DrawerList({ toggleDrawer }: any) {
               </AccordionSummary>
               <AccordionDetails sx={{ margin: 0 }}>
                 <List>
-                  {category.items.map((text, index) => (
+                  {category.items.map((item, index) => (
                     <ListItem
-                      key={text}
+                      key={item.text}
                       disablePadding
                       onClick={handleListItemClick}
                     >
-                      <ListItemButton>
-                        <ListItemText primary={text} />
-                      </ListItemButton>
+                      <Link href={`/product-category/${category.categoryEn}/${category.categoryEn}-${item.url}`}>
+                        <ListItemButton>
+                          <ListItemText primary={item.text} />
+                        </ListItemButton>
+                      </Link>
                     </ListItem>
                   ))}
                 </List>

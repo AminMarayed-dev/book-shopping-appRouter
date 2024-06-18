@@ -19,8 +19,6 @@ import Link from "next/link";
 import { useGetBooksByGroup } from "@/hooks/useGetBooksByAgeGroup";
 import { useState } from "react";
 
-
-
 // function Product({ageGroup}:{ageGroup:string}) {
 //   const { data, isLoading, isSuccess, isError, error } = useGetBooksByGroup({ageGroup});
 
@@ -86,7 +84,13 @@ import { useState } from "react";
 
 // export default Product;
 
-function Product({ ageGroup, ageGroupEn }: { ageGroup: string , ageGroupEn:string}) {
+function Product({
+  ageGroup,
+  ageGroupEn,
+}: {
+  ageGroup: string;
+  ageGroupEn: string;
+}) {
   const { data, isLoading, isSuccess, isError, error } = useGetBooksByGroup({
     ageGroup,
   });
@@ -114,7 +118,12 @@ function Product({ ageGroup, ageGroupEn }: { ageGroup: string , ageGroupEn:strin
   if (isSuccess && data) {
     return (
       <Box
-        sx={{ display: "flex", alignItems: "center", flexDirection: "column", mt:4 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          mt: 4,
+        }}
       >
         <Typography variant="h4" sx={{ mb: 2 }}>
           مجموعه کتاب های {ageGroup}
@@ -126,18 +135,24 @@ function Product({ ageGroup, ageGroupEn }: { ageGroup: string , ageGroupEn:strin
           <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
             {data?.slice(currentIndex, currentIndex + 2).map((book, index) => (
               <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={book?.imageUrl[0]}
-                  alt={book.name}
-                />
-                <CardContent>
-                  <Typography variant="h5">{book.name}</Typography>
-                  <Typography variant="h5" color="secondary.light" sx={{mt:1}}>
-                    {book?.price} ریال
-                  </Typography>
-                </CardContent>
+                <Link href={`/product/${book.id}`}>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={book?.imageUrl[0]}
+                    alt={book.name}
+                  />
+                  <CardContent>
+                    <Typography variant="h5">{book.name}</Typography>
+                    <Typography
+                      variant="h5"
+                      color="secondary.light"
+                      sx={{ mt: 1 }}
+                    >
+                      {book?.price} ریال
+                    </Typography>
+                  </CardContent>
+                </Link>
               </Card>
             ))}
           </Box>
@@ -147,15 +162,14 @@ function Product({ ageGroup, ageGroupEn }: { ageGroup: string , ageGroupEn:strin
           >
             <KeyboardArrowRightIcon />
           </IconButton>
-
         </Box>
         <Box sx={{ mt: 2 }}>
-            <Link href={`/product-category/${ageGroupEn}`} passHref>
-              <Button variant="contained" color="secondary">
-                مشاهده محصولات
-              </Button>
-            </Link>
-          </Box>
+          <Link href={`/product-category/${ageGroupEn}`} passHref>
+            <Button variant="contained" color="secondary">
+              مشاهده محصولات
+            </Button>
+          </Link>
+        </Box>
       </Box>
     );
   }
