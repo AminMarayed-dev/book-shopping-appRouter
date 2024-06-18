@@ -196,21 +196,6 @@
       "description": "کتاب ابزار فانی 6 - شهر آتش ملکوتی بخش اول آخرین جلد از مجموعه ابزار فانی است که کاساندرا کلر آن را به رشته تحریر درآورده و نجلا محقق مترجم آن است. "
     },
     {
-      "id": "7f3e",
-      "name": "پکیج مجموعه ویچر - 2 جلدی",
-      "writer": "آندژی ساپکوفسکی",
-      "price": 202000,
-      "genre": "فانتزی",
-      "ageGroup": "جوان",
-      "isbn": 9786225649273,
-      "imageUrl": [
-        "https://vidapub.com/wp-content/uploads/2023/10/witcher-pack-scaled.jpg",
-        "https://vidapub.com/wp-content/uploads/2022/03/Faratabiyif.jpg",
-        "https://vidapub.com/wp-content/uploads/2021/11/Tehran-tarinb.jpg"
-      ],
-      "description": "پکیج مجموعه ویچر به قلم آندژی ساپکوفسکی و ترجمه ابراهیم عامل محرابی است که از سوی نشر ویدا منتشر شده است.      "
-    },
-    {
       "id": "7f6e",
       "name": "کتاب امپیریوم 1 - خشم‌زاد (بخش اول) ",
       "writer": "کلر لگرند",
@@ -254,21 +239,6 @@
         "https://vidapub.com/wp-content/uploads/2023/07/15b.jpg"
       ],
       "description": "کتاب وارکرفت 15 - امواج تاریکی به قلم ارن رزنبرگ نوشته شده و نشر ویدا آن را با ترجمه افشین اردشیری منتشر کرده است.      "
-    },
-    {
-      "id": "7f0e",
-      "name": "پکیج مجموعه فراطبیعی - 3 جلدی",
-      "writer": "یث‌ آر. آ. دی‌کندیدو",
-      "price": 202000,
-      "genre": "وحشت",
-      "ageGroup": "جوان",
-      "isbn": 9786225649570,
-      "imageUrl": [
-        "https://vidapub.com/wp-content/uploads/2023/05/pack-supernatural.jpg",
-        "https://vidapub.com/wp-content/uploads/2022/06/five-kingdoms-4.jpg",
-        "https://vidapub.com/wp-content/uploads/2022/06/five-kingdoms-4.jpg"
-      ],
-      "description": "بیست و دو سال پیش، سم و دین وینچستر مادرشان را به‌خاطر یک نیروی فراطبیعی شیطانی و مرموز از دست دادند. در سال‌های بعد تحت تعلیم پدرشان آموختند که چگونه با این نیروهای شرُ فراطبیعی که در گوشه‌های تاریک و کوچه‌پس‌کوچه‌های آمریکا زندگی می‌کنند، مبارزه کنند.      "
     },
     {
       "id": "6f6e",
@@ -421,21 +391,6 @@
       "description": "کتاب پادشاهی جهان 1 – خیزش خاک کتابی فانتزی به قلم نویسنده خلاق نیما کهندانی است که از سوی نشر ویدا منتشر شده است."
     },
     {
-      "id": "7g7e",
-      "name": "پکیج مجموعه پادشاهی جهان – 4 جلدی",
-      "writer": "نیما کهندانی",
-      "price": 202000,
-      "genre": "فانتزی",
-      "ageGroup": "نوجوان",
-      "isbn": 9786225647779,
-      "imageUrl": [
-        "https://vidapub.com/wp-content/uploads/2021/05/kingdom-world-package-books-buy.jpg",
-        "https://vidapub.com/wp-content/uploads/2024/04/riyria1f.jpg",
-        "https://vidapub.com/wp-content/uploads/2024/04/riyria1b.jpg"
-      ],
-      "description": "داستان پکیج مجموعه پادشاهی جهان – 4 جلدی: یک پادشـــاهی به سردمـــداری اهـریمن؛ در دنیایی که می‌شناسیم…"
-    },
-    {
       "id": "8f8e",
       "name": "کتاب پادشاهی جهان 4 – رقص آتش",
       "writer": "نیما کهندانی",
@@ -481,11 +436,33 @@
       "description": "کتاب ویلا دختر جنگل کتابی جدید از رابرت بیتی است که انتشارات ویدا آن را با ترجمه فاطمه طاهری مخصوص نوجوانان منتشر کرده است."
     }
   ],
-  "users":[
+  "users": [
     {
-      "username":"AminMarayed",
-      "password":1234,
-      "role":"admin"
+      "id": "34f6",
+      "email": "aminmarayed1@gmail.com",
+      "username": "Vpjackie543543",
+      "password": "1234847589347598",
+      "role": "admin"
+    },
+    {
+      "id": "22",
+      "email": "aminmarayed1@gmail.com",
+      "username": "lkjflkdsjflsjdflk22",
+      "password": "749385798437598347794",
+      "role": "user"
+    },
+    {
+      "id": "33",
+      "email": "aminmarayed1@gmail.com",
+      "username": "jsdfjlk4324234324",
+      "password": "43289472938749832749873298847",
+      "role": "user"
+    },
+    {
+      "id": "23ab",
+      "email": "aminmarayed4@gmail.com",
+      "username": "lkjflkdsjflsjdflk22",
+      "password": "123123123213213232133"
     }
   ]
 }

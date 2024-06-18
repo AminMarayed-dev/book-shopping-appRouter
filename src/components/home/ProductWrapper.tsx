@@ -10,7 +10,7 @@ import Product from "./Product"
 
 function ProductWrapper() {
   return (
-    <Box>
+    <Box sx={{gap:2}}>
         <Product ageGroup="نوجوان"/>
         <Product ageGroup="جوان"/>
     </Box>

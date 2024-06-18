@@ -14,53 +14,90 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-
-const menuList = [
-  {
-    text: "صفحه اصلی",
-    icon: <HomeIcon />,
-  },
-  {
-    text: "درباره ما",
-    icon: <InfoIcon />,
-  },
-  {
-    text: "تماس با ما",
-    icon: <PhoneInTalkIcon />,
-  },
-  {
-    text: "علاقه مندی",
-    icon: <FavoriteBorderIcon />,
-  },
-  {
-    text: "ورود/ثبت نام",
-    icon: <PersonIcon />,
-  },
-];
-
-const categoryList = [
-  {
-    category: "رده سنی نوجوانان",
-    items: ["فانتزی", "وحشت"],
-  },
-  {
-    category: "رده سنی جوان",
-    items: ["فانتزی", "عاشقانه", "علمی تخیلی"],
-  },
-  {
-    category: "رده سنی بزرگسال",
-    items: ["داستانی", "روانشناسی"],
-  },
-];
+import LogoutIcon from "@mui/icons-material/Logout";
+import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
+// import { useRouter } from "next/router";
+import Link from "next/link";
 
 function DrawerList({ toggleDrawer }: any) {
+  const role = getLocalStorage("role");
+  const [roleText, setRoleText] = useState("");
+  // const router = useRouter();
+
+  useEffect(() => {
+    setRoleText(role);
+  }, []);
+  // if(role === 'admin') setRoleText("پنل ادمین")
+  // else if (role === 'user') setRoleText("پنل کاربر")
+  // else setRoleText("ورود/ثبت نام")
+
+  const menuList = [
+    {
+      text: "صفحه اصلی",
+      icon: <HomeIcon />,
+      url: "",
+    },
+    {
+      text: "درباره ما",
+      icon: <InfoIcon />,
+      url: "",
+    },
+    {
+      text: "تماس با ما",
+      icon: <PhoneInTalkIcon />,
+      url: "",
+    },
+    {
+      text: "علاقه مندی",
+      icon: <FavoriteBorderIcon />,
+      url: "",
+    },
+    {
+      text:
+        role === "admin"
+          ? "پنل ادمین"
+          : role === "user"
+          ? "پنل کاربر"
+          : "ورود/ثبت نام",
+
+      icon: <PersonIcon />,
+
+      url:
+        role === "admin"
+          ? "dashboard"
+          : role === "user"
+          ? "profile"
+          : "register",
+    },
+    {
+      text: role === "admin" || role === "user" ? "خروج" : "",
+      icon: role === "admin" || role === "user" ? <LogoutIcon /> : "",
+      url: role === "admin" || role === "user" ? "/" : "",
+    },
+  ];
+
+  const categoryList = [
+    {
+      category: "رده سنی نوجوانان",
+      items: ["فانتزی", "وحشت"],
+    },
+    {
+      category: "رده سنی جوان",
+      items: ["فانتزی", "عاشقانه", "علمی تخیلی"],
+    },
+    {
+      category: "رده سنی بزرگسال",
+      items: ["داستانی", "روانشناسی"],
+    },
+  ];
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -92,10 +129,20 @@ function DrawerList({ toggleDrawer }: any) {
                 disablePadding
                 onClick={handleListItemClick}
               >
-                <ListItemButton>
-                  <ListItemIcon>{menu.icon}</ListItemIcon>
-                  <ListItemText primary={menu.text} />
-                </ListItemButton>
+                <Link href={`/${menu.url}`}>
+                  <ListItemButton
+                    onClick={() => {
+                      menu.text === "خروج"
+                        ? (setLocalStorage("role", ""),
+                          toggleDrawer(true),
+                          setRoleText(""))
+                        : "";
+                    }}
+                  >
+                    <ListItemIcon>{menu.icon}</ListItemIcon>
+                    <ListItemText primary={menu.text} />
+                  </ListItemButton>
+                </Link>
               </ListItem>
             ))}
           </List>
@@ -128,12 +175,10 @@ function DrawerList({ toggleDrawer }: any) {
         <Box>
           {categoryList.map((category, index) => (
             <Accordion key={index} elevation={0}>
-              <AccordionSummary
-                expandIcon={<ArrowBackIosNewOutlinedIcon />}
-              >
+              <AccordionSummary expandIcon={<ArrowBackIosNewOutlinedIcon />}>
                 <Typography>{category.category}</Typography>
               </AccordionSummary>
-              <AccordionDetails sx={{margin:0}}>
+              <AccordionDetails sx={{ margin: 0 }}>
                 <List>
                   {category.items.map((text, index) => (
                     <ListItem
@@ -157,3 +202,4 @@ function DrawerList({ toggleDrawer }: any) {
 }
 
 export default DrawerList;
+// onClick={() => router.push(`/${menu.url}`)}

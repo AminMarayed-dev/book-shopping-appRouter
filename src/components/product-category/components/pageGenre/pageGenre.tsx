@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Divider,
-  Typography,
-} from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import OneCard from "../../../oneCard/oneCard";
 import { useGetBooksByGenre } from "../../hook";
 
@@ -17,9 +13,7 @@ function PageGenre({
   ageGroup: string;
   ageGroupEn: string;
 }) {
-
-const {data} = useGetBooksByGenre({genre , ageGroup})
-
+  const { data } = useGetBooksByGenre({ genre, ageGroup });
 
   return (
     <Box>
@@ -58,7 +52,7 @@ const {data} = useGetBooksByGenre({genre , ageGroup})
         }}
       >
         {data?.map((book, index) => (
-          <OneCard index={index} book={book} key={index}/>
+          <OneCard index={index} book={book} key={index} />
         ))}
       </Box>
 
