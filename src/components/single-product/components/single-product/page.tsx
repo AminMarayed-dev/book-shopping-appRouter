@@ -30,9 +30,9 @@ function SingleProduct({ id }: { id: string }) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [mainImage, setMainImage] = useState("");
   const { data } = useGetBookById(id);
-  const genre = data?.genre;
-  const ageGroup = data?.ageGroup;
-  const { data : dataBookGenre } = useGetBookByAge({ genre , ageGroup });
+  const genre: string = data?.genre || '';
+  const ageGroup: string = data?.ageGroup || '';
+  const { data : dataBookGenre } = useGetBookByAge({ genre , ageGroup } );
   
 
   const changeGenre = [{genre : "فانتزی" , genreEn : "fantasy"},{genre : "وحشت" , genreEn : "horror"}]
@@ -173,7 +173,7 @@ function SingleProduct({ id }: { id: string }) {
 
         {/* price */}
         <Typography
-          sx={{ color: "blue", fontSize: "18px", fontWeight: "bold" }}
+          sx={{ color: "secondary.light", fontSize: "18px", fontWeight: "bold" }}
         >
           {data?.price + " "} ریال
         </Typography>
@@ -209,7 +209,7 @@ function SingleProduct({ id }: { id: string }) {
                 padding: "8px",
                 justifyContent: "center",
                 display: "flex",
-                "&:hover": { backgroundColor: "blue", color: "white" },
+                "&:hover": { backgroundColor: "secondary.light", color: "white" },
               }}
             >
               <CustomButton
@@ -252,7 +252,7 @@ function SingleProduct({ id }: { id: string }) {
                 borderLeft: "1px solid gray",
                 display: "flex",
                 justifyContent: "center",
-                "&:hover": { backgroundColor: "blue", color: "white" },
+                "&:hover": { backgroundColor: "secondary.light", color: "white" },
               }}
             >
               <CustomButton
@@ -271,7 +271,7 @@ function SingleProduct({ id }: { id: string }) {
 
           <Box
             sx={{
-              bgcolor: "blue",
+              bgcolor: "secondary.light",
               color: "white",
               p: "5px",
               display: "flex",
@@ -355,7 +355,7 @@ function SingleProduct({ id }: { id: string }) {
 
           <Typography
             variant="body1"
-            sx={{ fontSize: "16px", color: "blue" }}
+            sx={{ fontSize: "16px", color: "secondary.light" }}
             onClick={toggleDescription}
           >
             توضیحات
@@ -375,6 +375,7 @@ function SingleProduct({ id }: { id: string }) {
         محصولات مرتبط
       </Typography>
 
+
       {/*  swiper image*/}
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <IconButton onClick={prevBooks} disabled={currentIndex === 0}>
@@ -390,10 +391,10 @@ function SingleProduct({ id }: { id: string }) {
                 alt={book.name}
               />
               <CardContent>
-                <Typography variant="h6" sx={{fontSize:"1rem"}}>{book.name}</Typography>
-                <Typography variant="body2" color="text.secondary" className="truncate">
+                <Typography variant="h6">{book.name}</Typography>
+                {/* <Typography variant="body2" color="text.secondary">
                   {book?.description}
-                </Typography>
+                </Typography> */}
                 <Typography variant="h6" color="primary">
                   {book?.price} ریال
                 </Typography>
