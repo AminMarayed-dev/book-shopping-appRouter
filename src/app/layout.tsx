@@ -23,11 +23,12 @@ export default function RootLayout({
         <QueryContextProvider>
           <ThemeContextProvider>
             <CssBaseline />
+            <Suspense fallback={<Loading />}>
               <LayoutHandler>{children}</LayoutHandler>
+            </Suspense>
           </ThemeContextProvider>
         </QueryContextProvider>
       </body>
     </html>
   );
 }
-
