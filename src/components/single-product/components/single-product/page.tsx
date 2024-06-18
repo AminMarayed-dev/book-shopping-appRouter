@@ -390,8 +390,8 @@ function SingleProduct({ id }: { id: string }) {
                 alt={book.name}
               />
               <CardContent>
-                <Typography variant="h6">{book.name}</Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="h6" sx={{fontSize:"1rem"}}>{book.name}</Typography>
+                <Typography variant="body2" color="text.secondary" className="truncate">
                   {book?.description}
                 </Typography>
                 <Typography variant="h6" color="primary">

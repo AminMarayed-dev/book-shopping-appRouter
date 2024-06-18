@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { api } from "@/api/config.api";
 import { TypeBook } from "@/type";
+import Link from "next/link";
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
@@ -47,45 +48,48 @@ function SearchBox() {
   };
 
   return (
-    <Box sx={{ p: 1 }}>
-      <Autocomplete
-        {...defaultProps}
-        id="disable-close-on-select"
-        disableCloseOnSelect
-        renderOption={(props, option) => (
-          <ListItem {...props} key={option.id}>
-            <ListItemAvatar>
-              <Avatar src={option.imageUrl[0]} alt={option.name} />
-            </ListItemAvatar>
-            <ListItemText primary={option.name} secondary={option.writer} />
-          </ListItem>
-        )}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            placeholder="جستجوی محصولات"
-            variant="outlined"
-            name="search"
-            id="search"
-            value={searchValue}
-            onChange={handleSearch}
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        )}
-        noOptionsText={
-          searchValue === ""
-            ? `لطفاً نام کتاب را وارد کنید`
-            : `کتابی با نام "${searchValue}" یافت نشد`
-        }
-      />
-    </Box>
+      <Box sx={{ p: 1 }}>
+        <Autocomplete
+          {...defaultProps}
+          id="disable-close-on-select"
+          disableCloseOnSelect
+          renderOption={(props, option) => (
+            <Link href={`/product/${option.id}`}>
+    
+              <ListItem {...props} key={option.id}>
+                <ListItemAvatar>
+                  <Avatar src={option.imageUrl[0]} alt={option.name} />
+                </ListItemAvatar>
+                <ListItemText primary={option.name} secondary={option.writer} />
+              </ListItem>
+            </Link>
+          )}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              placeholder="جستجوی محصولات"
+              variant="outlined"
+              name="search"
+              id="search"
+              value={searchValue}
+              onChange={handleSearch}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          )}
+          noOptionsText={
+            searchValue === ""
+              ? `لطفاً نام کتاب را وارد کنید`
+              : `کتابی با نام "${searchValue}" یافت نشد`
+          }
+        />
+      </Box>
   );
 }
 
