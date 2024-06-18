@@ -42,7 +42,7 @@ function DrawerList({ toggleDrawer }: any) {
     {
       text: "درباره ما",
       icon: <InfoIcon />,
-      url: "about",
+      url: "about-us",
     },
     {
       text: "تماس با ما",
