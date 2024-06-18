@@ -6,14 +6,10 @@ import {
   Card,
   CardContent,
   CardMedia,
-  CircularProgress,
   IconButton,
   Typography,
 } from "@mui/material";
 
-// Swiper components, modules, and styles
-import { Autoplay, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -23,7 +19,7 @@ import Link from "next/link";
 import { useGetBooksByGroup } from "@/hooks/useGetBooksByAgeGroup";
 import { useState } from "react";
 
-// const ageGroups = [{ageGroup:"جوان", ageGroupEN:"young"}, {ageGroup:"نوجوان", ageGroupEN:"teenager"}]
+
 
 // function Product({ageGroup}:{ageGroup:string}) {
 //   const { data, isLoading, isSuccess, isError, error } = useGetBooksByGroup({ageGroup});
@@ -90,11 +86,10 @@ import { useState } from "react";
 
 // export default Product;
 
-function Product({ ageGroup }: { ageGroup: string }) {
+function Product({ ageGroup, ageGroupEn }: { ageGroup: string , ageGroupEn:string}) {
   const { data, isLoading, isSuccess, isError, error } = useGetBooksByGroup({
     ageGroup,
   });
-  console.log(data);
   const [currentIndex, setCurrentIndex] = useState(0);
   const nextBooks = () => {
     if (currentIndex + 2 < data?.length) {
@@ -119,7 +114,7 @@ function Product({ ageGroup }: { ageGroup: string }) {
   if (isSuccess && data) {
     return (
       <Box
-        sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+        sx={{ display: "flex", alignItems: "center", flexDirection: "column", mt:4 }}
       >
         <Typography variant="h4" sx={{ mb: 2 }}>
           مجموعه کتاب های {ageGroup}
@@ -138,10 +133,7 @@ function Product({ ageGroup }: { ageGroup: string }) {
                   alt={book.name}
                 />
                 <CardContent>
-                  <Typography variant="h5" >{book.name}</Typography>
-                  {/* <Typography variant="body2" color="text.secondary" sx={{textAlign:'justify'}}>
-                    {book?.description}
-                  </Typography> */}
+                  <Typography variant="h5">{book.name}</Typography>
                   <Typography variant="h6" color="primary">
                     {book?.price} ریال
                   </Typography>
@@ -155,7 +147,15 @@ function Product({ ageGroup }: { ageGroup: string }) {
           >
             <KeyboardArrowRightIcon />
           </IconButton>
+
         </Box>
+        <Box sx={{ mt: 2 }}>
+            <Link href={`/product-category/${ageGroupEn}`} passHref>
+              <Button variant="contained" color="secondary">
+                مشاهده محصولات
+              </Button>
+            </Link>
+          </Box>
       </Box>
     );
   }

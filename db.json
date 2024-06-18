@@ -7,6 +7,7 @@
       "price": 0,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002912106,
       "imageUrl": [
         "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR78ToevoiC9HhqGafqk6mZSZo9cMZM0d11WTEM3KPGDf3u1EOd",
@@ -22,6 +23,7 @@
       "price": 462000,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002912107,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/08/eleanor-park-book-buy.jpg",
@@ -37,6 +39,7 @@
       "price": 282000,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002912480,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/05/wish-girl-book-buy.jpg",
@@ -52,6 +55,7 @@
       "price": 409000,
       "genre": "وحشت",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649392,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/11/mexican.jpg",
@@ -67,6 +71,7 @@
       "price": 110000,
       "genre": "وحشت",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002915726,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/03/%D8%AF%D8%A7%D8%B1%D9%86-%D8%B4%D8%A7%D9%86-%DA%AF%D9%84%D8%A7%D8%AF%DB%8C%D8%A7%D8%AA%D9%88%D8%B1-%D8%B2%D8%A7%D9%85%D8%A8%DB%8C-1.jpg",
@@ -82,6 +87,7 @@
       "price": 110000,
       "genre": "وحشت",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002915726,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/06/zombie.jpg",
@@ -97,6 +103,7 @@
       "price": 233000,
       "genre": "وحشت",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002914934,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/06/salvation.jpg",
@@ -112,6 +119,7 @@
       "price": 304000,
       "genre": "وحشت",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002916099,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/03/supernatural.jpg",
@@ -127,6 +135,7 @@
       "price": 167000,
       "genre": "وحشت",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786002916068,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/11/037-1.jpg",
@@ -142,6 +151,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2024/01/mortal6-2.jpg",
@@ -157,6 +167,7 @@
       "price": 396000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786228038215,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2024/04/riyria.jpg",
@@ -172,6 +183,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/10/02.jpg",
@@ -187,6 +199,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649274,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2024/01/mortal6-1.jpg",
@@ -202,6 +215,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/11/furyborn1.jpg",
@@ -217,6 +231,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649402,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/11/furyborn2.jpg",
@@ -232,6 +247,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "جوان",
+      "slug": "young",
       "isbn": 9786225649231,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/07/0.jpg",
@@ -247,6 +263,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225649269,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/06/slappy-5.jpg",
@@ -262,6 +279,7 @@
       "price": 170000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225643987,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg",
@@ -277,6 +295,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225649299,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/06/slappy-6.jpg",
@@ -292,6 +311,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225649179,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/05/%D8%A2%D8%B1%DA%86%DB%8C%D8%A8%D8%A7%D9%84%D8%AF%D9%84%D8%A7%DA%A9%D8%B3.jpg",
@@ -307,6 +327,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225641179,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2023/10/0.jpg",
@@ -322,6 +343,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225642279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/02/dial-a-ghost-buy.jpg",
@@ -337,6 +359,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225649379,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/08/horror-circle-book-18-sell-2.jpg",
@@ -352,6 +375,7 @@
       "price": 202000,
       "genre": "وحشت",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225644279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2022/02/great-ghost-rescue-buy.jpg",
@@ -367,6 +391,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786002915407,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/05/kingdom-world-book-2-price.jpg",
@@ -382,6 +407,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225646679,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/05/kingdom-world-book-1-price.jpg",
@@ -397,6 +423,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225618279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/05/kingdom-world-book-4-price.jpg",
@@ -412,6 +439,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225999279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/05/kingdom-world-book-3-buy.jpg",
@@ -427,6 +455,7 @@
       "price": 202000,
       "genre": "فانتزی",
       "ageGroup": "نوجوان",
+      "slug": "teenager",
       "isbn": 9786225749279,
       "imageUrl": [
         "https://vidapub.com/wp-content/uploads/2021/05/jungle-girl-villa-book-price.jpg",

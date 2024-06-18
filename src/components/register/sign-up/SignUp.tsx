@@ -12,26 +12,23 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import EmailIcon from "@mui/icons-material/Email";
-import PersonIcon from "@mui/icons-material/Person";
-import LockIcon from "@mui/icons-material/Lock";
-import GoogleIcon from "@mui/icons-material/Google";
-import XIcon from "@mui/icons-material/X";
-import FacebookIcon from "@mui/icons-material/Facebook";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-//   import { postUser } from "../../../../api/user.api";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-import { api } from "@/api/config.api";
 import { RegisterSchemaSignUP } from "../validation/RegisterSchema";
+import { postUser } from "@/api/user.api";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import PersonIcon from "@mui/icons-material/Person";
+import { useRouter } from "next/navigation";
 
-export async function postUser(user: any) {
-  const response = await api.post("/users", user);
-  return response.data;
-}
+// export async function postUser(user: any) {
+//   const response = await api.post("/users", user);
+//   return response.data;
+// }
 
 function SignUp() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const handleClose = (
@@ -58,7 +55,6 @@ function SignUp() {
     setOpen(true);
   };
 
-
   return (
     <Box
       sx={{
@@ -70,7 +66,7 @@ function SignUp() {
       }}
     >
       <Typography component="h1" variant="h3">
-        Sign UP Page
+        صفحه ثبت نام
       </Typography>
       <Box
         component="form"
@@ -81,17 +77,30 @@ function SignUp() {
           {...register("email")}
           margin="normal"
           fullWidth
-          placeholder="email"
+          placeholder="ایمیل"
           autoFocus
           helperText={errors.email?.message}
           error={!!errors.email}
-        //   InputProps={{
-        //     startAdornment: (
-        //       <InputAdornment position="start">
-        //         <EmailIcon />
-        //       </InputAdornment>
-        //     ),
-        //   }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <EmailIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
+              },
+              "&:hover fieldset": {
+                borderColor: "darkgray",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
+              },
+            },
+          }}
         />
         <TextField
           {...register("username")}
@@ -99,15 +108,28 @@ function SignUp() {
           fullWidth
           helperText={errors.username?.message}
           error={!!errors.username}
-          placeholder="username"
+          placeholder="نام کاربری"
           autoFocus
-        //   InputProps={{
-        //     startAdornment: (
-        //       <InputAdornment position="start">
-        //         <PersonIcon />
-        //       </InputAdornment>
-        //     ),
-        //   }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <PersonIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
+              },
+              "&:hover fieldset": {
+                borderColor: "darkgray",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
+              },
+            },
+          }}
         />
         <TextField
           {...register("password")}
@@ -116,15 +138,28 @@ function SignUp() {
           helperText={errors.password?.message}
           error={!!errors.password}
           type="password"
-          placeholder="password"
+          placeholder="رمز عبور"
           autoComplete="current-password"
-        //   InputProps={{
-        //     startAdornment: (
-        //       <InputAdornment position="start">
-        //         <LockIcon />
-        //       </InputAdornment>
-        //     ),
-        //   }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
+              },
+              "&:hover fieldset": {
+                borderColor: "darkgray",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
+              },
+            },
+          }}
         />
         <Button
           type="submit"
@@ -133,7 +168,7 @@ function SignUp() {
           sx={{ mt: 3, mb: 2 }}
           color="secondary"
         >
-          Sign Up
+          ثبت نام
         </Button>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
           <Alert
@@ -147,8 +182,11 @@ function SignUp() {
         </Snackbar>
         <Grid container>
           <Grid item>
-            <Button onClick={() => (location.href = "?mode=signin")} color="secondary">
-              Sign IN
+            <Button
+              onClick={() => router.push("?mode=signin")}
+              color="secondary"
+            >
+              ورود
             </Button>
           </Grid>
         </Grid>

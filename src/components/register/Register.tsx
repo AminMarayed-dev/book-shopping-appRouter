@@ -5,9 +5,7 @@ import Grid from "@mui/material/Grid";
 import SignUp from "./sign-up/SignUp";
 import SignIn from "./sign-in/SignIn";
 import { useSearchParams } from "next/navigation";
-// import { useSearchParams } from "react-router-dom";
-// import SignUp from "./sign-up/SignUp";
-// import SignIn from "./sign-in/SignIn";
+
 
 function RegisterPage() {
   const searchParams = useSearchParams();

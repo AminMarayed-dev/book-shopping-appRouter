@@ -23,20 +23,15 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
-// import { useRouter } from "next/router";
 import Link from "next/link";
 
 function DrawerList({ toggleDrawer }: any) {
   const role = getLocalStorage("role");
   const [roleText, setRoleText] = useState("");
-  // const router = useRouter();
 
   useEffect(() => {
     setRoleText(role);
   }, []);
-  // if(role === 'admin') setRoleText("پنل ادمین")
-  // else if (role === 'user') setRoleText("پنل کاربر")
-  // else setRoleText("ورود/ثبت نام")
 
   const menuList = [
     {
@@ -47,7 +42,7 @@ function DrawerList({ toggleDrawer }: any) {
     {
       text: "درباره ما",
       icon: <InfoIcon />,
-      url: "",
+      url: "about",
     },
     {
       text: "تماس با ما",
@@ -202,4 +197,3 @@ function DrawerList({ toggleDrawer }: any) {
 }
 
 export default DrawerList;
-// onClick={() => router.push(`/${menu.url}`)}
