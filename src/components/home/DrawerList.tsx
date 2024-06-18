@@ -24,6 +24,7 @@ import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutl
 import LogoutIcon from "@mui/icons-material/Logout";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 import Link from "next/link";
+import { deleteCookie, setCookie } from 'cookies-next';
 
 function DrawerList({ toggleDrawer }: any) {
   const role = getLocalStorage("role");
@@ -142,6 +143,8 @@ function DrawerList({ toggleDrawer }: any) {
                       menu.text === "خروج"
                         ? (setLocalStorage("role", ""),
                           handleListItemClick(),
+                          setCookie('role', "" ),
+
                           setRoleText(""))
                         : "";
                     }}
