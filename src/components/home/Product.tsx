@@ -134,7 +134,7 @@ function Product({ ageGroup, ageGroupEn }: { ageGroup: string , ageGroupEn:strin
                 />
                 <CardContent>
                   <Typography variant="h5">{book.name}</Typography>
-                  <Typography variant="h6" color="primary">
+                  <Typography variant="h5" color="secondary.light" sx={{mt:1}}>
                     {book?.price} ریال
                   </Typography>
                 </CardContent>
