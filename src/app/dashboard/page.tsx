@@ -1,7 +1,5 @@
 "use client";
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Image, { StaticImageData } from "next/image";
 import {
   Container,
@@ -23,20 +21,11 @@ import {
 } from "@mui/material";
 import logo from "../../../public/redlogo.svg";
 import { Logout, Home, Delete, Edit } from "@mui/icons-material";
-import axios from "axios";
 import Swal from "sweetalert2";
-
-interface Book {
-  id: number;
-  name: string;
-  writer: string;
-  price: number;
-  genre: string;
-  ageGroup: string;
-  isbn: number;
-  imageUrl: string[];
-  description: string;
-}
+import { useGetAllBooks } from "../../hooks/useGetAllBooks";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteBook, editBook, sendBooks } from "../../service";
+import { BooksEntity } from "../../hooks/type";
 
 const myLogo: StaticImageData = logo;
 
@@ -50,9 +39,8 @@ const Dashboard: React.FC = () => {
     };
   }, []);
 
-  const [books, setBooks] = useState<Book[]>([]);
-  const [newBook, setNewBook] = useState<Book>({
-    id: 0,
+  const [newBook, setNewBook] = useState<BooksEntity>({
+    id: Date.now().toString(),
     name: "",
     writer: "",
     price: 0,
@@ -63,20 +51,99 @@ const Dashboard: React.FC = () => {
     description: "",
   });
   const [page, setPage] = useState(0);
-  const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [editingBook, setEditingBook] = useState<BooksEntity | null>(null);
+  const { data: books } = useGetAllBooks();
   const [currentView, setCurrentView] = useState("table");
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/books");
-        setBooks(response.data);
-      } catch (error) {
-        console.error("There was an error fetching the books!", error);
-      }
-    };
-    fetchBooks();
-  }, []);
+  const queryClient = useQueryClient();
+
+  // Add
+  const { mutate: handleSaveBook } = useMutation({
+    mutationKey: ["sendbookskey"],
+    mutationFn: sendBooks,
+    onSuccess: () => {
+      Swal.fire({
+        title: " موفق!",
+        text: "کتاب با موفقیت افزوده شد",
+        icon: "success",
+      });
+      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
+      setNewBook({
+        id: Date.now().toString(),
+        name: "",
+        writer: "",
+        price: 0,
+        genre: "",
+        ageGroup: "",
+        isbn: 0,
+        imageUrl: [],
+        description: "",
+      });
+      setCurrentView("table");
+    },
+    onError: () => {
+      Swal.fire({
+        title: "خطا!",
+        text: "مشکلی پیش آمده!!!",
+        icon: "error",
+      });
+    },
+  });
+
+  // Delete
+  const { mutate: handleDeleteClick } = useMutation({
+    mutationKey: ["deleteBookskey"],
+    mutationFn: deleteBook,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
+      Swal.fire({
+        title: "حذف!",
+        text: "کتاب با موفقیت حذف شد",
+        icon: "success",
+      });
+    },
+    onError: () => {
+      Swal.fire({
+        title: "خطا!",
+        text: "مشکلی پیش آمده!!!",
+        icon: "error",
+      });
+    },
+  });
+
+  // Edit
+  const { mutate: handleEditBook } = useMutation({
+    mutationKey: ["editBookskey"],
+    mutationFn: editBook,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
+      Swal.fire({
+        title: "موفق!",
+        text: "!کتاب با موفقیت ویرایش شد",
+        icon: "success",
+      });
+      setNewBook({
+        id: Date.now().toString(),
+        name: "",
+        writer: "",
+        price: 0,
+        genre: "",
+        ageGroup: "",
+        isbn: 0,
+        imageUrl: [],
+        description: "",
+      });
+      setEditingBook(null);
+      setCurrentView("table");
+    },
+    onError: () => {
+      Swal.fire({
+        title: "خطا!",
+        text: "مشکلی پیش آمده!!!",
+        icon: "error",
+      });
+    },
+  });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -116,7 +183,7 @@ const Dashboard: React.FC = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result as string;
-        const updatedImageUrls = [...newBook.imageUrl];
+        const updatedImageUrls = [...newBook.imageUrl!];
         updatedImageUrls[index] = base64String;
         setNewBook({
           ...newBook,
@@ -127,98 +194,45 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleSaveBook = async () => {
-    if (editingBook) {
-      // Edit existing book
-      try {
-        const response = await axios.put(
-          `http://localhost:3000/books/${editingBook.id}`,
-          newBook
-        );
-        setBooks(
-          books.map((book) =>
-            book.id === editingBook.id ? response.data : book
-          )
-        );
-        setEditingBook(null);
-        setNewBook({
-          id: 0,
-          name: "",
-          writer: "",
-          price: 0,
-          genre: "",
-          ageGroup: "",
-          isbn: 0,
-          imageUrl: [],
-          description: "",
-        });
-        toast("کتاب با موفقیت ویرایش شد");
-      } catch (error) {
-        toast("مشکلی پیش آمده!!!");
-      }
-    } else {
-      // Add new book
-      try {
-        const response = await axios.post(
-          "http://localhost:3000/books",
-          newBook
-        );
-        setBooks([...books, response.data]);
-        setNewBook({
-          id: 0,
-          name: "",
-          writer: "",
-          price: 0,
-          genre: "",
-          ageGroup: "",
-          isbn: 0,
-          imageUrl: [],
-          description: "",
-        });
-        toast("کتاب با موفقیت افزوده شد");
-      } catch (error) {
-        toast("مشکلی پیش آمده!!!");
-      }
-    }
-  };
-
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
     console.log(event);
   };
 
-  const handleEditClick = (book: Book) => {
+  const handleEditClick = (book: BooksEntity) => {
     setEditingBook(book);
     setNewBook(book);
     setCurrentView("form");
   };
 
-  const handleDeleteClick = (id: number) => {
+  const handleCancelEdit = () => {
+    setEditingBook(null);
+    setNewBook({
+      id: Date.now().toString(),
+      name: "",
+      writer: "",
+      price: 0,
+      genre: "",
+      ageGroup: "",
+      isbn: 0,
+      imageUrl: [],
+      description: "",
+    });
+    setCurrentView("table");
+  };
+
+  const confirmDelete = (id: string) => {
     Swal.fire({
       title: "آیا از حذف این کتاب مطمئن هستید؟",
-      text: "این عملیات غیرقابل بازگشت خواهد بود!",
+      text: "عملیات غیرقابل بازگشت خواهد بود!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "حذف کتاب",
-    }).then(async (result: any) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        try {
-          await axios.delete(`http://localhost:3000/books/${id}`);
-          setBooks(books.filter((book) => book.id !== id));
-          Swal.fire({
-            title: "کتاب با موفقیت حذف شد!",
-            text: "دیگه هیچ کاریش نمیشه کرد",
-            icon: "success",
-          });
-        } catch (error) {
-          Swal.fire({
-            title: "مشکلی پیش آمده !",
-            text: "حذف کتاب با موفقیت انجام نشد!",
-            icon: "error",
-          });
-        }
+        handleDeleteClick(id);
       }
     });
   };
@@ -250,11 +264,11 @@ const Dashboard: React.FC = () => {
           </IconButton>
         </Box>
       </Box>
-      {/* <Container>
+      <Container>
         <Typography variant="h6" color="white" my={2}>
           لیست کتاب های موجود در سایت
         </Typography>
-      </Container> */}
+      </Container>
       <Container>
         <Tabs
           value={currentView}
@@ -263,8 +277,11 @@ const Dashboard: React.FC = () => {
           indicatorColor="primary"
           aria-label="secondary tabs example"
         >
-          <Tab value="table" label="لیست کتاب ها" />
-          <Tab value="form" label="افزودن کتاب" />
+          <Tab value="table" label="جدول کتاب ها" />
+          <Tab
+            value="form"
+            label={editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
+          />
         </Tabs>
         {currentView === "table" && (
           <Container
@@ -297,35 +314,37 @@ const Dashboard: React.FC = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {books.slice(page * 5, page * 5 + 5).map((book, index) => (
-                    <TableRow key={index}>
-                      <TableCell>
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => handleDeleteClick(book.id)}
-                        >
-                          <Delete style={{ color: "#162e54" }} />
-                        </IconButton>
-                        <IconButton
-                          aria-label="edit"
-                          onClick={() => handleEditClick(book)}
-                        >
-                          <Edit style={{ color: "#162e54" }} />
-                        </IconButton>
-                      </TableCell>
-                      <TableCell>{book.name}</TableCell>
-                      <TableCell>{book.writer}</TableCell>
-                      <TableCell>{book.genre}</TableCell>
-                      <TableCell>{book.ageGroup}</TableCell>
-                      <TableCell>{book.isbn}</TableCell>
-                    </TableRow>
-                  ))}
+                  {books
+                    ?.slice(page * 5, page * 5 + 5)
+                    .map((book: any, index: any) => (
+                      <TableRow key={index}>
+                        <TableCell>
+                          <IconButton
+                            aria-label="delete"
+                            onClick={() => confirmDelete(book.id)}
+                          >
+                            <Delete style={{ color: "#162e54" }} />
+                          </IconButton>
+                          <IconButton
+                            aria-label="edit"
+                            onClick={() => handleEditClick(book)}
+                          >
+                            <Edit style={{ color: "#162e54" }} />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell>{book.name}</TableCell>
+                        <TableCell>{book.writer}</TableCell>
+                        <TableCell>{book.genre}</TableCell>
+                        <TableCell>{book.ageGroup}</TableCell>
+                        <TableCell>{book.isbn}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
               <TablePagination
                 rowsPerPageOptions={[]}
                 component="div"
-                count={books.length}
+                count={books?.length}
                 rowsPerPage={5}
                 page={page}
                 onPageChange={handleChangePage}
@@ -352,7 +371,7 @@ const Dashboard: React.FC = () => {
                 flexDirection="column"
                 alignItems="flex-start"
               >
-                <Typography sx={{ mt: "1rem", color: "red" }}>نام</Typography>
+                <Typography sx={{ mt: "1rem", color: "white" }}>نام</Typography>
                 <TextField
                   placeholder="نام"
                   name="name"
@@ -362,10 +381,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
-                <Typography sx={{ mt: "1rem", color: "red" }}>
+                <Typography sx={{ mt: "1rem", color: "white" }}>
                   نویسنده
                 </Typography>
-
                 <TextField
                   placeholder="نویسنده"
                   name="writer"
@@ -375,7 +393,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
-                <Typography sx={{ mt: "1rem", color: "red" }}>قیمت</Typography>
+                <Typography sx={{ mt: "1rem", color: "white" }}>
+                  قیمت
+                </Typography>
                 <TextField
                   placeholder="قیمت"
                   name="price"
@@ -386,8 +406,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
-                <Typography sx={{ mt: "1rem", color: "red" }}>ژانر</Typography>
-
+                <Typography sx={{ mt: "1rem", color: "white" }}>
+                  ژانر
+                </Typography>
                 <TextField
                   placeholder="ژانر"
                   name="genre"
@@ -397,10 +418,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
-                <Typography sx={{ mt: "1rem", color: "red" }}>
+                <Typography sx={{ mt: "1rem", color: "white" }}>
                   گروه سنی
                 </Typography>
-
                 <TextField
                   placeholder="گروه سنی"
                   name="ageGroup"
@@ -410,8 +430,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
-                <Typography sx={{ mt: "1rem", color: "red" }}>شابک</Typography>
-
+                <Typography sx={{ mt: "1rem", color: "white" }}>
+                  شابک
+                </Typography>
                 <TextField
                   placeholder="شابک"
                   name="isbn"
@@ -422,10 +443,9 @@ const Dashboard: React.FC = () => {
                   margin="normal"
                   sx={inputStyle}
                 />
-                <Typography sx={{ mt: "1rem", color: "red" }}>
+                <Typography sx={{ mt: "1rem", color: "white" }}>
                   توضیحات
                 </Typography>
-
                 <TextField
                   placeholder="توضیحات"
                   name="description"
@@ -437,14 +457,14 @@ const Dashboard: React.FC = () => {
                   rows={4}
                   sx={inputStyle}
                 />
-                <Typography mt={2} mb={1} color="red">
+                <Typography mt={2} mb={1} color="white">
                   عکس اصلی را بارگذاری کنید:
                 </Typography>
                 <Box display="flex" alignItems="center" mb={2}>
                   <input type="file" onChange={(e) => handleFileUpload(e, 0)} />
-                  {newBook.imageUrl[0] && (
+                  {newBook.imageUrl![0] && (
                     <Image
-                      src={newBook.imageUrl[0]}
+                      src={newBook.imageUrl![0]}
                       alt="Main Image"
                       width={50}
                       height={50}
@@ -452,14 +472,14 @@ const Dashboard: React.FC = () => {
                     />
                   )}
                 </Box>
-                <Typography mt={3} mb={1} color="red">
+                <Typography mt={3} mb={1} color="white">
                   عکس روی جلد را بارگذاری کنید:
                 </Typography>
                 <Box display="flex" alignItems="center" mb={2}>
                   <input type="file" onChange={(e) => handleFileUpload(e, 1)} />
-                  {newBook.imageUrl[1] && (
+                  {newBook?.imageUrl![1] && (
                     <Image
-                      src={newBook.imageUrl[1]}
+                      src={newBook?.imageUrl[1]}
                       alt="Cover Image"
                       width={50}
                       height={50}
@@ -467,14 +487,14 @@ const Dashboard: React.FC = () => {
                     />
                   )}
                 </Box>
-                <Typography mt={3} mb={1} color="red">
+                <Typography mt={3} mb={1} color="white">
                   عکس پشت جلد را بارگذاری کنید:
                 </Typography>
                 <Box display="flex" alignItems="center" mb={2}>
                   <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
-                  {newBook.imageUrl[2] && (
+                  {newBook?.imageUrl![2] && (
                     <Image
-                      src={newBook.imageUrl[2]}
+                      src={newBook?.imageUrl[2]}
                       alt="Back Cover Image"
                       width={50}
                       height={50}
@@ -482,20 +502,39 @@ const Dashboard: React.FC = () => {
                     />
                   )}
                 </Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSaveBook}
-                  sx={{
-                    backgroundColor: "#db3249",
-                    mt: "3rem",
-                    color: "white",
-                    "&:hover": { backgroundColor: "#db3249d6" },
-                  }}
-                >
-                  {editingBook ? "ویرایش کتاب" : "افزودن کتاب"}
-                </Button>
-                <ToastContainer autoClose={2000} rtl={true} />
+                <Box display="flex" mt={3}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={
+                      editingBook
+                        ? () => handleEditBook(newBook)
+                        : () => handleSaveBook(newBook)
+                    }
+                    sx={{
+                      backgroundColor: "#db3249",
+                      color: "white",
+                      "&:hover": { backgroundColor: "#db3249d6" },
+                    }}
+                  >
+                    {editingBook ? "ویرایش کتاب" : "افزودن کتاب"}
+                  </Button>
+                  {editingBook && (
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleCancelEdit}
+                      sx={{
+                        backgroundColor: "#db3249",
+                        color: "white",
+                        "&:hover": { backgroundColor: "#db3249d6" },
+                        ml: 2,
+                      }}
+                    >
+                      انصراف
+                    </Button>
+                  )}
+                </Box>
               </Box>
             </form>
           </Container>
