@@ -1,12 +1,17 @@
 import CustomButton from "@/components/button/CustomButton";
-import { Box, Divider, IconButton, Rating, Typography } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Box, Divider, Rating, Typography } from "@mui/material";
+
 import React, { useState } from "react";
-import { BooksEntity, TypeChangeAgeGroup, TypeChangeGenre } from "../../hook/type";
+import {
+  BooksEntity,
+  TypeChangeAgeGroup,
+  TypeChangeGenre,
+} from "../../hook/type";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import WishListSingleProduct from "../wishList-singleProduct/wishList-singleProduct";
+
 
 function DesSingleProduct({
   data,
@@ -18,17 +23,18 @@ function DesSingleProduct({
   genreUrl: TypeChangeGenre;
 }) {
   const [number, setNumber] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  
 
   function addTobasket() {}
+
+  async function addToWishlist() {}
 
   const toggleDescription = () => {
     setIsDescriptionOpen(!isDescriptionOpen);
   };
-  const toggleFavorite = () => {
-    setIsFavorite((prevFavorite) => !prevFavorite);
-  };
+
+ 
 
   const subtractFromNumber = () => {
     setNumber((prevNumber) => prevNumber - 1);
@@ -206,17 +212,9 @@ function DesSingleProduct({
           />
         </Box>
       </Box>
-      <Box sx={{ display: "flex", gap: "5px", alignItems: "center" }}>
-        <IconButton onClick={toggleFavorite}>
-          {isFavorite ? (
-            <FavoriteIcon sx={{ color: "red" }} />
-          ) : (
-            <FavoriteBorderIcon sx={{ color: "black" }} />
-          )}
-        </IconButton>
-        <Typography sx={{ fontSize: "14px" }}>افزودن به علاقه مندی</Typography>
-      </Box>
 
+      {/* wishList */}
+<WishListSingleProduct book={data}/>
       <Divider sx={{ width: "80%", mx: "auto", my: "20px" }} />
 
       <Box sx={{ display: "flex", gap: "5px" }}>
@@ -247,7 +245,7 @@ function DesSingleProduct({
         </Typography>
         <TwitterIcon />
       </Box>
-            <Box
+      <Box
         sx={{
           display: "flex",
           cursor: "pointer",
@@ -277,7 +275,7 @@ function DesSingleProduct({
           </Typography>
         </Box>
         {isDescriptionOpen && (
-          <Typography variant="body2" >
+          <Typography variant="body2">
             کتاب تک جلدی هارلی کویین یکی از بهترین آثار در دنیای دی سی به قلم
             پاول دینی و پت کدیگنروانه بازار شده است.
           </Typography>

@@ -12,6 +12,15 @@ export interface books {
     imageUrl?: string[] | null;
     description: string;
   }
+  export interface TypeUser {
+    id: string;
+    email: string;
+    username: string;
+    password: string;
+    role: string;
+    wishlist?: (BooksEntity)[] | null;
+  }
+ 
   
   
   export interface TypeChangeGenre {
@@ -22,4 +31,9 @@ export interface books {
   export interface TypeChangeAgeGroup {
     ageGroup: string;
     ageGroupEn: string;
+  } 
+  
+  export interface TypeUserCookie {
+    role: string;
+    id: string;
   }

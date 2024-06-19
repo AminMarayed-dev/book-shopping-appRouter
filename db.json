@@ -486,28 +486,49 @@
       "email": "aminmarayed1@gmail.com",
       "username": "Vpjackie543543",
       "password": "Vpjackie543543",
-      "role": "admin"
+      "role": "admin",
+      "wishlist": [
+        {
+          "id": "6f6e",
+          "name": "کتاب دنیای اسلپی 5 - فرار از عمارت مخوف      ",
+          "writer": "آر. ال. استاین",
+          "price": 202000,
+          "genre": "وحشت",
+          "ageGroup": "نوجوان",
+          "slug": "teenager",
+          "isbn": 9786225649269,
+          "imageUrl": [
+            "https://vidapub.com/wp-content/uploads/2022/06/slappy-5.jpg",
+            "https://vidapub.com/wp-content/uploads/2022/06/5f.jpg",
+            "https://vidapub.com/wp-content/uploads/2022/06/5b.jpg"
+          ],
+          "description": "کتاب دنیای اسلپی 5 - فرار از عمارت مخوف یکی دیگر از کتاب های جذاب آر. ال. استاین و ترجمه آمنه یاری در انتشارات ویدا است.      "
+        }
+      ]
     },
     {
       "id": "22",
       "email": "aminmarayed1@gmail.com",
       "username": "lkjflkdsjflsjdflk22",
       "password": "749385798437598347794",
-      "role": "user"
+      "role": "user",
+      "wishlist": []
     },
     {
       "id": "33",
       "email": "aminmarayed1@gmail.com",
       "username": "jsdfjlk4324234324",
       "password": "43289472938749832749873298847",
-      "role": "user"
+      "role": "user",
+      "wishlist": []
     },
     {
       "id": "e327",
       "email": "aminmarayed1@gmail.com",
       "username": "AminMarayed1381",
       "password": "123456788",
-      "role": "user"
+      "role": "user",
+      "wishlist": []
     }
   ]
 }

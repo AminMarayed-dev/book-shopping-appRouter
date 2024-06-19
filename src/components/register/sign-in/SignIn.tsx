@@ -63,9 +63,8 @@ function SignIn() {
         try {
           if (res.length > 0) {
             setIsLogin(true);
-            setLocalStorage("role", res[0].role);
-            setCookie("access", true);
-            setCookie("role", res[0].role);
+            setLocalStorage("role", res);
+            setCookie('role', JSON.stringify({ role: res[0].role, id: res[0].id }));
             setTimeout(() => {
               router.push("/");
             }, 2000);

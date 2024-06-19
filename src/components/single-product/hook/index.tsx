@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBookByAge, getBookById } from "../service";
-import { BooksEntity } from "./type";
+import { getBookByAge, getBookById, getUser } from "../service";
+import { BooksEntity, TypeUser, TypeUserCookie } from "./type";
 
 export const useGetBookById = (id: string) => {
   return useQuery<BooksEntity>({
@@ -8,6 +8,7 @@ export const useGetBookById = (id: string) => {
     queryFn: () => getBookById(id),
   });
 };
+
 
 export const useGetBookByAge = ({
   genre,
@@ -17,7 +18,16 @@ export const useGetBookByAge = ({
   ageGroup: string;
 }) => {
   return useQuery<BooksEntity[]>({
-    queryKey: ["bookByAge", genre, ageGroup],  
+    queryKey: ["bookByAge", genre, ageGroup],
     queryFn: () => getBookByAge({ genre, ageGroup }),
+  });
+};
+
+
+
+export const useGetUser = ( user: TypeUserCookie) => {
+  return useQuery<TypeUser>({
+    queryKey: ["getUserById"],
+    queryFn: () => getUser( user ),
   });
 };
