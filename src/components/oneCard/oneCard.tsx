@@ -24,7 +24,7 @@ function OneCard({ book, index }: { book: BooksEntity; index: number }) {
     >
       <CardMedia
         component="img"
-        image={hoveredIndex === index ? book?.imageUrl[1] : book?.imageUrl[0]}
+        image={hoveredIndex === index ? book?.imageUrl![1] : book?.imageUrl![0]}
         alt={book?.name}
         sx={{
           width: "200px",

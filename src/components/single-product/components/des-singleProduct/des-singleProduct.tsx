@@ -3,27 +3,19 @@ import { Box, Divider, IconButton, Rating, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import React, { useState } from "react";
-import { BooksEntity } from "../../hook/type";
+import { BooksEntity, TypeChangeAgeGroup, TypeChangeGenre } from "../../hook/type";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
-interface TypeGenre {
-  genre: string;
-  genreEn: string;
-}
-interface TypeAgeGroupUrl {
-  ageGroup: string;
-  ageGroupEn: string;
-}
 function DesSingleProduct({
   data,
   ageGroupUrl,
   genreUrl,
 }: {
   data: BooksEntity;
-  ageGroupUrl: TypeAgeGroupUrl;
-  genreUrl: TypeGenre;
+  ageGroupUrl: TypeChangeAgeGroup;
+  genreUrl: TypeChangeGenre;
 }) {
   const [number, setNumber] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);

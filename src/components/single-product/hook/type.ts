@@ -13,3 +13,13 @@ export interface books {
     description: string;
   }
   
+  
+  export interface TypeChangeGenre {
+    genre: string;
+    genreEn: string;
+  }
+  
+  export interface TypeChangeAgeGroup {
+    ageGroup: string;
+    ageGroupEn: string;
+  }
