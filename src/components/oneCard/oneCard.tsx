@@ -44,7 +44,7 @@ function OneCard({ book, index }: { book: BooksEntity; index: number }) {
           color="secondary.light"
           sx={{ fontSize: "13px" }}
         >
-          {book?.price} ریال
+          {book?.price} تومان
         </Typography>
       </CardContent>
     </Card>

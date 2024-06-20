@@ -1,10 +1,10 @@
 import { Box, Typography, Grid } from "@mui/material";
 import React from "react";
 import Image from "next/image";
-import amin from "../../../public/amin.jpg";
-import rashed from "../../../public/rashed.jpg";
-import ghayoumi from "../../../public/ghayoumi.jpg";
-import tuba from "../../../public/tuba.jpg";
+import amin from "../../../../public/amin.jpg";
+import rashed from "../../../../public/rashed.jpg";
+import ghayoumi from "../../../../public/ghayoumi.jpg";
+import tuba from "../../../../public/tuba.jpg";
 
 export default function AboutUs() {
   return (
