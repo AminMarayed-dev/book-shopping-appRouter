@@ -22,10 +22,10 @@ import {
 import logo from "../../../public/redlogo.svg";
 import { Logout, Home, Delete, Edit } from "@mui/icons-material";
 import Swal from "sweetalert2";
-import { useGetAllBooks } from "../../hooks/useGetAllBooks";
+import { useGetAllBooks } from "../../../hooks/useGetAllBooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteBook, editBook, sendBooks } from "../../service";
-import { BooksEntity } from "../../hooks/type";
+import { deleteBook, editBook, sendBooks } from "../../../service";
+import { BooksEntity } from "../../../hooks/type";
 
 const myLogo: StaticImageData = logo;
 

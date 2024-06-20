@@ -24,7 +24,7 @@ export default function RootLayout({
           <ThemeContextProvider>
             <CssBaseline />
             <Suspense fallback={<Loading />}>
-              <LayoutHandler>{children}</LayoutHandler>
+             {children}
             </Suspense>
           </ThemeContextProvider>
         </QueryContextProvider>

@@ -6,6 +6,7 @@ import ProductWrapper from "@/components/home/ProductWrapper";
 export default function Home() {
   return (
     <main>
+      
       <Banner/>
       <Introduction/>
       <ProductWrapper/>
