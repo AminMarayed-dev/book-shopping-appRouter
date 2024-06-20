@@ -1,12 +1,12 @@
 "use client";
 
 import { Box, Divider, Typography } from "@mui/material";
-import OneCard from "../../../oneCard/oneCard";
-import { useGetBooksByGenre } from "../../hook";
+import { useGetBooksByGenre } from "@/app/(rootLayout)/product-category/hook/index";
 import AboutPublisher from "../about-publisher/about-publisher";
 import DesYoungFantasy from "../des-young-fantasy/des-young-fantasy";
 import DesTeenagerFantasy from "../des-teenager-fantasy/des-teenager-fantasy";
 import TitlePageGenre from "../title-pageGenre/Title-pageGenre";
+import OneCard from "@/components/one-card/OneCard";
 
 function PageGenre({
   genre,
@@ -17,14 +17,16 @@ function PageGenre({
   ageGroup: string;
   ageGroupEn: string;
 }) {
-  
   const { data } = useGetBooksByGenre({ genre, ageGroup });
 
   return (
     <Box>
-      
       {/* title */}
-     <TitlePageGenre ageGroup={ageGroup} ageGroupEn={ageGroupEn} genre={genre}/>
+      <TitlePageGenre
+        ageGroup={ageGroup}
+        ageGroupEn={ageGroupEn}
+        genre={genre}
+      />
 
       <Divider sx={{ my: 2 }} />
 
@@ -51,7 +53,7 @@ function PageGenre({
           >
             کتاب داستان وحشت نوجوان انتشارات ویدا
           </Typography>
-         <AboutPublisher/>
+          <AboutPublisher />
           <Box
             sx={{
               justifyContent: "center",
@@ -66,9 +68,9 @@ function PageGenre({
           </Box>
         </Box>
       ) : genre === "فانتزی" && ageGroup === "نوجوان" ? (
-      <DesTeenagerFantasy/>
+        <DesTeenagerFantasy />
       ) : genre === "فانتزی" && ageGroup === "جوان" ? (
-        <DesYoungFantasy/>
+        <DesYoungFantasy />
       ) : genre === "وحشت" && ageGroup === "جوان" ? (
         <Box sx={{ px: 2 }}>
           <Typography
@@ -76,7 +78,7 @@ function PageGenre({
           >
             کتاب داستان وحشت جوان انتشارات ویدا
           </Typography>
-        <AboutPublisher/>
+          <AboutPublisher />
         </Box>
       ) : (
         ""

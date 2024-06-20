@@ -19,26 +19,20 @@ import {
   Tabs,
   Tab,
 } from "@mui/material";
-import logo from "../../../public/redlogo.svg";
+import logo from "../../../../public/redlogo.svg";
 import { Logout, Home, Delete, Edit } from "@mui/icons-material";
 import Swal from "sweetalert2";
 import { useGetAllBooks } from "../../../hooks/useGetAllBooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteBook, editBook, sendBooks } from "../../../service";
 import { BooksEntity } from "../../../hooks/type";
+import TableDashboard from "./TableDashboard";
+import FormDashboard from "./FormDashboard";
+import { useDeleteBook, useEditBook } from "./hook";
 
 const myLogo: StaticImageData = logo;
 
 const Dashboard: React.FC = () => {
-  useEffect(() => {
-    // Set the background color when the component mounts
-    document.body.style.backgroundColor = "#162e54";
-    // Cleanup function to reset the background color when the component unmounts
-    return () => {
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-
   const [newBook, setNewBook] = useState<BooksEntity>({
     id: Date.now().toString(),
     name: "",
@@ -91,88 +85,11 @@ const Dashboard: React.FC = () => {
   });
 
   // Delete
-  const { mutate: handleDeleteClick } = useMutation({
-    mutationKey: ["deleteBookskey"],
-    mutationFn: deleteBook,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
-      Swal.fire({
-        title: "حذف!",
-        text: "کتاب با موفقیت حذف شد",
-        icon: "success",
-      });
-    },
-    onError: () => {
-      Swal.fire({
-        title: "خطا!",
-        text: "مشکلی پیش آمده!!!",
-        icon: "error",
-      });
-    },
-  });
+  const { handleDelete : handleDeleteClick} = useDeleteBook();
 
   // Edit
-  const { mutate: handleEditBook } = useMutation({
-    mutationKey: ["editBookskey"],
-    mutationFn: editBook,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
-      Swal.fire({
-        title: "موفق!",
-        text: "!کتاب با موفقیت ویرایش شد",
-        icon: "success",
-      });
-      setNewBook({
-        id: Date.now().toString(),
-        name: "",
-        writer: "",
-        price: 0,
-        genre: "",
-        ageGroup: "",
-        isbn: 0,
-        imageUrl: [],
-        description: "",
-      });
-      setEditingBook(null);
-      setCurrentView("table");
-    },
-    onError: () => {
-      Swal.fire({
-        title: "خطا!",
-        text: "مشکلی پیش آمده!!!",
-        icon: "error",
-      });
-    },
-  });
+  const { handleEditBook } = useEditBook({newBook, setNewBook, setCurrentView, setEditingBook });
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setNewBook({
-      ...newBook,
-      [name]: name === "price" || name === "isbn" ? Number(value) : value,
-    });
-  };
-
-  const inputStyle = {
-    backgroundColor: "white",
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: "white",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "white",
-      },
-    },
-    "& .MuiInputBase-input": {
-      color: "#162e54",
-    },
-    "& .MuiInputLabel-root": {
-      color: "#162e54",
-    },
-    "& .MuiInputLabel-root.Mui-focused": {
-      color: "red",
-    },
-  };
 
   const handleFileUpload = (
     e: ChangeEvent<HTMLInputElement>,
@@ -238,10 +155,10 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <>
+    <Box sx={{ bgcolor: "secondary.dark" }}>
       <Box
         sx={{
-          backgroundColor: "#162e54",
+          backgroundColor: "secondary.dark",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -269,6 +186,7 @@ const Dashboard: React.FC = () => {
           لیست کتاب های موجود در سایت
         </Typography>
       </Container>
+
       <Container>
         <Tabs
           value={currentView}
@@ -283,264 +201,29 @@ const Dashboard: React.FC = () => {
             label={editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
           />
         </Tabs>
-        {currentView === "table" && (
-          <Container
-            sx={{
-              backgroundColor: "#162e54",
-              my: "2rem",
-              py: "2rem",
-              border: "5px solid",
-              borderColor: "#db3249",
-            }}
-          >
-            <Typography
-              variant="h4"
-              gutterBottom
-              color="white"
-              sx={{ mb: "2rem" }}
-            >
-              لیست کتاب های موجود
-            </Typography>
-            <TableContainer component={Paper} sx={{ mb: 4, margin: "auto" }}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell>نام کتاب</TableCell>
-                    <TableCell>نویسنده</TableCell>
-                    <TableCell>ژانر</TableCell>
-                    <TableCell>گروه سنی</TableCell>
-                    <TableCell>شابک</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {books
-                    ?.slice(page * 5, page * 5 + 5)
-                    .map((book: any, index: any) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <IconButton
-                            aria-label="delete"
-                            onClick={() => confirmDelete(book.id)}
-                          >
-                            <Delete style={{ color: "#162e54" }} />
-                          </IconButton>
-                          <IconButton
-                            aria-label="edit"
-                            onClick={() => handleEditClick(book)}
-                          >
-                            <Edit style={{ color: "#162e54" }} />
-                          </IconButton>
-                        </TableCell>
-                        <TableCell>{book.name}</TableCell>
-                        <TableCell>{book.writer}</TableCell>
-                        <TableCell>{book.genre}</TableCell>
-                        <TableCell>{book.ageGroup}</TableCell>
-                        <TableCell>{book.isbn}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-              <TablePagination
-                rowsPerPageOptions={[]}
-                component="div"
-                count={books?.length}
-                rowsPerPage={5}
-                page={page}
-                onPageChange={handleChangePage}
-              />
-            </TableContainer>
-          </Container>
-        )}
-        {currentView === "form" && (
-          <Container
-            sx={{
-              backgroundColor: "#162e54",
-              my: "2rem",
-              py: "2rem",
-              border: "5px solid",
-              borderColor: "#db3249",
-            }}
-          >
-            <Typography variant="h4" gutterBottom color="white">
-              {editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
-            </Typography>
-            <form>
-              <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="flex-start"
-              >
-                <Typography sx={{ mt: "1rem", color: "white" }}>نام</Typography>
-                <TextField
-                  placeholder="نام"
-                  name="name"
-                  value={newBook.name}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  sx={inputStyle}
-                />
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  نویسنده
-                </Typography>
-                <TextField
-                  placeholder="نویسنده"
-                  name="writer"
-                  value={newBook.writer}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  sx={inputStyle}
-                />
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  قیمت
-                </Typography>
-                <TextField
-                  placeholder="قیمت"
-                  name="price"
-                  type="number"
-                  value={newBook.price}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  sx={inputStyle}
-                />
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  ژانر
-                </Typography>
-                <TextField
-                  placeholder="ژانر"
-                  name="genre"
-                  value={newBook.genre}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  sx={inputStyle}
-                />
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  گروه سنی
-                </Typography>
-                <TextField
-                  placeholder="گروه سنی"
-                  name="ageGroup"
-                  value={newBook.ageGroup}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  sx={inputStyle}
-                />
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  شابک
-                </Typography>
-                <TextField
-                  placeholder="شابک"
-                  name="isbn"
-                  type="number"
-                  value={newBook.isbn}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  sx={inputStyle}
-                />
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  توضیحات
-                </Typography>
-                <TextField
-                  placeholder="توضیحات"
-                  name="description"
-                  value={newBook.description}
-                  onChange={handleInputChange}
-                  fullWidth
-                  margin="normal"
-                  multiline
-                  rows={4}
-                  sx={inputStyle}
-                />
-                <Typography mt={2} mb={1} color="white">
-                  عکس اصلی را بارگذاری کنید:
-                </Typography>
-                <Box display="flex" alignItems="center" mb={2}>
-                  <input type="file" onChange={(e) => handleFileUpload(e, 0)} />
-                  {newBook.imageUrl![0] && (
-                    <Image
-                      src={newBook.imageUrl![0]}
-                      alt="Main Image"
-                      width={50}
-                      height={50}
-                      style={{ marginLeft: "10px" }}
-                    />
-                  )}
-                </Box>
-                <Typography mt={3} mb={1} color="white">
-                  عکس روی جلد را بارگذاری کنید:
-                </Typography>
-                <Box display="flex" alignItems="center" mb={2}>
-                  <input type="file" onChange={(e) => handleFileUpload(e, 1)} />
-                  {newBook?.imageUrl![1] && (
-                    <Image
-                      src={newBook?.imageUrl[1]}
-                      alt="Cover Image"
-                      width={50}
-                      height={50}
-                      style={{ marginLeft: "10px" }}
-                    />
-                  )}
-                </Box>
-                <Typography mt={3} mb={1} color="white">
-                  عکس پشت جلد را بارگذاری کنید:
-                </Typography>
-                <Box display="flex" alignItems="center" mb={2}>
-                  <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
-                  {newBook?.imageUrl![2] && (
-                    <Image
-                      src={newBook?.imageUrl[2]}
-                      alt="Back Cover Image"
-                      width={50}
-                      height={50}
-                      style={{ marginLeft: "10px" }}
-                    />
-                  )}
-                </Box>
-                <Box display="flex" mt={3}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={
-                      editingBook
-                        ? () => handleEditBook(newBook)
-                        : () => handleSaveBook(newBook)
-                    }
-                    sx={{
-                      backgroundColor: "#db3249",
-                      color: "white",
-                      "&:hover": { backgroundColor: "#db3249d6" },
-                    }}
-                  >
-                    {editingBook ? "ویرایش کتاب" : "افزودن کتاب"}
-                  </Button>
-                  {editingBook && (
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={handleCancelEdit}
-                      sx={{
-                        backgroundColor: "#db3249",
-                        color: "white",
-                        "&:hover": { backgroundColor: "#db3249d6" },
-                        ml: 2,
-                      }}
-                    >
-                      انصراف
-                    </Button>
-                  )}
-                </Box>
-              </Box>
-            </form>
-          </Container>
-        )}
+
+        <TableDashboard
+          currentView={currentView}
+          books={books}
+          page={page}
+          confirmDelete={(id: string) => confirmDelete(id)}
+          handleEditClick={handleEditClick}
+          handleChangePage={handleChangePage}
+        />
+       
+        <FormDashboard
+          currentView={currentView}
+          editingBook={editingBook}
+          newBook={newBook}
+          setNewBook={setNewBook}
+          handleFileUpload={handleFileUpload}
+          handleEditBook={handleEditBook}
+          handleSaveBook={handleSaveBook}
+          handleCancelEdit={handleCancelEdit}
+        />
+
       </Container>
-    </>
+    </Box>
   );
 };
 

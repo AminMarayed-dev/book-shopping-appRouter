@@ -1,8 +1,8 @@
 "use client";
 
 import { Box, Divider } from "@mui/material";
-import OneCard from "../../../oneCard/oneCard";
-import { useGetBooksByAgeGroup } from "../../hook";
+import OneCard from "../../../../../components/one-card/OneCard";
+import { useGetBooksByAgeGroup } from "../../hook/index";
 import CardsGenre from "../cards-genre/Cards-genre";
 import AboutPublisher from "../about-publisher/about-publisher";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,6 @@ function PageAgeGroup({
   const router = useRouter();
   return (
     <Box>
-
       {/* title */}
       <TitlePageAgeGroup ageGroup={ageGroup} ageGroupEn={ageGroupEn} />
 

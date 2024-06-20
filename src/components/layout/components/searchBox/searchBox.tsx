@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { api } from "@/api/config.api";
 import { TypeBook } from "@/type";
 import Link from "next/link";
 import { useGetBookSearch } from "../../hook";

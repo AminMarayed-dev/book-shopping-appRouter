@@ -12,12 +12,17 @@ export const sendBooks = async (bodyRequest : BooksEntity)=>{
 }
 
 
-export const deleteBook = async (bodyRequest : BooksEntity)=>{
+export const deleteBook = async (bodyRequest : string)=>{
+
     const {data} = await axios.delete(`http://localhost:3000/books/${bodyRequest}`)
+    console.log(bodyRequest)
+    console.log(data)
+
     return data
 }
 
-export const editBook = async (bodyRequest: BooksEntity) => {
+export const editBook = async (bodyRequest : BooksEntity) => {
+    
     const { data } = await axios.patch(`http://localhost:3000/books/${bodyRequest.id}`, bodyRequest);
     return data;
 }

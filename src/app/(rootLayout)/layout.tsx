@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/layout/components/header/Header";
+import Footer from "@/components/layout/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "کتاب ویدا",
