@@ -22,12 +22,11 @@ import InfoIcon from "@mui/icons-material/Info";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 import Link from "next/link";
-import { deleteCookie, setCookie } from 'cookies-next';
+import {  getCookie, setCookie } from 'cookies-next';
 
 function DrawerList({ toggleDrawer }: any) {
-  const role = getLocalStorage("role");
+  const role = getCookie("role");
   const [roleText, setRoleText] = useState("");
 
   useEffect(() => {
@@ -144,7 +143,6 @@ function DrawerList({ toggleDrawer }: any) {
                         ? (
                           handleListItemClick(),
                           setCookie('role', "" ),
-
                           setRoleText(""))
                         : "";
                     }}

@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import React, { ChangeEvent } from "react";
 import TextFieldForm from "../text-field-form/TextFieldForm";
+import SelectForm from "../select-form/SelectForm";
 
 function FormDashboard({
   currentView,
@@ -34,20 +35,7 @@ function FormDashboard({
   handleSaveBook: (newBook: BooksEntity) => void;
   handleCancelEdit: () => void;
 }) {
-  const inputStyle = {
-    backgroundColor: "white",
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: "white",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "white",
-      },
-    },
-    "& .MuiInputBase-input": {
-      color: "secondary.dark",
-    },
-  };
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewBook({
@@ -97,6 +85,7 @@ function FormDashboard({
             {editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
           </Typography>
           <form>
+
             <Box display="flex" flexDirection="column" alignItems="flex-start">
               {textBook.map((item, index) => (
                 <TextFieldForm
@@ -108,37 +97,14 @@ function FormDashboard({
                 />
               ))}
 
-              <FormControl fullWidth>
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  گروه سنی
-                </Typography>
-                <Select
-                  labelId="age-group-select-label"
-                  id="age-group-select"
-                  value={newBook.ageGroup}
-                  onChange={handleAgeGroupChange}
-                  sx={inputStyle}
-                >
-                  <MenuItem value={"نوجوان"}>نوجوان</MenuItem>
-                  <MenuItem value={"جوان"}>جوان</MenuItem>
-                </Select>
-              </FormControl>
-
-              <FormControl fullWidth>
-                <Typography sx={{ mt: "1rem", color: "white" }}>
-                  ژانر
-                </Typography>
-                <Select
-                  labelId="genre-select-label"
-                  id="genre-select"
-                  value={newBook.genre}
-                  onChange={handleGenreChange}
-                  sx={{...inputStyle , mb:2}}
-                >
-                  <MenuItem value={"وحشت"}>وحشت</MenuItem>
-                  <MenuItem value={"فانتزی"}>فانتزی</MenuItem>
-                </Select>
-              </FormControl>
+              <SelectForm
+                value={newBook.genre}
+                handleChange={handleGenreChange}
+              />
+              <SelectForm
+                value={newBook.ageGroup}
+                handleChange={handleAgeGroupChange}
+              />
 
               <TextFieldForm
                 textFa={"توضیحات"}

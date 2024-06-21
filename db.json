@@ -457,7 +457,22 @@
       "password": "Vpjackie543543",
       "role": "admin",
       "wishlist": [
- 
+        {
+          "id": "6f6e",
+          "name": "کتاب دنیای اسلپی 5 - فرار از عمارت مخوف      ",
+          "writer": "آر. ال. استاین",
+          "price": 202000,
+          "genre": "وحشت",
+          "ageGroup": "نوجوان",
+          "slug": "teenager",
+          "isbn": 9786225649269,
+          "imageUrl": [
+            "https://vidapub.com/wp-content/uploads/2022/06/slappy-5.jpg",
+            "https://vidapub.com/wp-content/uploads/2022/06/5f.jpg",
+            "https://vidapub.com/wp-content/uploads/2022/06/5b.jpg"
+          ],
+          "description": "کتاب دنیای اسلپی 5 - فرار از عمارت مخوف یکی دیگر از کتاب های جذاب آر. ال. استاین و ترجمه آمنه یاری در انتشارات ویدا است.      "
+        }
       ]
     },
     {
