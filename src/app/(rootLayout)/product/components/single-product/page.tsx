@@ -2,11 +2,9 @@
 
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
-
 import SwiperProducts from "../swiper-products/swiper-products";
 import DesSingleProduct from "../des-singleProduct/des-singleProduct";
 import TitleSingleProduct from "../title-singleProduct/title-singleProduct";
-
 import ImageSingleProduct from "../image-singleProduct/image-singleProduct";
 import { useGetBookById } from "@/hooks/useGetBookById";
 import { useGetBookByAge } from "../../hook";

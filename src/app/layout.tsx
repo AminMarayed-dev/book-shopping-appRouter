@@ -3,7 +3,6 @@ import "./globals.css";
 import ThemeContextProvider from "@/context/ThemeContextProvider";
 import { CssBaseline } from "@mui/material";
 import QueryContextProvider from "@/context/QueryContextProvider";
-import LayoutHandler from "@/components/layout";
 import { Suspense } from "react";
 import Loading from "./loading";
 
