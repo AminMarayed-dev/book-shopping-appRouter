@@ -221,7 +221,7 @@ const Dashboard: React.FC = () => {
     setCurrentView("table");
   };
 
-  const confirmDelete = (id: string) => {
+  const confirmDelete = (id: any) => {
     Swal.fire({
       title: "آیا از حذف این کتاب مطمئن هستید؟",
       text: "عملیات غیرقابل بازگشت خواهد بود!",
