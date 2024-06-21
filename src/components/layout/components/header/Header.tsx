@@ -12,6 +12,7 @@ import { Divider, Drawer } from "@mui/material";
 import DrawerList from "@/app/(rootLayout)/components/DrawerList";
 import SearchBox from "../searchBox/searchBox";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
@@ -25,7 +26,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 function Header() {
   const [open, setOpen] = useState(false);
-
+const router = useRouter()
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
@@ -58,6 +59,7 @@ function Header() {
             }}
           >
             <Image
+            onClick={()=> router.push("/")}
               src="https://vidapub.com/wp-content/uploads/2021/05/logo-6.png"
               alt="Logo"
               width={140}

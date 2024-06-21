@@ -30,7 +30,7 @@ function SwiperProducts({ dataBookGenre }: { dataBookGenre: BooksEntity[] }) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <IconButton onClick={prevBooks} disabled={currentIndex === 0}>
-        <KeyboardArrowLeftIcon />
+        <KeyboardArrowRightIcon />
       </IconButton>
       <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
         {dataBookGenre
@@ -65,7 +65,7 @@ function SwiperProducts({ dataBookGenre }: { dataBookGenre: BooksEntity[] }) {
         onClick={nextBooks}
         disabled={currentIndex + 2 >= dataBookGenre?.length}
       >
-        <KeyboardArrowRightIcon />
+        <KeyboardArrowLeftIcon />
       </IconButton>
     </Box>
   );

@@ -1,3 +1,3 @@
 export default function Page() {
-    return <div>My Post</div>
+    return <div>همچین بیچی وجود ندارد</div>
   }
