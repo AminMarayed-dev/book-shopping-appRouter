@@ -8,14 +8,16 @@ import { BooksEntity } from "@/hooks/type";
 
 import { useGetBookById } from "@/hooks/useGetBookById";
 import { useEditUser, useGetUser } from "../../hook";
+import { getCookie } from "cookies-next";
 
 interface User {
   wishlist: BooksEntity[];
 }
 function WishListSingleProduct({ book }: { book: BooksEntity }) {
   const [isFavorite, setIsFavorite] = useState(false);
-  const userCookie = getCookieData("role");
-  const { data: user } = useGetUser(userCookie);
+  const userId = getCookie("id");
+  const userRole = getCookie("role");
+  const { data: user } = useGetUser(userId);
   const { mutate: editUserMutation } = useEditUser();
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function WishListSingleProduct({ book }: { book: BooksEntity }) {
   }, [user]);
 
   const toggleFavorite = async () => {
-    if (userCookie?.role === "admin" || userCookie?.role === "user") {
+    if (userRole === "admin" || userRole === "user") {
       if (!isFavorite) {
         const newUser = {
           ...user,

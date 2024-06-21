@@ -26,7 +26,7 @@ export const useGetBookByAge = ({
 
 
 
-export const useGetUser = ( user: TypeUserCookie) => {
+export const useGetUser = ( user: string) => {
   return useQuery<TypeUser>({
     queryKey: ["getUserById"],
     queryFn: () => getUser( user ),
