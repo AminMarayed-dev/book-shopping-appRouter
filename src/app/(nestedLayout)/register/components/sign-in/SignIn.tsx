@@ -52,9 +52,16 @@ function SignIn() {
             setIsLogin(true);
             setCookie("role", res[0].role);
             setCookie("id", res[0].id);
-            setTimeout(() => {
-              router.push("/");
-            }, 2000);
+
+            if(res[0].role === "admin") {
+              setTimeout(() => {
+                router.push("/dashboard");
+              }, 2000);
+            } else if (res[0].role === "user") {
+              setTimeout(() => {
+                router.push("/");
+              }, 2000);
+            }
           } else {
             setIsLogin(false);
           }

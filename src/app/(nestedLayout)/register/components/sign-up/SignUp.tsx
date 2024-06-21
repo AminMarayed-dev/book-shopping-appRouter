@@ -7,7 +7,6 @@ import {
   Grid,
   InputAdornment,
   Snackbar,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -21,7 +20,8 @@ import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/navigation";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import { TypeUser } from "../type";
+import { setCookie } from "cookies-next";
+import { TypeUser } from "@/type";
 
 function SignUp() {
   const router = useRouter();
@@ -47,7 +47,14 @@ function SignUp() {
   });
 
   const onSumbitSignUp = (data: TypeUser) => {
-    postUser({ ...data, role: "user" });
+
+    const newUser : TypeUser ={
+      ...data, role: "user" , id : Date.now().toString() ,wishlist: []
+    }
+    postUser(newUser);
+    setCookie("role", "user");
+    setCookie("id", newUser.id);
+    setTimeout(() => router.push("/"), 2000);
     setOpen(true);
   };
 

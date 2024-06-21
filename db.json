@@ -479,7 +479,7 @@
       "id": "22",
       "email": "aminmarayed1@gmail.com",
       "username": "lkjflkdsjflsjdflk22",
-      "password": "749385798437598347794",
+      "password": "lkjflkdsjflsjdflk22",
       "role": "user",
       "wishlist": []
     },
@@ -496,6 +496,14 @@
       "email": "aminmarayed1@gmail.com",
       "username": "AminMarayed1381",
       "password": "123456788",
+      "role": "user",
+      "wishlist": []
+    },
+    {
+      "id": "1718952111977",
+      "email": "sdasdas@gmail.com",
+      "username": "Vpjackie5tt43543",
+      "password": "Vpjackie543543",
       "role": "user",
       "wishlist": []
     }
