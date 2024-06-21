@@ -12,6 +12,6 @@ export async function getUserByFilter({
   name: string;
   password: string;
 }) {
-  const response = await api.get(`/users?name=${name}&password=${password}`);
+  const response = await api.get(`/users?username=${name}&password=${password}`);
   return response.data;
 }
