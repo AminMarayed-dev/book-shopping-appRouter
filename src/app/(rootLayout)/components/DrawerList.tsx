@@ -159,29 +159,7 @@ function DrawerList({ toggleDrawer }: any) {
         </Box>
       )}
       {value === 1 && (
-        // <Box>
-        //   <Accordion elevation={0}>
-        //     <AccordionSummary
-        //       expandIcon={<ArrowBackIosNewOutlinedIcon />}
-        //       aria-controls="panel1-content"
-        //       id="panel1-header"
-        //     >
-        //       <List>
-        //         {["All mail", "Trash", "Spam"].map((text, index) => (
-        //           <ListItem
-        //             key={text}
-        //             disablePadding
-        //             onClick={handleListItemClick}
-        //           >
-        //             <ListItemButton>
-        //               <ListItemText primary={text} />
-        //             </ListItemButton>
-        //           </ListItem>
-        //         ))}
-        //       </List>
-        //     </AccordionSummary>
-        //   </Accordion>
-        // </Box>
+      
         <Box>
           {categoryList.map((category, index) => (
             <Accordion key={index} elevation={0}>

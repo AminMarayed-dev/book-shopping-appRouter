@@ -1,7 +1,17 @@
 import { BooksEntity } from "@/type";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import React, { ChangeEvent } from "react";
+import TextFieldForm from "../text-field-form/TextFieldForm";
+
 function FormDashboard({
   currentView,
   editingBook,
@@ -10,18 +20,20 @@ function FormDashboard({
   handleFileUpload,
   handleEditBook,
   handleSaveBook,
-  handleCancelEdit
+  handleCancelEdit,
 }: {
   currentView: string;
   editingBook: BooksEntity | null;
   newBook: BooksEntity;
-  setNewBook: ({} : BooksEntity) => void;
-  handleFileUpload: (e: React.ChangeEvent<HTMLInputElement>, a: number) => void;
-  handleEditBook: (newBook : BooksEntity) => void;
-  handleSaveBook: (newBook : BooksEntity) => void;
-  handleCancelEdit : ()=>void
+  setNewBook: (book: BooksEntity) => void;
+  handleFileUpload: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => void;
+  handleEditBook: (newBook: BooksEntity) => void;
+  handleSaveBook: (newBook: BooksEntity) => void;
+  handleCancelEdit: () => void;
 }) {
-
   const inputStyle = {
     backgroundColor: "white",
     "& .MuiOutlinedInput-root": {
@@ -36,18 +48,41 @@ function FormDashboard({
       color: "secondary.dark",
     },
   };
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewBook({
       ...newBook,
-      [name]: name === "price" || name === "isbn" ? Number(value) : value,
+      [name]:
+        name === "price" || name === "isbn"
+          ? isNaN(Number(value))
+            ? newBook[name]
+            : Number(value)
+          : value,
+    });
+  };
+  const handleAgeGroupChange = (e: ChangeEvent<{ value: unknown }>) => {
+    setNewBook({
+      ...newBook,
+      ageGroup: e.target.value as string,
     });
   };
 
+  const handleGenreChange = (e: ChangeEvent<{ value: unknown }>) => {
+    setNewBook({
+      ...newBook,
+      genre: e.target.value as string,
+    });
+  };
+
+  const textBook = [
+    { textFa: "نام", name: "name", value: newBook.name },
+    { textFa: "نویسنده", name: "writer", value: newBook.writer },
+    { textFa: "قیمت", name: "price", value: newBook.price },
+    { textFa: "شابک", name: "isbn", value: newBook.isbn },
+  ];
+
   return (
     <>
-      {" "}
       {currentView === "form" && (
         <Container
           sx={{
@@ -63,87 +98,55 @@ function FormDashboard({
           </Typography>
           <form>
             <Box display="flex" flexDirection="column" alignItems="flex-start">
-              <Typography sx={{ mt: "1rem", color: "white" }}>نام</Typography>
-              <TextField
-                placeholder="نام"
-                name="name"
-                value={newBook.name}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                sx={inputStyle}
-              />
-              <Typography sx={{ mt: "1rem", color: "white" }}>
-                نویسنده
-              </Typography>
-              <TextField
-                placeholder="نویسنده"
-                name="writer"
-                value={newBook.writer}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                sx={inputStyle}
-              />
-              <Typography sx={{ mt: "1rem", color: "white" }}>قیمت</Typography>
-              <TextField
-                placeholder="قیمت"
-                name="price"
-                type="number"
-                value={newBook.price}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                sx={inputStyle}
-              />
-              <Typography sx={{ mt: "1rem", color: "white" }}>ژانر</Typography>
-              <TextField
-                placeholder="ژانر"
-                name="genre"
-                value={newBook.genre}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                sx={inputStyle}
-              />
-              <Typography sx={{ mt: "1rem", color: "white" }}>
-                گروه سنی
-              </Typography>
-              <TextField
-                placeholder="گروه سنی"
-                name="ageGroup"
-                value={newBook.ageGroup}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                sx={inputStyle}
-              />
-              <Typography sx={{ mt: "1rem", color: "white" }}>شابک</Typography>
-              <TextField
-                placeholder="شابک"
-                name="isbn"
-                type="number"
-                value={newBook.isbn}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                sx={inputStyle}
-              />
+              {textBook.map((item, index) => (
+                <TextFieldForm
+                  key={index}
+                  textFa={item.textFa}
+                  name={item.name}
+                  handleInputChange={handleInputChange}
+                  value={item.value}
+                />
+              ))}
 
-              <Typography sx={{ mt: "1rem", color: "white" }}>
-                توضیحات
-              </Typography>
-              <TextField
-                placeholder="توضیحات"
-                name="description"
+              <FormControl fullWidth>
+                <Typography sx={{ mt: "1rem", color: "white" }}>
+                  گروه سنی
+                </Typography>
+                <Select
+                  labelId="age-group-select-label"
+                  id="age-group-select"
+                  value={newBook.ageGroup}
+                  onChange={handleAgeGroupChange}
+                  sx={inputStyle}
+                >
+                  <MenuItem value={"نوجوان"}>نوجوان</MenuItem>
+                  <MenuItem value={"جوان"}>جوان</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl fullWidth>
+                <Typography sx={{ mt: "1rem", color: "white" }}>
+                  ژانر
+                </Typography>
+                <Select
+                  labelId="genre-select-label"
+                  id="genre-select"
+                  value={newBook.genre}
+                  onChange={handleGenreChange}
+                  sx={{...inputStyle , mb:2}}
+                >
+                  <MenuItem value={"وحشت"}>وحشت</MenuItem>
+                  <MenuItem value={"فانتزی"}>فانتزی</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextFieldForm
+                textFa={"توضیحات"}
+                name={"description"}
                 value={newBook.description}
-                onChange={handleInputChange}
-                fullWidth
-                margin="normal"
-                multiline
-                rows={4}
-                sx={inputStyle}
-              />
+                handleInputChange={handleInputChange}
+              ></TextFieldForm>
+
               <Typography mt={2} mb={1} color="white">
                 عکس اصلی را بارگذاری کنید:
               </Typography>
@@ -159,6 +162,7 @@ function FormDashboard({
                   />
                 )}
               </Box>
+
               <Typography mt={3} mb={1} color="white">
                 عکس روی جلد را بارگذاری کنید:
               </Typography>
@@ -174,10 +178,10 @@ function FormDashboard({
                   />
                 )}
               </Box>
+
               <Typography mt={3} mb={1} color="white">
                 عکس پشت جلد را بارگذاری کنید:
               </Typography>
-
               <Box display="flex" alignItems="center" mb={2}>
                 <input type="file" onChange={(e) => handleFileUpload(e, 2)} />
                 {newBook?.imageUrl![2] && (
@@ -190,6 +194,7 @@ function FormDashboard({
                   />
                 )}
               </Box>
+
               <Box display="flex" mt={3}>
                 <Button
                   variant="contained"
