@@ -21,8 +21,8 @@ export const getBookByAge = async ({
   return data;
 };
 
-export const getUser = async (user: TypeUserCookie) => {
-  const { data } = await axios.get(`http://localhost:3000/users/${user.id}`);
+export const getUser = async (user: string) => {
+  const { data } = await axios.get(`http://localhost:3000/users/${user}`);
   return data;
 };
 
