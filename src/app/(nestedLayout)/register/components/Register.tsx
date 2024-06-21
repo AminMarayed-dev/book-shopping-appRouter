@@ -1,9 +1,9 @@
 "use client";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import SignUp from "./sign-up/SignUp";
+import SignUp from "@/app/(nestedLayout)/register/components/sign-up/SignUp";
 import { useSearchParams } from "next/navigation";
-import SignIn from "./sign-in/SignIn";
+import SignIn from "@/app/(nestedLayout)/register/components/sign-in/SignIn";
 
 function RegisterPage() {
   const searchParams = useSearchParams();

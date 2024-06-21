@@ -9,7 +9,6 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -18,6 +17,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Link from "next/link";
 import { useGetBooksByGroup } from "@/hooks/useGetBooksByAgeGroup";
 import { useState } from "react";
+import { BooksEntity } from "@/type";
 
 
 
@@ -76,13 +76,13 @@ function Product({
 
 
           <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
-            {data?.slice(currentIndex, currentIndex + 2).map((book, index) => (
+            {data?.slice(currentIndex, currentIndex + 2).map((book : BooksEntity, index : number) => (
               <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
                 <Link href={`/product/${book.id}`}>
                   <CardMedia
                     component="img"
                     height="140"
-                    image={book?.imageUrl[0]}
+                    image={book?.imageUrl![0]}
                     alt={book.name}
                   />
                   <CardContent>

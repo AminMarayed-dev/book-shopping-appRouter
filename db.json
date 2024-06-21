@@ -472,6 +472,22 @@
             "https://vidapub.com/wp-content/uploads/2022/06/5b.jpg"
           ],
           "description": "کتاب دنیای اسلپی 5 - فرار از عمارت مخوف یکی دیگر از کتاب های جذاب آر. ال. استاین و ترجمه آمنه یاری در انتشارات ویدا است.      "
+        },
+        {
+          "id": "8b19",
+          "name": "کتاب دایره وحشت 10 - مترسک نیمه شب",
+          "writer": "آر. ال. استاین",
+          "price": 170000,
+          "genre": "وحشت",
+          "ageGroup": "نوجوان",
+          "slug": "teenager",
+          "isbn": 9786225643987,
+          "imageUrl": [
+            "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg",
+            "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg",
+            "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg"
+          ],
+          "description": "کتاب دایره وحشت 10 - مترسک نیمه شب داستانی ترسناک و رازآلود نوشته شده توسط آر. ال. استاین و ترجمه رویا خادم الرضا در نشر ویدا است."
         }
       ]
     },

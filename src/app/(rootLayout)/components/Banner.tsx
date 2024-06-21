@@ -7,8 +7,6 @@ function Banner() {
       <Image
         src="https://vidapub.com/wp-content/uploads/2022/10/photo_2022-10-31_11-16-34.jpg"
         alt="Landscape picture"
-        // width={`${100}`}
-        // height={400}
         width={400}
         height={400}
       />

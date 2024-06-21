@@ -3,6 +3,7 @@ import { BooksEntity } from "@/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
+
 export const useEditBook = ({
   newBook,
   setNewBook,
@@ -58,31 +59,31 @@ export const useEditBook = ({
 
 
 export const useDeleteBook = () => {
-    const queryClient = useQueryClient();
-  
-    const { mutate } = useMutation({
-      mutationKey: ["deleteBookskey"],
-      mutationFn: (id) => deleteBook(id),
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["AllBook"] });
-        Swal.fire({
-          title: "حذف!",
-          text: "کتاب با موفقیت حذف شد",
-          icon: "success",
-        });
-      },
-      onError: (res) => {
-        Swal.fire({
-          title: "خطا!",
-          text: "مشکلی پیش آمده!!!",
-          icon: "error",
-        });
-      },
-    });
-  
-    const handleDelete = (id) => {
-      mutate(id);
-    };
-  
-    return { handleDelete };
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationKey: ["deleteBookskey"],
+    mutationFn: (id) => deleteBook(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
+      Swal.fire({
+        title: "حذف!",
+        text: "کتاب با موفقیت حذف شد",
+        icon: "success",
+      });
+    },
+    onError: (res) => {
+      Swal.fire({
+        title: "خطا!",
+        text: "مشکلی پیش آمده!!!",
+        icon: "error",
+      });
+    },
+  });
+
+  const handleDelete = (id) => {
+    mutate(id);
   };
+
+  return { handleDelete };
+};

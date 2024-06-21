@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { BooksEntity } from "@/app/(rootLayout)/single-product/hook/type";
+import { BooksEntity } from "@/type";
 
 function ImageSingleProduct({ data }: { data: BooksEntity }) {
   const [mainImage, setMainImage] = useState("");

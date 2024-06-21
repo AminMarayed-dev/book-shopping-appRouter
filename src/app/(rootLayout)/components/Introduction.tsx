@@ -16,8 +16,6 @@ function Introduction() {
       <Image
         src="https://vidapub.com/wp-content/uploads/2021/12/vida-publishing-logo.jpg"
         alt="Landscape picture"
-        // width={`${100}`}
-        // height={400}
         width={200}
         height={200}
       />
