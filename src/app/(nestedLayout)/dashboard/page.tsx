@@ -26,8 +26,8 @@ import { useGetAllBooks } from "../../../hooks/useGetAllBooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteBook, editBook, sendBooks } from "../../../service";
 import { BooksEntity } from "../../../hooks/type";
-import TableDashboard from "./TableDashboard";
-import FormDashboard from "./FormDashboard";
+import TableDashboard from "./components/table-dashboard/TableDashboard";
+import FormDashboard from "./components/form-dashboard/FormDashboard";
 import { useDeleteBook, useEditBook } from "./hook";
 
 const myLogo: StaticImageData = logo;
