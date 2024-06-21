@@ -66,9 +66,15 @@ function Product({
           مجموعه کتاب های {ageGroup}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
+
+          
           <IconButton onClick={prevBooks} disabled={currentIndex === 0}>
-            <KeyboardArrowLeftIcon />
+            <KeyboardArrowRightIcon />
+
           </IconButton>
+
+
+
           <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
             {data?.slice(currentIndex, currentIndex + 2).map((book, index) => (
               <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
@@ -97,7 +103,7 @@ function Product({
             onClick={nextBooks}
             disabled={currentIndex + 2 >= data?.length}
           >
-            <KeyboardArrowRightIcon />
+            <KeyboardArrowLeftIcon />
           </IconButton>
         </Box>
         <Box sx={{ mt: 2 }}>
