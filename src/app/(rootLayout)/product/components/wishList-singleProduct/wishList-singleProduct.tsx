@@ -2,7 +2,7 @@ import { Box, IconButton, Typography } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import React, { useEffect, useState } from "react";
-import { BooksEntity } from "@/hooks/type";
+import { BooksEntity } from "@/type";
 import { useEditUser, useGetUser } from "../../hook";
 import { getCookie } from "cookies-next";
 import { TypeUser } from "@/type";
@@ -33,17 +33,17 @@ function WishListSingleProduct({ book }: { book: BooksEntity }) {
       if (!isFavorite) {
         const newUser  = {
           ...user,
-          wishlist: [...user?.wishlist!, book],
-        } as TypeUser;
+          wishlist: [...user?.wishlist, book],
+        } ;
         editUserMutation(newUser);
       } else {
-        const newWishlist = user?.wishlist!.filter(
+        const newWishlist = user?.wishlist.filter(
           (item: BooksEntity) => item.id != book.id
         );
-        const newUser = {
+        const newUser : TypeUser = {
           ...user,
           wishlist: newWishlist,
-        } as TypeUser;
+        };
         editUserMutation(newUser);
       }
     }

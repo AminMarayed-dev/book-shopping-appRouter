@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getBooksByAgeGroup } from "@/app/(rootLayout)/product-category/services";
-import { BooksEntity } from "@/app/(rootLayout)/product-category/hook/type";
+import { BooksEntity } from "@/type";
 import { getBooksByGenre } from "@/app/(rootLayout)/product-category/services";
 
 export const useGetBooksByAgeGroup = (ageGroup: string) => {

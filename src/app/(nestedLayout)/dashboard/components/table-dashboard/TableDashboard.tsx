@@ -14,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import Swal from "sweetalert2";
 
 function TableDashboard({
   currentView,
