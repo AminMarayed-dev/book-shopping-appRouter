@@ -30,6 +30,7 @@ export interface TypeBook {
     isbn: number;
     imageUrl?: string[] | null;
     description: string;
+    quantity: number;
   }
   
  

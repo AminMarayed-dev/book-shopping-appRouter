@@ -22,11 +22,12 @@ import {
   useEditBook,
 } from "@/app/(nestedLayout)/dashboard/hook";
 import { useGetAllBooks } from "@/hooks/useGetAllBooks";
+import TableInventory from "./table-inventory/TableInventory";
 
 const myLogo: StaticImageData = logo;
 
 const Dashboard: React.FC = () => {
-  const [newBook, setNewBook] = useState<BooksEntity>({
+  const [newBook, setNewBook] = useState<any>({
     id: Date.now().toString(),
     name: "",
     writer: "",
@@ -36,11 +37,12 @@ const Dashboard: React.FC = () => {
     isbn: 0,
     imageUrl: [],
     description: "",
+    quantity: 0,
   });
   const [page, setPage] = useState(0);
   const [editingBook, setEditingBook] = useState<BooksEntity | null>(null);
   const { data: books } = useGetAllBooks();
-  const [currentView, setCurrentView] = useState("table");
+  const [currentView, setCurrentView] = useState("storeForm");
 
   const queryClient = useQueryClient();
 
@@ -65,6 +67,7 @@ const Dashboard: React.FC = () => {
         isbn: 0,
         imageUrl: [],
         description: "",
+        quantity: 0,
       });
       setCurrentView("table");
     },
@@ -131,6 +134,7 @@ const Dashboard: React.FC = () => {
       isbn: 0,
       imageUrl: [],
       description: "",
+      quantity: 0,
     });
     setCurrentView("table");
   };
@@ -187,7 +191,10 @@ const Dashboard: React.FC = () => {
       <Container>
         <Tabs
           value={currentView}
-          onChange={(e, newValue) => setCurrentView(newValue)}
+          onChange={(e, newValue) => {
+            setCurrentView(newValue);
+            console.log(newValue, e);
+          }}
           textColor="primary"
           indicatorColor="primary"
           aria-label="secondary tabs example"
@@ -197,6 +204,7 @@ const Dashboard: React.FC = () => {
             value="form"
             label={editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
           />
+          <Tab value="storeForm" label="جدول موجودی/قیمت" />
         </Tabs>
 
         <TableDashboard
@@ -217,6 +225,12 @@ const Dashboard: React.FC = () => {
           handleEditBook={handleEditBook}
           handleSaveBook={handleSaveBook}
           handleCancelEdit={handleCancelEdit}
+        />
+        <TableInventory
+          currentView={currentView}
+          books={books}
+          page={page}
+          handleChangePage={handleChangePage}
         />
       </Container>
     </Box>
