@@ -1,6 +1,5 @@
 
 
-import { TypeUserCookie } from "@/app/(rootLayout)/single-product/hook/type";
 import React from "react";
 
 const getCookieData = (name: string) => {

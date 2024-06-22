@@ -26,9 +26,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 function Header() {
   const [open, setOpen] = useState(false);
-const router = useRouter()
+  const router = useRouter();
   const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
+    setOpen((prev) => !prev);
   };
 
   return (
@@ -45,9 +45,9 @@ const router = useRouter()
           >
             <MenuIcon />
           </IconButton>
-          <Drawer open={open} onClose={toggleDrawer(false)}>
+          {/* <Drawer open={open} onClose={toggleDrawer(false)}>
             <DrawerList toggleDrawer={toggleDrawer} />
-          </Drawer>
+          </Drawer> */}
           <Box
             sx={{
               flexGrow: 1,
@@ -59,14 +59,13 @@ const router = useRouter()
             }}
           >
             <Image
-            onClick={()=> router.push("/")}
+              onClick={() => router.push("/")}
               src="https://vidapub.com/wp-content/uploads/2021/05/logo-6.png"
               alt="Logo"
               width={140}
               height={140}
             />
           </Box>
-
           <IconButton
             size="large"
             aria-label="display more actions"
@@ -84,6 +83,9 @@ const router = useRouter()
           >
             <LocalMallIcon />
           </IconButton>
+          <Drawer open={open} onClose={toggleDrawer(false)}>
+            <DrawerList toggleDrawer={toggleDrawer} />
+          </Drawer>
         </StyledToolbar>
       </AppBar>
       <Divider />

@@ -1,8 +1,6 @@
 import CustomButton from "@/components/button/CustomButton";
 import { Box, Divider, Rating, Typography } from "@mui/material";
-
 import React, { useState } from "react";
-
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";

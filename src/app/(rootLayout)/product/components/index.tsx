@@ -11,7 +11,8 @@ import { useGetBookByAge } from "@/app/(rootLayout)/product/hook/index";
 import { TypeChangeAgeGroup, TypeChangeGenre } from "./../hook/type";
 
 function SingleProduct({ id }: { id: string }) {
-  const { data } = useGetBookById(id);
+  const { data , isLoading} = useGetBookById(id);
+ 
   const genre: string = data?.genre || "";
   const ageGroup: string = data?.ageGroup || "";
   const { data: dataBookGenre } = useGetBookByAge({ genre, ageGroup });

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BooksEntity } from "../hooks/type"
+import { BooksEntity } from "@/type"
 
 export const getAllBooks = async ()=>{
     const {data} = await axios.get("http://localhost:3000/books")

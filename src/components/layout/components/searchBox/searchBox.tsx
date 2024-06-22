@@ -9,11 +9,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { TypeBook } from "@/type";
 import Link from "next/link";
 import { useGetBookSearch } from "../../hook";
+import { BooksEntity } from "@/type";
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
@@ -29,10 +29,10 @@ function SearchBox() {
 
   const defaultProps = {
     options: listBook,
-    getOptionLabel: (option: TypeBook) => option.name,
+    getOptionLabel: (option: BooksEntity) => option.name,
   };
 
-  const handleOptionSelect = (event: React.ChangeEvent<{}>, value: TypeBook | null) => {
+  const handleOptionSelect = (event: React.ChangeEvent<{}>, value: BooksEntity | null) => {
     setOpen(false);
     setSearchValue("");
   };

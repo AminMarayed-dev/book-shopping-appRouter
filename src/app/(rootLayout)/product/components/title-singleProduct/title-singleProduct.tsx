@@ -3,7 +3,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import GridViewIcon from "@mui/icons-material/GridView";
 import React from "react";
-import { BooksEntity } from "@/hooks/type";
+import { BooksEntity } from "@/type";
 import { useRouter } from "next/navigation";
 
 function TitleSingleProduct({

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { BooksEntity } from "../../app/(rootLayout)/product-category/hook/type";
+import { BooksEntity } from "@/type";
 
 function OneCard({ book, index }: { book: BooksEntity; index: number }) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
