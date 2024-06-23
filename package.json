@@ -21,13 +21,9 @@
     "@tanstack/react-query-devtools": "^5.40.1",
     "@types/stylis": "^4.2.6",
     "axios": "^1.7.2",
-<<<<<<< HEAD
-    "json-server": "^0.17.3",
-=======
     "cookie": "^0.6.0",
     "cookies-next": "^4.2.1",
     "json-server": "^1.0.0-beta.1",
->>>>>>> main
     "next": "14.2.3",
     "next-auth": "^4.24.7",
     "nprogress": "^0.2.0",
@@ -38,12 +34,8 @@
     "stylis": "^4.3.2",
     "stylis-plugin-rtl": "^2.1.1",
     "sweetalert2": "^11.11.1",
-<<<<<<< HEAD
-    "swiper": "^11.1.4"
-=======
     "swiper": "^11.1.4",
     "yup": "^1.4.0"
->>>>>>> main
   },
   "devDependencies": {
     "@types/node": "^20",
