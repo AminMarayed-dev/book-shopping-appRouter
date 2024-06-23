@@ -1,10 +1,5 @@
 import { BooksEntity } from "@/type";
-import {
-  Box,
-  Button,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { ChangeEvent } from "react";
 import TextFieldForm from "../text-field-form/TextFieldForm";
@@ -28,11 +23,10 @@ function FormDashboard({
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => void;
-  handleEditBook: (newBook: BooksEntity) => void;
+  handleEditBook: (newBook: any) => any;
   handleSaveBook: (newBook: BooksEntity) => void;
   handleCancelEdit: () => void;
 }) {
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewBook({
@@ -82,7 +76,6 @@ function FormDashboard({
             {editingBook ? "ویرایش کتاب" : "افزودن کتاب جدید"}
           </Typography>
           <form>
-
             <Box display="flex" flexDirection="column" alignItems="flex-start">
               {textBook.map((item, index) => (
                 <TextFieldForm

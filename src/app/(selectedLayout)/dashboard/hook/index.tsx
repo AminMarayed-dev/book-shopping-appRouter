@@ -3,7 +3,6 @@ import { BooksEntity } from "@/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
-
 export const useEditBook = ({
   newBook,
   setNewBook,
@@ -37,6 +36,7 @@ export const useEditBook = ({
         isbn: 0,
         imageUrl: [],
         description: "",
+        quantity: 0,
       });
       setEditingBook(null);
       setCurrentView("table");
@@ -55,15 +55,12 @@ export const useEditBook = ({
   return { handleEditBook };
 };
 
-
-
-
 export const useDeleteBook = () => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationKey: ["deleteBookskey"],
-    mutationFn: (id) => deleteBook(id),
+    mutationFn: (id: any) => deleteBook(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["AllBook"] });
       Swal.fire({
@@ -72,7 +69,7 @@ export const useDeleteBook = () => {
         icon: "success",
       });
     },
-    onError: (res) => {
+    onError: () => {
       Swal.fire({
         title: "خطا!",
         text: "مشکلی پیش آمده!!!",
@@ -81,7 +78,7 @@ export const useDeleteBook = () => {
     },
   });
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: any) => {
     mutate(id);
   };
 

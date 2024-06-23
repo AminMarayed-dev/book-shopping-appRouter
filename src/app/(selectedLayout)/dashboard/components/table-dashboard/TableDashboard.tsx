@@ -32,7 +32,6 @@ function TableDashboard({
 }) {
   return (
     <>
-      {" "}
       {currentView === "table" && (
         <Container
           sx={{
