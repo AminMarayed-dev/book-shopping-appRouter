@@ -7,6 +7,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import WishListSingleProduct from "../wishList-singleProduct/wishList-singleProduct";
 import { TypeChangeAgeGroup, TypeChangeGenre } from "../../hook/type";
 import { BooksEntity } from "@/type";
+import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 
 function DesSingleProduct({
   data,
@@ -21,18 +22,19 @@ function DesSingleProduct({
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
   function addToBasket() {
-    const productBasket = {
-      id: data?.id,
-      name: data?.name,
-      writer: data?.writer,
-      price: data?.price,
-      genre: data?.genre,
-      ageGroup: data?.ageGroup,
-      slug: data?.slug,
-      isbn: data?.isbn,
-      imageUrl: data?.imageUrl,
-      description: data?.description,
-    };
+    const arrayBooksBasket = getLocalStorage("basket");
+    const foundedBookBasket = arrayBooksBasket.findIndex((item) => item.id === data.id
+    );
+        if (foundedBookBasket > -1) {
+      arrayBooksBasket[foundedBookBasket].quantityInBasket = number 
+      setLocalStorage("basket", arrayBooksBasket);
+    } else {   
+       const productBasket = {
+        ...data,
+        quantityInBasket: number,
+      };
+      setLocalStorage("basket", [...getLocalStorage("basket"), productBasket]);
+    }
   }
 
   const toggleDescription = () => {
