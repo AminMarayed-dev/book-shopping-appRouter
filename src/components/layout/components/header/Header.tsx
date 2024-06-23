@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,8 +12,8 @@ import Image from "next/image";
 import { Divider, Drawer } from "@mui/material";
 import DrawerList from "@/app/(rootLayout)/components/DrawerList";
 import SearchBox from "../searchBox/searchBox";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import SwipeableTemporaryDrawer from "../draw-list-basket/drawListBasket";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
@@ -26,9 +27,24 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const router = useRouter();
+
   const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen((prev) => !prev);
+    setOpen(newOpen);
+  };
+
+  const toggleDrawerLeft = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
+      return;
+    }
+
+    setDrawerOpen(open);
   };
 
   return (
@@ -45,9 +61,6 @@ function Header() {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Drawer open={open} onClose={toggleDrawer(false)}>
-            <DrawerList toggleDrawer={toggleDrawer} />
-          </Drawer> */}
           <Box
             sx={{
               flexGrow: 1,
@@ -80,6 +93,7 @@ function Header() {
             aria-label="display more actions"
             edge="end"
             color="inherit"
+            onClick={toggleDrawerLeft(true)}
           >
             <LocalMallIcon />
           </IconButton>
@@ -91,6 +105,7 @@ function Header() {
       <Divider />
       <SearchBox />
       <Divider />
+      <SwipeableTemporaryDrawer open={drawerOpen} toggleDrawer={toggleDrawerLeft} />
     </Box>
   );
 }
