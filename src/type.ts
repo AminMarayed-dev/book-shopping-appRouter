@@ -16,6 +16,7 @@
     genre: string;
     ageGroup: string;
     isbn: number;
+    slug : string;
     imageUrl: string[] | null;
     description: string;
     quantity? : number | null

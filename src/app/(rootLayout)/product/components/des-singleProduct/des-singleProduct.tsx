@@ -20,16 +20,29 @@ function DesSingleProduct({
   const [number, setNumber] = useState(0);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
-  function addTobasket() {}
-
-  async function addToWishlist() {}
+  function addToBasket() {
+    const productBasket = {
+      id: data?.id,
+      name: data?.name,
+      writer: data?.writer,
+      price: data?.price,
+      genre: data?.genre,
+      ageGroup: data?.ageGroup,
+      slug: data?.slug,
+      isbn: data?.isbn,
+      imageUrl: data?.imageUrl,
+      description: data?.description,
+    };
+  }
 
   const toggleDescription = () => {
     setIsDescriptionOpen(!isDescriptionOpen);
   };
 
   const subtractFromNumber = () => {
-    setNumber((prevNumber) => prevNumber - 1);
+    if (number > 0) {
+      setNumber((prevNumber) => prevNumber - 1);
+    }
   };
 
   const addToNumber = () => {
@@ -199,7 +212,7 @@ function DesSingleProduct({
           {" "}
           <CustomButton
             text={"افزودن به سبد خرید"}
-            handleClick={addTobasket}
+            handleClick={addToBasket}
             sx={{ fontSize: "13px", fontWeight: "bold" }}
           />
         </Box>

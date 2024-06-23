@@ -15,12 +15,12 @@ import Swal from "sweetalert2";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { sendBooks } from "@/service";
 import { BooksEntity } from "@/type";
-import TableDashboard from "@/app/(nestedLayout)/dashboard/components/table-dashboard/TableDashboard";
-import FormDashboard from "@/app/(nestedLayout)/dashboard/components/form-dashboard/FormDashboard";
+import TableDashboard from "@/app/(selectedLayout)/dashboard/components/table-dashboard/TableDashboard";
+import FormDashboard from "@/app/(selectedLayout)/dashboard/components/form-dashboard/FormDashboard";
 import {
   useDeleteBook,
   useEditBook,
-} from "@/app/(nestedLayout)/dashboard/hook";
+} from "@/app/(selectedLayout)/dashboard/hook";
 import { useGetAllBooks } from "@/hooks/useGetAllBooks";
 
 const myLogo: StaticImageData = logo;
