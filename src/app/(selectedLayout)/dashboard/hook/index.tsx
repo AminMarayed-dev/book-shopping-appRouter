@@ -55,6 +55,22 @@ export const useEditBook = ({
   return { handleEditBook };
 };
 
+
+export const useEditBookk = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["editBookSearch"],
+    mutationFn: editBook,
+    onSuccess: () => {
+      console.log("ok shod");
+      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
+    },
+  });
+};
+
+
+
+
 export const useDeleteBook = () => {
   const queryClient = useQueryClient();
 
