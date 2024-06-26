@@ -23,7 +23,7 @@ function DesSingleProduct({
 
   function addToBasket() {
     const arrayBooksBasket = getLocalStorage("basket");
-    const foundedBookBasket = arrayBooksBasket.findIndex((item) => item.id === data.id
+    const foundedBookBasket = arrayBooksBasket.findIndex((item : BooksEntity) => item.id === data.id
     );
         if (foundedBookBasket > -1) {
       arrayBooksBasket[foundedBookBasket].quantityInBasket = number 

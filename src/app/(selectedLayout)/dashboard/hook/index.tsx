@@ -62,8 +62,12 @@ export const useEditBookk = () => {
     mutationKey: ["editBookSearch"],
     mutationFn: editBook,
     onSuccess: () => {
-      console.log("ok shod");
       queryClient.invalidateQueries({ queryKey: ["AllBook"] });
+      Swal.fire({
+        title: "موفق!",
+        text: "کتاب با موفقیت ویرایش شد",
+        icon: "success",
+      });
     },
   });
 };

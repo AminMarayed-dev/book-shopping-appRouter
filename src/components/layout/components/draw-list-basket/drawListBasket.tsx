@@ -13,6 +13,7 @@ import { Close } from "@mui/icons-material";
 import Image from "next/image";
 import CustomButton from "@/components/button/CustomButton";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
+import { BooksEntity } from "@/type";
 interface SwipeableTemporaryDrawerProps {
   open: boolean;
   toggleDrawer: (
@@ -27,16 +28,16 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
   // const [addedValue, setAddedValue] = useState([]);
   const basketItems = getLocalStorage("basket");
 
-  const subtractFromNumber = (id) => {
-    const foundedIndex = basketItems.findIndex((item) => item.id === id);
+  const subtractFromNumber = (id : string) => {
+    const foundedIndex = basketItems.findIndex((item : BooksEntity) => item.id === id);
     if (basketItems[foundedIndex].quantityInBasket >= 1) {
       basketItems[foundedIndex].quantityInBasket -= 1;
       setLocalStorage("basket", basketItems);
     }
   };
 
-  const addToNumber = (id) => {
-    const foundedIndex = basketItems.findIndex((item) => item.id === id);
+  const addToNumber = (id : string) => {
+    const foundedIndex = basketItems.findIndex((item : BooksEntity) => item.id === id);
     basketItems[foundedIndex].quantityInBasket += 1;
     setLocalStorage("basket", basketItems);
     // setAddedValue(basketItems);

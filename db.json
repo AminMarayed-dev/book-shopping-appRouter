@@ -4,7 +4,7 @@
       "id": "f40ffff",
       "name": "کتاب زامبی 44 - گلادیاتور زامبی ",
       "writer": "دارن شان",
-      "price": "4",
+      "price": "3002",
       "genre": "وحشت",
       "ageGroup": "جوان",
       "slug": "young",
@@ -15,13 +15,13 @@
         "https://vidapub.com/wp-content/uploads/2022/03/jeld-6b.jpg"
       ],
       "description": "کتاب زامبی 6 - گلادیاتور زامبی به روایت داستان بی در شهری زامبی زده به قلم دارن شان و ترجمه امیرمهدی عاطفی نیا می‌پردازد. ",
-      "quantity": "5"
+      "quantity": 3
     },
     {
       "id": "4d64",
       "name": "کتاب النور و پارک",
       "writer": "رینبو راول",
-      "price": "000",
+      "price": 42800,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
       "slug": "young",
@@ -32,7 +32,7 @@
         "https://vidapub.com/wp-content/uploads/2021/08/eleanor-park-book-buy.jpg"
       ],
       "description": "کتاب النور و پارک کتابی در ژانر عاشقانه و مناسب برای رده سنی نوجوان و جوان است. این کتاب به قلم رینبو راول است و فرح بهبهانی آن را به زبان فارسی ترجمه کرده است.\n\n",
-      "quantity": "klkj"
+      "quantity": "3"
     },
     {
       "id": "ea8d",

@@ -1,4 +1,3 @@
-import { api } from "@/api/config.api";
 import { BooksEntity } from "@/type";
 import {
   Box,
@@ -15,9 +14,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Swal from "sweetalert2";
 import { useEditBookk } from "../../hook";
+
+type TypeUpdateDashboard = {
+  id: string | undefined;
+  quantity?: number;
+  price?: number;
+};
 
 function TableInventory({
   currentView,
@@ -32,40 +37,23 @@ function TableInventory({
 }) {
   const [isClicked, setIsClicked] = useState<string | null>(null);
   const [isClicked2, setIsClicked2] = useState<string | null>(null);
-  const [newValues, setNewValues] = useState<
-    { id: string; quantity?: number; price?: number }[]
-  >([]);
+  const [newValues, setNewValues] = useState<TypeUpdateDashboard[]>([]);
   const { mutate: editUserMutation } = useEditBookk();
 
   console.log(newValues);
 
-  async function updateBooks(book) {
-    await api.patch(`/books/${book.id}`, book);
-    try {
-      Swal.fire({
-        title: "موفق!",
-        text: "کتاب ها با موفقیت ویرایش شدند",
-        icon: "success",
-      });
-    } catch {
-      Swal.fire({
-        title: "نا موفق!",
-        text: "کتاب ها ویرایش نشدند",
-        icon: "error",
-      });
-    }
-  }
   function saveChange() {
-    newValues.map((item) => {
-      // updateBooks(item);
+    newValues.map((item: BooksEntity) => {
       editUserMutation(item);
     });
     setNewValues([]);
   }
 
-  function changeQuantity(e: any, book: BooksEntity) {
-    const newQuantity = e.target.value;
-
+  function changeQuantity(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    book: BooksEntity
+  ) {
+    const newQuantity = +e.target.value;
     const foundedId = newValues.findIndex((item) => item.id === book.id);
     if (foundedId > -1) {
       newValues[foundedId].quantity = newQuantity;
@@ -74,8 +62,11 @@ function TableInventory({
     }
     setNewValues(newValues);
   }
-  function changePrice(e: any, book: BooksEntity) {
-    const newPrice = e.target.value;
+  function changePrice(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    book: BooksEntity
+  ) {
+    const newPrice = +e.target.value;
     const foundedId = newValues.findIndex((item) => item.id === book.id);
     if (foundedId > -1) {
       newValues[foundedId].price = newPrice;
@@ -113,9 +104,7 @@ function TableInventory({
               تغییر موجودی/ قیمت
             </Typography>
             <Button
-              disabled={
-                newValues.length > 0 ? false : true
-              }
+              disabled={newValues.length > 0 ? false : true}
               onClick={saveChange}
               sx={{ border: 2 }}
             >
@@ -154,7 +143,7 @@ function TableInventory({
                                 ? "blue"
                                 : "",
                             }}
-                            onClick={() => setIsClicked2(book.id)}
+                            onClick={() => book.id && setIsClicked2(book.id)}
                           >
                             {newValues?.find((item) => item.id === book.id)
                               ?.price || book.price}
@@ -178,7 +167,7 @@ function TableInventory({
                                 ? "blue"
                                 : "",
                             }}
-                            onClick={() => setIsClicked(book.id)}
+                            onClick={() => book.id && setIsClicked(book.id)}
                           >
                             {newValues.find((item) => item.id === book.id)
                               ?.quantity || book.quantity}
