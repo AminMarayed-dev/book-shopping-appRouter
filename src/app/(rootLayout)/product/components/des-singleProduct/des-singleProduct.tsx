@@ -1,5 +1,12 @@
 import CustomButton from "@/components/button/CustomButton";
-import { Box, Divider, Rating, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -22,8 +29,10 @@ function DesSingleProduct({
 }) {
   const [number, setNumber] = useState(0);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const router = useRouter();
+
   function addToBasket() {
     const arrayBooksBasket = getLocalStorage("basket");
     const foundedBookBasket = arrayBooksBasket.findIndex(
@@ -36,7 +45,10 @@ function DesSingleProduct({
       const productBasket = {
         ...data,
         quantityInBasket: number,
+        totalPriceSingle : number * data?.price!
       };
+
+      console.log(productBasket);
       setLocalStorage("basket", [...getLocalStorage("basket"), productBasket]);
     }
   }
@@ -47,12 +59,18 @@ function DesSingleProduct({
 
   const subtractFromNumber = () => {
     if (number > 0) {
-      setNumber((prevNumber) => prevNumber - 1);
+      setNumber((prevNumber) => {
+        prevNumber <= 2 ? setDisabled(false) : "";
+        return prevNumber - 1;
+      });
     }
   };
 
   const addToNumber = () => {
-    setNumber((prevNumber) => prevNumber + 1);
+    setNumber((prevNumber) => {
+      prevNumber >= 2 ? setDisabled(true) : "";
+      return prevNumber + 1;
+    });
   };
 
   return (
@@ -166,7 +184,6 @@ function DesSingleProduct({
             }}
           >
             <Typography
-              variant="h5"
               sx={{
                 width: "20px",
                 fontSize: "14px",
@@ -191,9 +208,9 @@ function DesSingleProduct({
               },
             }}
           >
-            <CustomButton
-              text="+"
-              handleClick={addToNumber}
+            <Button
+              disabled={disabled}
+              onClick={addToNumber}
               sx={{
                 fontSize: "13px",
                 color: "gray",
@@ -201,7 +218,9 @@ function DesSingleProduct({
                 display: "flex",
                 "&:hover": { color: "white" },
               }}
-            />
+            >
+              +
+            </Button>
           </Box>
         </Box>
 
@@ -216,11 +235,17 @@ function DesSingleProduct({
           }}
         >
           {" "}
-          <CustomButton
+          <Button
+            onClick={addToBasket}
+            sx={{ fontSize: "13px", fontWeight: "bold" }}
+          >
+            افزودن به سبد خرید
+          </Button>
+          {/* <CustomButton
             text={"افزودن به سبد خرید"}
             handleClick={addToBasket}
             sx={{ fontSize: "13px", fontWeight: "bold" }}
-          />
+          /> */}
         </Box>
       </Box>
 
@@ -234,12 +259,14 @@ function DesSingleProduct({
         </Typography>
         <Typography
           sx={{ fontSize: "14px", color: "gray" }}
-      
           onClick={() =>
             router.push(
               routes.productCategoryGenre
-              .replace(`:slug`, ageGroupUrl?.ageGroupEn!)
-              .replace(`:genre`,  (`${ageGroupUrl?.ageGroupEn}-${genreUrl?.genreEn!}`))
+                .replace(`:slug`, ageGroupUrl?.ageGroupEn!)
+                .replace(
+                  `:genre`,
+                  `${ageGroupUrl?.ageGroupEn}-${genreUrl?.genreEn!}`
+                )
             )
           }
         >

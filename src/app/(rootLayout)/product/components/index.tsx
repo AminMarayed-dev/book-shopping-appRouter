@@ -15,8 +15,7 @@ function SingleProduct({ id }: { id: string }) {
  
   const genre: string = data?.genre || "";
   const ageGroup: string = data?.ageGroup || "";
-  const { data: dataBookGenre } = useGetBookByAge({ genre, ageGroup });
-
+  const { data: dataBookGenre } = useGetBookByAge( {genre, ageGroup} );
   const changeGenre: TypeChangeGenre[] = [
     { genre: "فانتزی", genreEn: "fantasy" },
     { genre: "وحشت", genreEn: "horror" },

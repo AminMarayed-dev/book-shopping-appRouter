@@ -19,7 +19,9 @@
     slug? : string;
     imageUrl?: string[] | null;
     description?: string;
-    quantity? : number | null
+    quantity? : number | null,
+    totalPriceSingle? : number | null
+    quantityInBasket? : number | null
   }
   
  

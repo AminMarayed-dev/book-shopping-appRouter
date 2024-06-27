@@ -4,7 +4,7 @@
       "id": "f40ffff",
       "name": "کتاب زامبی 44 - گلادیاتور زامبی ",
       "writer": "دارن شان",
-      "price": 24,
+      "price": 557,
       "genre": "وحشت",
       "ageGroup": "جوان",
       "slug": "young",
@@ -15,13 +15,13 @@
         "https://vidapub.com/wp-content/uploads/2022/03/jeld-6b.jpg"
       ],
       "description": "کتاب زامبی 6 - گلادیاتور زامبی به روایت داستان بی در شهری زامبی زده به قلم دارن شان و ترجمه امیرمهدی عاطفی نیا می‌پردازد. ",
-      "quantity": 1
+      "quantity": 3
     },
     {
       "id": "4d64",
       "name": "کتاب النور و پارک",
       "writer": "رینبو راول",
-      "price": 3243,
+      "price": 575,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
       "slug": "young",
@@ -83,7 +83,7 @@
         "https://vidapub.com/wp-content/uploads/2022/06/jeld-6b.jpg"
       ],
       "description": "کتاب زامبی 6.5 - سیرک زامبی کتابی نوشته دارن شان و ترجمه امیرمهدی عاطفی نیا در نشر ویدا است.",
-      "quantity": 2
+      "quantity": 3
     },
     {
       "id": "883e",

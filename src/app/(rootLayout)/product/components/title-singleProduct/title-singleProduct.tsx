@@ -52,7 +52,8 @@ function TitleSingleProduct({
             router.push(
               routes.productCategoryGenre
               .replace(`:slug`, ageGroupEn)
-              .replace(`:genre`,  (`${ageGroupEn}-${genreEn!}`))
+
+              // .replace(`:genre`,  (`${ageGroupEn}-${genreEn!}`))
             )
           }
         >

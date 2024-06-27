@@ -16,10 +16,10 @@ export const useGetBookById = (id: string) => {
   });
 };
 
-export const useGetBookByAge = ({ params }: { params: Typeparams }) => {
+export const useGetBookByAge = (params: Typeparams ) => {
   return useQuery<BooksEntity[]>({
     queryKey: ["bookByAge"],
-    queryFn: () => getBookByAge({ params }),
+    queryFn: () => getBookByAge( params ),
   });
 };
 

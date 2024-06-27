@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Divider from "@mui/material/Divider";
 import {
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -25,22 +26,40 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
   open,
   toggleDrawer,
 }) => {
-  // const [addedValue, setAddedValue] = useState([]);
-  const basketItems = getLocalStorage("basket");
+  const [arrayBook, setArrayBook] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const basketItems: BooksEntity[] = getLocalStorage("basket");
 
-  const subtractFromNumber = (id : string) => {
-    const foundedIndex = basketItems.findIndex((item : BooksEntity) => item.id === id);
-    if (basketItems[foundedIndex].quantityInBasket >= 1) {
-      basketItems[foundedIndex].quantityInBasket -= 1;
+  useEffect(() => {
+    setArrayBook(basketItems);
+    const price = basketItems.reduce((a, b) => a + b?.totalPriceSingle!, 0);
+    setTotalPrice(price);
+  }, [basketItems.length]);
+
+  const subtractFromNumber = (id: string) => {
+    const foundedIndex = basketItems.findIndex(
+      (item: BooksEntity) => item.id === id
+    );
+    if (basketItems[foundedIndex]?.quantityInBasket! >= 1) {
+      setTotalPrice((prev) => prev - basketItems[foundedIndex]?.price!);
+
+      basketItems[foundedIndex].quantityInBasket! -= 1;
       setLocalStorage("basket", basketItems);
+      setArrayBook(basketItems);
     }
   };
+  [{}, {}];
+  const addToNumber = (id: string) => {
+    const foundedIndex = basketItems.findIndex(
+      (item: BooksEntity) => item.id === id
+    );
+    if (!(basketItems[foundedIndex].quantityInBasket! >= 3)) {
+      (basketItems[foundedIndex].quantityInBasket! += 1),
+        setTotalPrice((prev) => prev + basketItems[foundedIndex]?.price!);
+    }
 
-  const addToNumber = (id : string) => {
-    const foundedIndex = basketItems.findIndex((item : BooksEntity) => item.id === id);
-    basketItems[foundedIndex].quantityInBasket += 1;
     setLocalStorage("basket", basketItems);
-    // setAddedValue(basketItems);
+    setArrayBook(basketItems);
   };
 
   return (
@@ -62,7 +81,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography>بستن</Typography>
         </Box>{" "}
         <Divider />
-        {basketItems.map((item: any) => (
+        {arrayBook.map((item: any) => (
           <Card sx={{ display: "flex" }} key={item.id}>
             <CardMedia>
               <Image
@@ -105,15 +124,16 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                       },
                     }}
                   >
-                    <CustomButton
-                      text="-"
-                      handleClick={() => subtractFromNumber(item.id)}
+                    <Button
+                      onClick={() => subtractFromNumber(item.id)}
                       sx={{
                         fontSize: "13px",
                         color: "gray",
                         "&:hover": { color: "white" },
                       }}
-                    />
+                    >
+                      -
+                    </Button>
                   </Box>
 
                   <Box
@@ -165,13 +185,21 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                   </Box>
                 </Box>
               </Box>
-              <Typography>قیمت :{item.price}</Typography>
+              <Typography
+                sx={{ display: "flex", flexWrap: "nowrap", fontSize: 10 }}
+              >
+                قیمت :{item.price} * {item.quantityInBasket}
+              </Typography>
             </CardContent>
             <IconButton>
               <Close />
             </IconButton>
           </Card>
         ))}
+      </Box>
+      <Box>
+        <Typography>{totalPrice}</Typography>
+        <Button>تسویه حساب</Button>
       </Box>
     </SwipeableDrawer>
   );

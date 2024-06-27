@@ -8,7 +8,7 @@ import { api } from "@/api/config.api";
 
 }
 
-export const getBookByAge = async ({params} : {params :Typeparams}) => {
+export const getBookByAge = async (params :Typeparams) => {
   const { data } = await api.get(`/books?genre=${params.genre}&ageGroup=${params.ageGroup}`);
   return data;
 };
