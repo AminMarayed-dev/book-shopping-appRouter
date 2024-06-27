@@ -1,16 +1,18 @@
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { BooksEntity } from "@/type";
+import { useRouter } from "next/navigation";
+import { routes } from "@/context/routes";
 
 function OneCard({ book, index }: { book: BooksEntity; index: number }) {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-
+  const router = useRouter()
   const handleCardHover = (index: number) => {
     setHoveredIndex(index);
   };
   return (
     <Card
-      onClick={() => (location.href = `/product/${book.id}`)}
+      onClick={() => router.push(routes.sigleProduct.replace(`:slug` , book.id! ))  }
       key={index}
       sx={{
         flex: "0 0 45%",

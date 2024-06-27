@@ -27,6 +27,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 import Link from "next/link";
 import link from "next/link";
+import { routes } from "@/context/routes";
 
 const firstList = [
   {
@@ -120,7 +121,7 @@ function Footer() {
       >
         <Grid container justifyContent="space-evenly">
           <Grid item>
-            <Link href="/" passHref>
+            <Link href={routes.home} passHref>
               <Box textAlign="center">
                 <StoreOutlinedIcon sx={{ color: 'black' }} />
                 <Typography variant="h5">فروشگاه</Typography>

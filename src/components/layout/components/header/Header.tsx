@@ -14,6 +14,7 @@ import DrawerList from "@/app/(rootLayout)/components/DrawerList";
 import SearchBox from "../searchBox/searchBox";
 import { useRouter } from "next/navigation";
 import SwipeableTemporaryDrawer from "../draw-list-basket/drawListBasket";
+import { routes } from "@/context/routes";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: "flex-start",
@@ -72,7 +73,7 @@ function Header() {
             }}
           >
             <Image
-              onClick={() => router.push("/")}
+              onClick={() => router.push(routes.home)}
               src="https://vidapub.com/wp-content/uploads/2021/05/logo-6.png"
               alt="Logo"
               width={140}

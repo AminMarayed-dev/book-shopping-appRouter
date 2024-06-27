@@ -18,8 +18,7 @@ import Link from "next/link";
 import { useGetBooksByGroup } from "@/hooks/useGetBooksByAgeGroup";
 import { useState } from "react";
 import { BooksEntity } from "@/type";
-
-
+import { routes } from "@/context/routes";
 
 function Product({
   ageGroup,
@@ -66,38 +65,35 @@ function Product({
           مجموعه کتاب های {ageGroup}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center" }}>
-
-          
           <IconButton onClick={prevBooks} disabled={currentIndex === 0}>
             <KeyboardArrowRightIcon />
-
           </IconButton>
 
-
-
           <Box sx={{ display: "flex", overflow: "hidden", width: "100%" }}>
-            {data?.slice(currentIndex, currentIndex + 2).map((book : BooksEntity, index : number) => (
-              <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
-                <Link href={`/product/${book.id}`}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={book?.imageUrl![0]}
-                    alt={book.name}
-                  />
-                  <CardContent>
-                    <Typography variant="h5">{book.name}</Typography>
-                    <Typography
-                      variant="h5"
-                      color="secondary.light"
-                      sx={{ mt: 1 }}
-                    >
-                      {book?.price} ریال
-                    </Typography>
-                  </CardContent>
-                </Link>
-              </Card>
-            ))}
+            {data
+              ?.slice(currentIndex, currentIndex + 2)
+              .map((book: BooksEntity, index: number) => (
+                <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
+                  <Link href={routes.sigleProduct.replace(`:slug`, book.id!)}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={book?.imageUrl![0]}
+                      alt={book.name}
+                    />
+                    <CardContent>
+                      <Typography variant="h5">{book.name}</Typography>
+                      <Typography
+                        variant="h5"
+                        color="secondary.light"
+                        sx={{ mt: 1 }}
+                      >
+                        {book?.price} ریال
+                      </Typography>
+                    </CardContent>
+                  </Link>
+                </Card>
+              ))}
           </Box>
           <IconButton
             onClick={nextBooks}
@@ -107,7 +103,7 @@ function Product({
           </IconButton>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Link href={`/product-category/${ageGroupEn}`} passHref>
+          <Link href={routes.productCategory.replace(`:slug` ,ageGroupEn )} passHref>
             <Button variant="contained" color="secondary">
               مشاهده محصولات
             </Button>

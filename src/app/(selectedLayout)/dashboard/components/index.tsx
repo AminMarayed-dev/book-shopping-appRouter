@@ -23,6 +23,8 @@ import {
 } from "@/app/(selectedLayout)/dashboard/hook";
 import { useGetAllBooks } from "@/hooks/useGetAllBooks";
 import TableInventory from "./table-inventory/TableInventory";
+import { useRouter } from "next/navigation";
+import { routes } from "@/context/routes";
 
 const myLogo: StaticImageData = logo;
 
@@ -139,6 +141,8 @@ const Dashboard: React.FC = () => {
     setCurrentView("table");
   };
 
+  const router = useRouter();
+
   const confirmDelete = (id: any) => {
     Swal.fire({
       title: "آیا از حذف این کتاب مطمئن هستید؟",
@@ -171,12 +175,12 @@ const Dashboard: React.FC = () => {
           <Typography>دَشبورد</Typography>
         </Box>
         <Box ml={3}>
-          <IconButton aria-label="logout" onClick={() => (location.href = "/")}>
+          <IconButton aria-label="logout" onClick={() => (router.push(routes.home))}>
             <Home style={{ color: "#db3249" }} />
           </IconButton>
           <IconButton
             aria-label="logout"
-            onClick={() => (location.href = "/register")}
+            onClick={() => router.push(routes.register)}
           >
             <Logout style={{ color: "#db3249" }} />
           </IconButton>

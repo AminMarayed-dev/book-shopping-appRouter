@@ -1,3 +1,4 @@
+import { routes } from "@/context/routes";
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,7 +29,7 @@ function Introduction() {
         معمایی و کارآگاهی تقسیم می‌شود. اکنون با گذشت بیش از ۲۴ سال از فعالیت
         کتاب ویدا امیدواریم توانسته باشیم رضایت مخاطبان عزیز را جلب کرده باشیم.
       </Typography>
-      <Link href="/" passHref>
+      <Link href={routes.home} passHref>
         <Button variant="contained" color="secondary">
            ادامه مطالب
         </Button>

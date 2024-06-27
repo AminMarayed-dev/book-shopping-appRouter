@@ -1,7 +1,10 @@
+import { routes } from "@/context/routes";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function CardsGenre({ ageGroupEn , ageGroup }: { ageGroupEn: string , ageGroup: string }) {
+  const router = useRouter()
   const items = [
     {
       genre: "وحشتت",
@@ -39,8 +42,13 @@ function CardsGenre({ ageGroupEn , ageGroup }: { ageGroupEn: string , ageGroup: 
           return (
             <Card
               sx={{ boxShadow: 4 }}
+          
               onClick={() =>
-                (location.href = `/product-category/${ageGroupEn}/${ageGroupEn}-${item.genreEn}`)
+                router.push(
+                  routes.productCategoryGenre
+                  .replace(`:slug`, ageGroupEn!)
+                  .replace(`:genre`,  (`${ageGroupEn}-${item.genreEn}`))
+                )
               }
             >
               <CardContent>

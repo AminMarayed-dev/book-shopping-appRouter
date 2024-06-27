@@ -8,6 +8,8 @@ import WishListSingleProduct from "../wishList-singleProduct/wishList-singleProd
 import { TypeChangeAgeGroup, TypeChangeGenre } from "../../hook/type";
 import { BooksEntity } from "@/type";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
+import { useRouter } from "next/navigation";
+import { routes } from "@/context/routes";
 
 function DesSingleProduct({
   data,
@@ -21,15 +23,17 @@ function DesSingleProduct({
   const [number, setNumber] = useState(0);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
+  const router = useRouter();
   function addToBasket() {
     const arrayBooksBasket = getLocalStorage("basket");
-    const foundedBookBasket = arrayBooksBasket.findIndex((item : BooksEntity) => item.id === data.id
+    const foundedBookBasket = arrayBooksBasket.findIndex(
+      (item: BooksEntity) => item.id === data.id
     );
-        if (foundedBookBasket > -1) {
-      arrayBooksBasket[foundedBookBasket].quantityInBasket = number 
+    if (foundedBookBasket > -1) {
+      arrayBooksBasket[foundedBookBasket].quantityInBasket = number;
       setLocalStorage("basket", arrayBooksBasket);
-    } else {   
-       const productBasket = {
+    } else {
+      const productBasket = {
         ...data,
         quantityInBasket: number,
       };
@@ -230,8 +234,13 @@ function DesSingleProduct({
         </Typography>
         <Typography
           sx={{ fontSize: "14px", color: "gray" }}
+      
           onClick={() =>
-            (location.href = `/product-category/${ageGroupUrl?.ageGroupEn}/${ageGroupUrl?.ageGroupEn}-${genreUrl?.genreEn}`)
+            router.push(
+              routes.productCategoryGenre
+              .replace(`:slug`, ageGroupUrl?.ageGroupEn!)
+              .replace(`:genre`,  (`${ageGroupUrl?.ageGroupEn}-${genreUrl?.genreEn!}`))
+            )
           }
         >
           ژانر {data?.genre}{" "}

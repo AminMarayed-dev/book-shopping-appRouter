@@ -21,6 +21,7 @@ import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { getUserByFilter } from "@/api/user.api";
 import { TypeUser } from "@/type";
+import { routes } from "@/context/routes";
 
 function SignIn() {
   const [open, setOpen] = useState(false);
@@ -55,11 +56,11 @@ function SignIn() {
 
             if(res[0].role === "admin") {
               setTimeout(() => {
-                router.push("/dashboard");
+                router.push(routes.dashboard);
               }, 2000);
             } else if (res[0].role === "user") {
               setTimeout(() => {
-                router.push("/");
+                router.push(routes.home);
               }, 2000);
             }
           } else {
@@ -172,7 +173,7 @@ function SignIn() {
         <Grid container>
           <Grid item>
             <Button
-              onClick={() => router.push("?mode=signup")}
+              onClick={() => router.push(routes.signUp)}
               color="secondary"
             >
               ثبت نام

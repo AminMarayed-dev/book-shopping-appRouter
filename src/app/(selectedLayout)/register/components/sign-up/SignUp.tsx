@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import { setCookie } from "cookies-next";
 import { TypeUser } from "@/type";
+import { routes } from "@/context/routes";
 
 function SignUp() {
   const router = useRouter();
@@ -54,7 +55,7 @@ function SignUp() {
     postUser(newUser);
     setCookie("role", "user");
     setCookie("id", newUser.id);
-    setTimeout(() => router.push("/"), 2000);
+    setTimeout(() => router.push(routes.home), 2000);
     setOpen(true);
   };
 
@@ -187,7 +188,7 @@ function SignUp() {
         <Grid container>
           <Grid item>
             <Button
-              onClick={() => router.push("?mode=signin")}
+              onClick={() => router.push(routes.signIn)}
               color="secondary"
             >
               ورود

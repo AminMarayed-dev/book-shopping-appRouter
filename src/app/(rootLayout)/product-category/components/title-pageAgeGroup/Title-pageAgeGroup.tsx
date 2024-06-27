@@ -1,3 +1,4 @@
+import { routes } from "@/context/routes";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -15,14 +16,19 @@ function TitlePageAgeGroup({
     <Box sx={{ display: "flex", gap: 1, mt: 2, mx: 2 }}>
     <Typography
       sx={{ fontSize: "13.3px", color: "gray" }}
-      onClick={() => router.push(`/`)}
+      onClick={() => router.push(routes.home)}
     >
       خانه
     </Typography>
     <Typography sx={{ fontSize: "13.3px", color: "gray" }}>/</Typography>
     <Typography
       sx={{ fontSize: "13.3px", textWrap: "nowrap", fontWeight: "bold" }}
-      onClick={() => router.push(`/product-category/${ageGroupEn}`)}
+      onClick={() =>
+        router.push(
+          routes.productCategory
+          .replace(`:slug`, ageGroupEn)
+        )
+      }
     >
       {" "}
       {`  رده سنی ${ageGroup}`}
