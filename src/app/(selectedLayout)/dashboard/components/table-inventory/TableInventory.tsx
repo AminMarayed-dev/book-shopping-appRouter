@@ -93,6 +93,10 @@ function TableInventory({
               display: "flex",
               justifyContent: "space-between",
               alignContent: "center",
+              textAlign : "center",
+              alignItems : "center",
+              alignSelf : "center"
+
             }}
           >
             <Typography
@@ -130,6 +134,8 @@ function TableInventory({
                         {isClicked2 === book.id ? (
                           <TextField
                             autoFocus
+                            sx={{color : "black"}}
+
                             onChange={(e) => changePrice(e, book)}
                             onBlur={() => setIsClicked2(null)}
                           />
@@ -137,6 +143,12 @@ function TableInventory({
                           <TableCell
                             id={book.id}
                             sx={{
+                              borderRadius : 2,
+                              color: newValues.find(
+                                (item) => item.id === book.id && item.price
+                              )
+                                ? "white"
+                                : "black",
                               bgcolor: newValues.find(
                                 (item) => item.id === book.id && item.price
                               )
@@ -154,6 +166,7 @@ function TableInventory({
                         {isClicked === book.id ? (
                           <TextField
                             autoFocus
+                            sx={{color : "black"}}
                             onChange={(e) => changeQuantity(e, book)}
                             onBlur={() => setIsClicked(null)}
                           />
@@ -161,6 +174,12 @@ function TableInventory({
                           <TableCell
                             id={book.id}
                             sx={{
+                              borderRadius : 2,
+                              color: newValues.find(
+                                (item) => item.id === book.id && item.quantity
+                              )
+                                ? "white"
+                                : "black",
                               bgcolor: newValues.find(
                                 (item) => item.id === book.id && item.quantity
                               )

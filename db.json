@@ -4,7 +4,7 @@
       "id": "f40ffff",
       "name": "کتاب زامبی 44 - گلادیاتور زامبی ",
       "writer": "دارن شان",
-      "price": "3002",
+      "price": 24,
       "genre": "وحشت",
       "ageGroup": "جوان",
       "slug": "young",
@@ -15,13 +15,13 @@
         "https://vidapub.com/wp-content/uploads/2022/03/jeld-6b.jpg"
       ],
       "description": "کتاب زامبی 6 - گلادیاتور زامبی به روایت داستان بی در شهری زامبی زده به قلم دارن شان و ترجمه امیرمهدی عاطفی نیا می‌پردازد. ",
-      "quantity": 3
+      "quantity": 1
     },
     {
       "id": "4d64",
       "name": "کتاب النور و پارک",
       "writer": "رینبو راول",
-      "price": 42800,
+      "price": 3243,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
       "slug": "young",
@@ -32,13 +32,13 @@
         "https://vidapub.com/wp-content/uploads/2021/08/eleanor-park-book-buy.jpg"
       ],
       "description": "کتاب النور و پارک کتابی در ژانر عاشقانه و مناسب برای رده سنی نوجوان و جوان است. این کتاب به قلم رینبو راول است و فرح بهبهانی آن را به زبان فارسی ترجمه کرده است.\n\n",
-      "quantity": "3"
+      "quantity": 2
     },
     {
       "id": "ea8d",
       "name": "کتاب دختر آرزو",
       "writer": "نیکی لافتین",
-      "price": 282000,
+      "price": 24000,
       "genre": "عاشقانه",
       "ageGroup": "جوان",
       "slug": "young",
@@ -49,7 +49,7 @@
         "https://vidapub.com/wp-content/uploads/2021/05/wish-girl-book-buy.jpg"
       ],
       "description": "کتاب دختر آرزو کتابی است در ژانر عاشقانه و سرار امید و آرزو که توسط نیکی لافتین نوشته شده و فرح بهبهانی آن را ترجمه کرده است. این کتاب خواننده را به عمق داستان می‌برد و او را درگیر خود می‌کند.",
-      "quantity": "5"
+      "quantity": 2
     },
     {
       "id": "8b62",
@@ -66,7 +66,7 @@
         "https://vidapub.com/wp-content/uploads/2023/11/mexicanb.jpg"
       ],
       "description": "کتاب تک جلدی جنون مکزیکی بهترین اثر ژانر وحشت در سال 2020 به قلم سیلویا مورنو گارسیا و ترجمه فاطمه گنجعلی‌خان حاکمی از سوی نشر ویدا روانه بازار شده است.",
-      "quantity": 2
+      "quantity": 3
     },
     {
       "id": "676767fg",
@@ -100,7 +100,7 @@
         "https://vidapub.com/wp-content/uploads/2022/06/3bb.jpg"
       ],
       "description": "کتاب رستگاری 3 - رهایی به نویسندگی ال. جی. اسمیت و ترجمه عاطفه حاجی آقایی توسط انتشارات ویدا چاپ شده است.",
-      "quantity": "3"
+      "quantity": 2
     },
     {
       "id": "05c8",
@@ -500,6 +500,23 @@
             "https://vidapub.com/wp-content/uploads/2022/06/5b.jpg"
           ],
           "description": "کتاب دنیای اسلپی 5 - فرار از عمارت مخوف یکی دیگر از کتاب های جذاب آر. ال. استاین و ترجمه آمنه یاری در انتشارات ویدا است.      ",
+          "quantity": 2
+        },
+        {
+          "id": "8b19",
+          "name": "کتاب دایره وحشت 10 - مترسک نیمه شب",
+          "writer": "آر. ال. استاین",
+          "price": 170000,
+          "genre": "وحشت",
+          "ageGroup": "نوجوان",
+          "slug": "teenager",
+          "isbn": 9786225643987,
+          "imageUrl": [
+            "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg",
+            "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg",
+            "https://vidapub.com/wp-content/uploads/2021/09/horror-circle-book-10-buy.jpg"
+          ],
+          "description": "کتاب دایره وحشت 10 - مترسک نیمه شب داستانی ترسناک و رازآلود نوشته شده توسط آر. ال. استاین و ترجمه رویا خادم الرضا در نشر ویدا است.",
           "quantity": 2
         }
       ]
