@@ -5,7 +5,7 @@ import { getBooksByGenre } from "@/app/(rootLayout)/product-category/services";
 
 export const useGetBooksByAgeGroup = (ageGroup: string) => {
   return useQuery<BooksEntity[]>({
-    queryKey: ["book by ageGroup"],
+    queryKey: ["book-by-ageGroup"],
     queryFn: () => getBooksByAgeGroup(ageGroup),
   });
 };
@@ -18,7 +18,7 @@ export const useGetBooksByGenre = ({
   ageGroup: string;
 }) => {
   return useQuery<BooksEntity[]>({
-    queryKey: ["book by ageGroup and genre"],
+    queryKey: ["book-by-ageGroup-genre"],
     queryFn: () => getBooksByGenre({ genre, ageGroup }),
   });
 };

@@ -30,6 +30,7 @@ function DesSingleProduct({
   const [number, setNumber] = useState(0);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const [disabled, setDisabled] = useState(false);
+  
 
   const router = useRouter();
 
@@ -45,7 +46,7 @@ function DesSingleProduct({
       const productBasket = {
         ...data,
         quantityInBasket: number,
-        totalPriceSingle : number * data?.price!
+        // totalPriceSingle : number * data?.price!
       };
 
       console.log(productBasket);

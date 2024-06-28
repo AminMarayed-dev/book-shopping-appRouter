@@ -36,7 +36,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
   const router = useRouter();
   useEffect(() => {
     setArrayBook(basketItems);
-    const price = basketItems.reduce((a, b) => a + b?.totalPriceSingle!, 0);
+    const price = basketItems.reduce((a, b) => a + b?.price! * b?.quantityInBasket!, 0);
     setTotalPrice(price);
   }, [basketItems.length]);
 
@@ -70,12 +70,13 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
     const updatedBasketItems = basketItems.filter((item) => item.id !== id);
     setLocalStorage("basket", updatedBasketItems);
     setArrayBook(updatedBasketItems);
-    const updatedTotalPrice = updatedBasketItems.reduce(
-      (a, b) => a + b?.totalPriceSingle!,
-      0
-    );
-    setTotalPrice(updatedTotalPrice);
+    // const updatedTotalPrice = updatedBasketItems.reduce(
+    //   (a, b) => a + b?.totalPriceSingle!,
+    //   0
+    // );
+    // setTotalPrice(updatedTotalPrice);
   };
+
 
   return (
     <SwipeableDrawer
@@ -103,8 +104,8 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography sx={{ m: 2, fontSize: "20px", fontWeight: "bold" }}>
             سبد خرید
           </Typography>
-          <Typography sx={{ m: 2, fontWeight: "bold" }}>
-            <CloseIcon sx={{ fontSize: 16 }} /> بستن{" "}
+          <Typography sx={{ m: 2, fontWeight: "bold" }} onClick={toggleDrawer(false)}>
+            <CloseIcon  sx={{ fontSize: 16 }} /> بستن{" "}
           </Typography>
         </Box>
         <Divider />

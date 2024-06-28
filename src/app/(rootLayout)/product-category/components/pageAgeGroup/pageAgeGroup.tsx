@@ -34,7 +34,7 @@ function PageAgeGroup({
         }}
       >
         {data?.map((book, index) => (
-          <OneCard index={index} book={book} />
+          <OneCard index={index} book={book} key={index} />
         ))}
       </Box>
 

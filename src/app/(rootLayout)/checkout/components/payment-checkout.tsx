@@ -61,9 +61,15 @@ function PaymentCheckOut() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button type="submit" fullWidth variant="contained" color="secondary">
-        ثبت سفارش
-      </Button>
+      <a href="/payment">
+        <Button
+          fullWidth
+          variant="contained"
+          color="secondary"
+        >
+          ثبت سفارش
+        </Button>
+      </a>
     </Container>
   );
 }
