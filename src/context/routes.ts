@@ -8,4 +8,5 @@ export const routes = {
   signIn: `?mode=signin`,
   signUp: `?mode=signup`,
   cart: `/cart`,
+  checkout:'/checkout'
 };

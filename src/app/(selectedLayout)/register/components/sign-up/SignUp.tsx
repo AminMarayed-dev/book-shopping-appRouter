@@ -43,15 +43,16 @@ function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(RegisterSchemaSignUP),
-  });
+  } = useForm();
 
-  const onSumbitSignUp = (data: TypeUser) => {
-
-    const newUser : TypeUser ={
-      ...data, role: "user" , id : Date.now().toString() ,wishlist: []
-    }
+  const onSumbitSignUp = (data: any) => {
+    const newUser: any = {
+      ...data,
+      role: "user",
+      id: Date.now().toString(),
+      wishlist: [],
+      basket:[],
+    };
     postUser(newUser);
     setCookie("role", "user");
     setCookie("id", newUser.id);
@@ -84,8 +85,8 @@ function SignUp() {
           fullWidth
           placeholder="ایمیل"
           autoFocus
-          helperText={errors.email?.message}
-          error={!!errors.email}
+          // helperText={errors.email?.message}
+          // error={!!errors.email}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -111,9 +112,67 @@ function SignUp() {
           {...register("username")}
           margin="normal"
           fullWidth
-          helperText={errors.username?.message}
-          error={!!errors.username}
+          // helperText={errors.username?.message}
+          // error={!!errors.username}
           placeholder="نام کاربری"
+          autoFocus
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <PersonIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
+              },
+              "&:hover fieldset": {
+                borderColor: "darkgray",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
+              },
+            },
+          }}
+        />
+        <TextField
+          {...register("name")}
+          margin="normal"
+          fullWidth
+          // helperText={errors.username?.message}
+          // error={!!errors.username}
+          placeholder="نام و نام خانوادگی"
+          autoFocus
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <PersonIcon />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray",
+              },
+              "&:hover fieldset": {
+                borderColor: "darkgray",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
+              },
+            },
+          }}
+        />
+                <TextField
+          {...register("mobile")}
+          margin="normal"
+          fullWidth
+          // helperText={errors.username?.message}
+          // error={!!errors.username}
+          placeholder="شماره موبایل"
           autoFocus
           InputProps={{
             startAdornment: (
@@ -140,8 +199,8 @@ function SignUp() {
           {...register("password")}
           margin="normal"
           fullWidth
-          helperText={errors.password?.message}
-          error={!!errors.password}
+          // helperText={errors.password?.message}
+          // error={!!errors.password}
           type="password"
           placeholder="رمز عبور"
           autoComplete="current-password"
@@ -201,3 +260,8 @@ function SignUp() {
 }
 
 export default SignUp;
+
+
+// {
+//   resolver: yupResolver(RegisterSchemaSignUP),
+// }

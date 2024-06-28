@@ -522,34 +522,22 @@
       ]
     },
     {
-      "id": "22",
-      "email": "aminmarayed1@gmail.com",
-      "username": "lkjflkdsjflsjdflk22",
-      "password": "lkjflkdsjflsjdflk22",
-      "role": "user",
-      "wishlist": []
-    },
-    {
-      "id": "33",
-      "email": "aminmarayed1@gmail.com",
-      "username": "jsdfjlk4324234324",
-      "password": "432894729",
-      "role": "user",
-      "wishlist": []
-    },
-    {
-      "id": "e327",
-      "email": "aminmarayed1@gmail.com",
+      "id": "1719563120351",
+      "email": "aminmarayed4@gmail.com",
       "username": "AminMarayed1381",
-      "password": "123456788",
+      "name": "امین مراید",
+      "mobile": "09100034661",
+      "password": "3424324324234",
       "role": "user",
       "wishlist": []
     },
     {
-      "id": "1718952111977",
-      "email": "sdasdas@gmail.com",
-      "username": "Vpjackie5tt43543",
-      "password": "Vpjackie543543",
+      "id": "1719569329525",
+      "email": "aminmarayed2@gmail.com",
+      "username": "Vpjackie543543",
+      "name": "علی سیدی",
+      "mobile": "09177774661",
+      "password": "987987",
       "role": "user",
       "wishlist": []
     }
