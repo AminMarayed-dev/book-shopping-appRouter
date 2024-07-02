@@ -21,7 +21,7 @@ import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { getUserByFilter } from "@/api/user.api";
 import { TypeUser } from "@/type";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function SignIn() {
   const [open, setOpen] = useState(false);
@@ -54,7 +54,7 @@ function SignIn() {
             setCookie("role", res[0].role);
             setCookie("id", res[0].id);
 
-            if(res[0].role === "admin") {
+            if (res[0].role === "admin") {
               setTimeout(() => {
                 router.push(routes.dashboard);
               }, 2000);

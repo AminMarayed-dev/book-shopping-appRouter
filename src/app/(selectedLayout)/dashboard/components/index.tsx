@@ -24,7 +24,7 @@ import {
 import { useGetAllBooks } from "@/hooks/useGetAllBooks";
 import TableInventory from "./table-inventory/TableInventory";
 import { useRouter } from "next/navigation";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 const myLogo: StaticImageData = logo;
 
@@ -175,7 +175,10 @@ const Dashboard: React.FC = () => {
           <Typography>دَشبورد</Typography>
         </Box>
         <Box ml={3}>
-          <IconButton aria-label="logout" onClick={() => (router.push(routes.home))}>
+          <IconButton
+            aria-label="logout"
+            onClick={() => router.push(routes.home)}
+          >
             <Home style={{ color: "#db3249" }} />
           </IconButton>
           <IconButton

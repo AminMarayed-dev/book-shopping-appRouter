@@ -1,10 +1,16 @@
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-function CardsGenre({ ageGroupEn , ageGroup }: { ageGroupEn: string , ageGroup: string }) {
-  const router = useRouter()
+function CardsGenre({
+  ageGroupEn,
+  ageGroup,
+}: {
+  ageGroupEn: string;
+  ageGroup: string;
+}) {
+  const router = useRouter();
   const items = [
     {
       genre: "وحشتت",
@@ -37,17 +43,15 @@ function CardsGenre({ ageGroupEn , ageGroup }: { ageGroupEn: string , ageGroup: 
       <Box
         sx={{ display: "flex", justifyContent: "space-between", gap: 3, m: 3 }}
       >
-        
         {items.map((item) => {
           return (
             <Card
               sx={{ boxShadow: 4 }}
-          
               onClick={() =>
                 router.push(
                   routes.productCategoryGenre
-                  .replace(`:slug`, ageGroupEn!)
-                  .replace(`:genre`,  (`${ageGroupEn}-${item.genreEn}`))
+                    .replace(`:slug`, ageGroupEn!)
+                    .replace(`:genre`, `${ageGroupEn}-${item.genreEn}`)
                 )
               }
             >

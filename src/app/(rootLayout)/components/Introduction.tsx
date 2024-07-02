@@ -1,4 +1,4 @@
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,7 +31,7 @@ function Introduction() {
       </Typography>
       <Link href={routes.home} passHref>
         <Button variant="contained" color="secondary">
-           ادامه مطالب
+          ادامه مطالب
         </Button>
       </Link>
     </Box>

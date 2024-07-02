@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import { setCookie } from "cookies-next";
 import { TypeUser } from "@/type";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function SignUp() {
   const router = useRouter();
@@ -51,7 +51,7 @@ function SignUp() {
       role: "user",
       id: Date.now().toString(),
       wishlist: [],
-      basket:[],
+      basket: [],
     };
     postUser(newUser);
     setCookie("role", "user");
@@ -166,7 +166,7 @@ function SignUp() {
             },
           }}
         />
-                <TextField
+        <TextField
           {...register("mobile")}
           margin="normal"
           fullWidth
@@ -260,7 +260,6 @@ function SignUp() {
 }
 
 export default SignUp;
-
 
 // {
 //   resolver: yupResolver(RegisterSchemaSignUP),

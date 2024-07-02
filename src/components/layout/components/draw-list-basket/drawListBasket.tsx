@@ -12,13 +12,14 @@ import {
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import Image from "next/image";
-import CustomButton from "@/components/button/CustomButton";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 import { BooksEntity } from "@/type";
 import CloseIcon from "@mui/icons-material/Close";
 import { formatNumber } from "@/utils/formatNumber";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 import { useRouter } from "next/navigation";
+import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
+import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
 interface SwipeableTemporaryDrawerProps {
   open: boolean;
   toggleDrawer: (
@@ -30,13 +31,16 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
   open,
   toggleDrawer,
 }) => {
-  const [arrayBook, setArrayBook] = useState([]);
+  const [arrayBook, setArrayBook] = useState<BooksEntity[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const basketItems: BooksEntity[] = getLocalStorage("basket");
   const router = useRouter();
   useEffect(() => {
     setArrayBook(basketItems);
-    const price = basketItems.reduce((a, b) => a + b?.price! * b?.quantityInBasket!, 0);
+    const price = basketItems.reduce(
+      (a, b) => a + b?.price! * b?.quantityInBasket!,
+      0
+    );
     setTotalPrice(price);
   }, [basketItems.length]);
 
@@ -70,13 +74,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
     const updatedBasketItems = basketItems.filter((item) => item.id !== id);
     setLocalStorage("basket", updatedBasketItems);
     setArrayBook(updatedBasketItems);
-    // const updatedTotalPrice = updatedBasketItems.reduce(
-    //   (a, b) => a + b?.totalPriceSingle!,
-    //   0
-    // );
-    // setTotalPrice(updatedTotalPrice);
   };
-
 
   return (
     <SwipeableDrawer
@@ -104,8 +102,11 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography sx={{ m: 2, fontSize: "20px", fontWeight: "bold" }}>
             سبد خرید
           </Typography>
-          <Typography sx={{ m: 2, fontWeight: "bold" }} onClick={toggleDrawer(false)}>
-            <CloseIcon  sx={{ fontSize: 16 }} /> بستن{" "}
+          <Typography
+            sx={{ m: 2, fontWeight: "bold" }}
+            onClick={toggleDrawer(false)}
+          >
+            <CloseIcon sx={{ fontSize: 16 }} /> بستن{" "}
           </Typography>
         </Box>
         <Divider />
@@ -140,88 +141,13 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                     textAlign: "center",
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      border: "1px solid gray",
-                      borderRadius: "4px",
-                      backgroundColor: "white",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "40px",
-                        borderRight: "1px solid gray",
-                        padding: "8px",
-                        justifyContent: "center",
-                        display: "flex",
-                        "&:hover": {
-                          backgroundColor: "secondary.light",
-                          color: "white",
-                        },
-                      }}
-                    >
-                      <Button
-                        onClick={() => subtractFromNumber(item.id)}
-                        sx={{
-                          fontSize: "13px",
-                          color: "gray",
-                          "&:hover": { color: "white" },
-                        }}
-                      >
-                        -
-                      </Button>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        padding: "8px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center",
-                      }}
-                    >
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          width: "20px",
-                          fontSize: "14px",
-                          color: "gray",
-                          textAlign: "center",
-                          m: "auto",
-                        }}
-                      >
-                        {item.quantityInBasket}
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        width: "40px",
-                        borderLeft: "1px solid gray",
-                        display: "flex",
-                        justifyContent: "center",
-                        "&:hover": {
-                          backgroundColor: "secondary.light",
-                          color: "white",
-                        },
-                      }}
-                    >
-                      <CustomButton
-                        text="+"
-                        handleClick={() => addToNumber(item.id)}
-                        sx={{
-                          fontSize: "13px",
-                          color: "gray",
-                          width: "100%",
-                          display: "flex",
-                          "&:hover": { color: "white" },
-                        }}
-                      />
-                    </Box>
-                  </Box>
+                  <ChangeQuantity
+                    item={item.id}
+                    subtractFromNumber={() => subtractFromNumber(item.id)}
+                    disabled={false}
+                    addToNumber={() => addToNumber(item.id)}
+                    quantity={item.quantityInBasket}
+                  />
                 </Box>
                 <Typography
                   sx={{ display: "flex", flexWrap: "nowrap", fontSize: 15 }}
@@ -244,16 +170,11 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography>
             جمع کل سبد خرید: {formatNumber(totalPrice)} تومان
           </Typography>
-          <Button
-            fullWidth
-            sx={{ bgcolor: "secondary.light", mt: 1 }}
-            onClick={() => router.push(routes.cart)}
-          >
-            مشاهده و سبد خرید
-          </Button>
-          <Button fullWidth sx={{ bgcolor: "secondary.light", mt: 1 }}>
-            تسویه حساب
-          </Button>
+          <ButtonTypeOne
+            text="مشاهده و سبد خرید"
+            handleClick={() => router.push(routes.cart)}
+          />
+          <ButtonTypeOne text="تسویه حساب" />
         </Box>
       </Box>
     </SwipeableDrawer>

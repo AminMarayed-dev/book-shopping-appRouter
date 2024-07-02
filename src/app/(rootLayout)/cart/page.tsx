@@ -14,17 +14,15 @@ import {
 import { Close } from "@mui/icons-material";
 import Image from "next/image";
 import { formatNumber } from "@/utils/formatNumber";
-import ghayoumi from "../../../../public/ghayoumi.jpg";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
-import CustomButton from "@/components/button/CustomButton";
 import { useEffect, useState } from "react";
 import { BooksEntity } from "@/type";
 import { useRouter } from "next/navigation";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [arrayBook, setArrayBook] = useState([]);
+  const [arrayBook, setArrayBook] = useState<BooksEntity[] | []>([]);
   const basketItems: BooksEntity[] = getLocalStorage("basket");
   useEffect(() => {
     setArrayBook(basketItems);
@@ -84,13 +82,13 @@ function Cart() {
               >
                 <Image
                   alt="test"
-                  src={item.imageUrl[0]}
+                  src={item.imageUrl![0]}
                   width={140}
                   height={200}
                 />
               </CardMedia>
               <CardContent>
-                <Typography>{item.name}</Typography>
+                <Typography>{item?.name}</Typography>
                 <Box
                   sx={{
                     display: "flex",
@@ -107,7 +105,7 @@ function Cart() {
                     mb: 1,
                   }}
                 >
-                  قیمت: {formatNumber(item.price)} تومان
+                  قیمت: {formatNumber(item.price!)} تومان
                 </Typography>
                 <Divider
                   sx={{
@@ -157,7 +155,7 @@ function Cart() {
                         }}
                       >
                         <Button
-                          onClick={() => subtractFromNumber(item.id)}
+                          onClick={() => subtractFromNumber(item?.id!)}
                           sx={{
                             fontSize: "13px",
                             color: "gray",
@@ -187,7 +185,7 @@ function Cart() {
                             m: "auto",
                           }}
                         >
-                          {item.quantityInBasket}
+                          {item?.quantityInBasket}
                         </Typography>
                       </Box>
 
@@ -204,7 +202,7 @@ function Cart() {
                         }}
                       >
                         <Button
-                          onClick={() => addToNumber(item.id)}
+                          onClick={() => addToNumber(item.id!)}
                           sx={{
                             fontSize: "13px",
                             color: "gray",
@@ -229,7 +227,7 @@ function Cart() {
                             mt: 1,
                           }}
                         >
-                          جمع جز: {formatNumber(item.price)} تومان
+                          جمع جز: {formatNumber(item?.price!)} تومان
                         </Typography>
                       </Box>
                     </Box>

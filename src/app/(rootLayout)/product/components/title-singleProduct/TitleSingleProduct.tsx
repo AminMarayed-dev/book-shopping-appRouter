@@ -5,7 +5,7 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import React from "react";
 import { BooksEntity } from "@/type";
 import { useRouter } from "next/navigation";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function TitleSingleProduct({
   data,
@@ -38,8 +38,9 @@ function TitleSingleProduct({
         <Typography sx={{ fontSize: "13.3px" }}>/</Typography>
         <Typography
           sx={{ fontSize: "13.3px", textWrap: "nowrap" }}
-          onClick={() => router.push(routes.productCategory
-            .replace(`:slug`, ageGroupEn!))}
+          onClick={() =>
+            router.push(routes.productCategory.replace(`:slug`, ageGroupEn!))
+          }
         >
           {" "}
           رده سنی {data?.ageGroup}
@@ -47,11 +48,9 @@ function TitleSingleProduct({
         <Typography sx={{ fontSize: "13.3px" }}>/</Typography>
         <Typography
           sx={{ fontSize: "13.3px", textWrap: "nowrap", fontWeight: "bold" }}
- 
           onClick={() =>
             router.push(
-              routes.productCategoryGenre
-              .replace(`:slug`, ageGroupEn)
+              routes.productCategoryGenre.replace(`:slug`, ageGroupEn)
 
               // .replace(`:genre`,  (`${ageGroupEn}-${genreEn!}`))
             )
