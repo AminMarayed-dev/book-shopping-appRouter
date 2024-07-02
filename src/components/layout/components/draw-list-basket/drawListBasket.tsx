@@ -19,6 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { formatNumber } from "@/utils/formatNumber";
 import { routes } from "@/context/routes";
 import { useRouter } from "next/navigation";
+
 interface SwipeableTemporaryDrawerProps {
   open: boolean;
   toggleDrawer: (
@@ -30,53 +31,47 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
   open,
   toggleDrawer,
 }) => {
-  const [arrayBook, setArrayBook] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const basketItems: BooksEntity[] = getLocalStorage("basket");
+  const [arrayBook, setArrayBook] = useState<BooksEntity[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const basketItems: BooksEntity[] = getLocalStorage("basket") || [];
   const router = useRouter();
+
   useEffect(() => {
     setArrayBook(basketItems);
-    const price = basketItems.reduce((a, b) => a + b?.price! * b?.quantityInBasket!, 0);
+    const price = basketItems.reduce(
+      (a, b) => a + (b?.price! * b?.quantityInBasket!),
+      0
+    );
     setTotalPrice(price);
   }, [basketItems.length]);
 
   const subtractFromNumber = (id: string) => {
-    const foundedIndex = basketItems.findIndex(
-      (item: BooksEntity) => item.id === id
-    );
+    const foundedIndex = basketItems.findIndex((item) => item.id === id);
     if (basketItems[foundedIndex]?.quantityInBasket! >= 1) {
       setTotalPrice((prev) => prev - basketItems[foundedIndex]?.price!);
 
       basketItems[foundedIndex].quantityInBasket! -= 1;
       setLocalStorage("basket", basketItems);
-      setArrayBook(basketItems);
+      setArrayBook([...basketItems]);
     }
   };
 
   const addToNumber = (id: string) => {
-    const foundedIndex = basketItems.findIndex(
-      (item: BooksEntity) => item.id === id
-    );
+    const foundedIndex = basketItems.findIndex((item) => item.id === id);
     if (!(basketItems[foundedIndex].quantityInBasket! >= 3)) {
-      (basketItems[foundedIndex].quantityInBasket! += 1),
-        setTotalPrice((prev) => prev + basketItems[foundedIndex]?.price!);
+      basketItems[foundedIndex].quantityInBasket! += 1;
+      setTotalPrice((prev) => prev + basketItems[foundedIndex]?.price!);
     }
 
     setLocalStorage("basket", basketItems);
-    setArrayBook(basketItems);
+    setArrayBook([...basketItems]);
   };
 
   const removeFromBasket = (id: string) => {
     const updatedBasketItems = basketItems.filter((item) => item.id !== id);
     setLocalStorage("basket", updatedBasketItems);
     setArrayBook(updatedBasketItems);
-    // const updatedTotalPrice = updatedBasketItems.reduce(
-    //   (a, b) => a + b?.totalPriceSingle!,
-    //   0
-    // );
-    // setTotalPrice(updatedTotalPrice);
   };
-
 
   return (
     <SwipeableDrawer
@@ -105,12 +100,12 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
             سبد خرید
           </Typography>
           <Typography sx={{ m: 2, fontWeight: "bold" }} onClick={toggleDrawer(false)}>
-            <CloseIcon  sx={{ fontSize: 16 }} /> بستن{" "}
+            <CloseIcon sx={{ fontSize: 16 }} /> بستن{" "}
           </Typography>
         </Box>
         <Divider />
         <Box sx={{ flex: 1, overflowY: "auto" }}>
-          {arrayBook.map((item: any) => (
+          {arrayBook.map((item) => (
             <Card
               sx={{
                 display: "flex",
@@ -123,8 +118,8 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                 sx={{ display: "grid", alignItems: "center", padding: 1 }}
               >
                 <Image
-                  alt={item.name}
-                  src={item.imageUrl[0]}
+                  alt='img of book'
+                  src={item.imageUrl ? item.imageUrl[0] : ""}
                   width={300}
                   height={200}
                 />
@@ -163,7 +158,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                       }}
                     >
                       <Button
-                        onClick={() => subtractFromNumber(item.id)}
+                        onClick={() => subtractFromNumber(item.id!)}
                         sx={{
                           fontSize: "13px",
                           color: "gray",
@@ -211,7 +206,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                     >
                       <CustomButton
                         text="+"
-                        handleClick={() => addToNumber(item.id)}
+                        handleClick={() => addToNumber(item.id!)}
                         sx={{
                           fontSize: "13px",
                           color: "gray",
@@ -226,12 +221,12 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                 <Typography
                   sx={{ display: "flex", flexWrap: "nowrap", fontSize: 15 }}
                 >
-                  {item.quantityInBasket} × {formatNumber(item.price)} تومان
+                  {item.quantityInBasket} × {formatNumber(item.price!)} تومان
                 </Typography>
               </CardContent>
               <IconButton
                 sx={{ display: "grid", alignItems: "start" }}
-                onClick={() => removeFromBasket(item.id)}
+                onClick={() => removeFromBasket(item.id!)}
               >
                 <Close />
               </IconButton>
