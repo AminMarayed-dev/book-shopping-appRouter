@@ -3,19 +3,23 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
 import SwiperProducts from "./swiper-products/swiper-products";
-import DesSingleProduct from "./des-singleProduct/des-singleProduct";
-import TitleSingleProduct from "./title-singleProduct/title-singleProduct";
-import ImageSingleProduct from "./image-singleProduct/image-singleProduct";
+import MainSingleProduct from "./main-singleProduct/MainSingleProduct";
+import TitleSingleProduct from "./title-singleProduct/TitleSingleProduct";
+import ImageSingleProduct from "./image-singleProduct/ImageSingleProduct";
 import { useGetBookById } from "@/hooks/useGetBookById";
 import { useGetBookByAge } from "@/app/(rootLayout)/product/hook/index";
 import { TypeChangeAgeGroup, TypeChangeGenre } from "./../hook/type";
 
 function SingleProduct({ id }: { id: string }) {
   const { data , isLoading} = useGetBookById(id);
- 
   const genre: string = data?.genre || "";
   const ageGroup: string = data?.ageGroup || "";
   const { data: dataBookGenre } = useGetBookByAge( {genre, ageGroup} );
+
+  if(isLoading){
+    return <Box>Loading ...</Box>
+  }
+
   const changeGenre: TypeChangeGenre[] = [
     { genre: "فانتزی", genreEn: "fantasy" },
     { genre: "وحشت", genreEn: "horror" },
@@ -43,7 +47,7 @@ function SingleProduct({ id }: { id: string }) {
 
       {/* description */}
       {data && (
-        <DesSingleProduct
+        <MainSingleProduct
           data={data}
           ageGroupUrl={ageGroupUrl!}
           genreUrl={genreUrl!}

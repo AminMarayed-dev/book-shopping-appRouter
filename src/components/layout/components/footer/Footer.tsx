@@ -23,11 +23,11 @@ import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import Link from "next/link";
 import link from "next/link";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 const firstList = [
   {
@@ -123,7 +123,7 @@ function Footer() {
           <Grid item>
             <Link href={routes.home} passHref>
               <Box textAlign="center">
-                <StoreOutlinedIcon sx={{ color: 'black' }} />
+                <StoreOutlinedIcon sx={{ color: "black" }} />
                 <Typography variant="h5">فروشگاه</Typography>
               </Box>
             </Link>
@@ -131,7 +131,7 @@ function Footer() {
           <Grid item>
             <Link href="/search" passHref>
               <Box textAlign="center">
-                <FilterAltOutlinedIcon sx={{ color: 'black' }} />
+                <FilterAltOutlinedIcon sx={{ color: "black" }} />
                 <Typography variant="h5">فیلتر</Typography>
               </Box>
             </Link>
@@ -139,7 +139,7 @@ function Footer() {
           <Grid item>
             <Link href="/favorites" passHref>
               <Box textAlign="center">
-                <FavoriteBorderIcon sx={{ color: 'black' }} />
+                <FavoriteBorderIcon sx={{ color: "black" }} />
                 <Typography variant="h5">علاقه مندی</Typography>
               </Box>
             </Link>
@@ -147,7 +147,7 @@ function Footer() {
           <Grid item>
             <Link href="/cart" passHref>
               <Box textAlign="center">
-                <ShoppingBagOutlinedIcon sx={{ color: 'black' }} />
+                <ShoppingBagOutlinedIcon sx={{ color: "black" }} />
                 <Typography variant="h5">سبد خرید</Typography>
               </Box>
             </Link>
@@ -155,7 +155,7 @@ function Footer() {
           <Grid item>
             <Link href="/profile" passHref>
               <Box textAlign="center">
-                <AccountCircleIcon sx={{ color: 'black' }} />
+                <AccountCircleIcon sx={{ color: "black" }} />
                 <Typography variant="h5">پروفایل</Typography>
               </Box>
             </Link>

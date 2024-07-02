@@ -1,4 +1,4 @@
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -27,12 +27,8 @@ function TitlePageGenre({
       <Typography
         sx={{ fontSize: "13.3px", textWrap: "nowrap", color: "gray" }}
         onClick={() =>
-          router.push(
-            routes.productCategory
-            .replace(`:slug`, ageGroupEn)
-          )
+          router.push(routes.productCategory.replace(`:slug`, ageGroupEn))
         }
-
       >
         {` رده سنی ${ageGroup}`}{" "}
       </Typography>

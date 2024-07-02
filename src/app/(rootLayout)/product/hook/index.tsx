@@ -23,19 +23,12 @@ export const useGetBookByAge = (params: Typeparams ) => {
   });
 };
 
+
+
 export const useGetUser = (user: string) => {
-  const queryClient = useQueryClient()
   return useQuery<TypeUser>({
     queryKey: ["getUserById"],
     queryFn: () => getUser(user),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["AllBook"] });
-      Swal.fire({
-        title: "حذف!",
-        text: "کتاب با موفقیت حذف شد",
-        icon: "success",
-      });
-    },
   });
 };
 

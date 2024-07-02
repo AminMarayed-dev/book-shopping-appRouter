@@ -18,13 +18,19 @@ import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 import { useEffect, useState } from "react";
 import { BooksEntity } from "@/type";
 import { useRouter } from "next/navigation";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function Cart() {
+<<<<<<< HEAD
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [arrayBook, setArrayBook] = useState<BooksEntity[]>([]);
   const basketItems: BooksEntity[] = getLocalStorage("basket") || [];
 
+=======
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [arrayBook, setArrayBook] = useState<BooksEntity[] | []>([]);
+  const basketItems: BooksEntity[] = getLocalStorage("basket");
+>>>>>>> feature/mohammad
   useEffect(() => {
     setArrayBook(basketItems);
     const price = basketItems.reduce(
@@ -165,8 +171,101 @@ function Cart() {
                         "&:hover": { color: "white" },
                       }}
                     >
+<<<<<<< HEAD
                       -
                     </Button>
+=======
+                      <Box
+                        sx={{
+                          width: "40px",
+                          borderRight: "1px solid gray",
+                          padding: "8px",
+                          justifyContent: "center",
+                          display: "flex",
+                          "&:hover": {
+                            backgroundColor: "secondary.light",
+                            color: "white",
+                          },
+                        }}
+                      >
+                        <Button
+                          onClick={() => subtractFromNumber(item?.id!)}
+                          sx={{
+                            fontSize: "13px",
+                            color: "gray",
+                            "&:hover": { color: "white" },
+                          }}
+                        >
+                          -
+                        </Button>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          padding: "8px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          textAlign: "center",
+                        }}
+                      >
+                        <Typography
+                          variant="h5"
+                          sx={{
+                            width: "20px",
+                            fontSize: "14px",
+                            color: "gray",
+                            textAlign: "center",
+                            m: "auto",
+                          }}
+                        >
+                          {item?.quantityInBasket}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          width: "40px",
+                          borderLeft: "1px solid gray",
+                          display: "flex",
+                          justifyContent: "center",
+                          "&:hover": {
+                            backgroundColor: "secondary.light",
+                            color: "white",
+                          },
+                        }}
+                      >
+                        <Button
+                          onClick={() => addToNumber(item.id!)}
+                          sx={{
+                            fontSize: "13px",
+                            color: "gray",
+                            width: "100%",
+                            display: "flex",
+                            "&:hover": { color: "white" },
+                          }}
+                        >
+                          +
+                        </Button>
+                        <Divider
+                          sx={{
+                            borderStyle: "dashed",
+                            borderWidth: "1px",
+                          }}
+                        />
+                        <Typography
+                          sx={{
+                            display: "flex",
+                            flexWrap: "nowrap",
+                            fontSize: 15,
+                            mt: 1,
+                          }}
+                        >
+                          جمع جز: {formatNumber(item?.price!)} تومان
+                        </Typography>
+                      </Box>
+                    </Box>
+>>>>>>> feature/mohammad
                   </Box>
                   <Box
                     sx={{

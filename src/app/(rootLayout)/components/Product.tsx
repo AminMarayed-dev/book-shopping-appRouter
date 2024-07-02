@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useGetBooksByGroup } from "@/hooks/useGetBooksByAgeGroup";
 import { useState } from "react";
 import { BooksEntity } from "@/type";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function Product({
   ageGroup,
@@ -103,7 +103,10 @@ function Product({
           </IconButton>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Link href={routes.productCategory.replace(`:slug` ,ageGroupEn )} passHref>
+          <Link
+            href={routes.productCategory.replace(`:slug`, ageGroupEn)}
+            passHref
+          >
             <Button variant="contained" color="secondary">
               مشاهده محصولات
             </Button>

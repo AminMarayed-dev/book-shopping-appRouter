@@ -9,12 +9,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import { useGetBookSearch } from "../../hook";
 import { BooksEntity } from "@/type";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState("");
@@ -29,11 +29,13 @@ function SearchBox() {
   };
 
   const defaultProps = {
-    options: listBook,
+    options: listBook || [],
     getOptionLabel: (option: BooksEntity) => option.name || "",
   };
-
-  const handleOptionSelect = (event: React.ChangeEvent<{}>, value: BooksEntity | null) => {
+  const handleOptionSelect = (
+    event: React.ChangeEvent<{}>,
+    value: BooksEntity | null
+  ) => {
     setOpen(false);
     setSearchValue("");
   };
@@ -51,7 +53,6 @@ function SearchBox() {
         renderOption={(props, option) => (
           <ListItem {...props} key={option.id}>
             <Link href={routes.sigleProduct.replace(`:slug`, option.id!)}>
-
               <ListItemAvatar>
                 <Avatar src={option.imageUrl![0]} alt={option.name} />
               </ListItemAvatar>

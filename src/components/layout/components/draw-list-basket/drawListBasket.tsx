@@ -12,14 +12,18 @@ import {
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import Image from "next/image";
-import CustomButton from "@/components/button/CustomButton";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
 import { BooksEntity } from "@/type";
 import CloseIcon from "@mui/icons-material/Close";
 import { formatNumber } from "@/utils/formatNumber";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 
+=======
+import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
+import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
+>>>>>>> feature/mohammad
 interface SwipeableTemporaryDrawerProps {
   open: boolean;
   toggleDrawer: (
@@ -32,8 +36,13 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
   toggleDrawer,
 }) => {
   const [arrayBook, setArrayBook] = useState<BooksEntity[]>([]);
+<<<<<<< HEAD
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const basketItems: BooksEntity[] = getLocalStorage("basket") || [];
+=======
+  const [totalPrice, setTotalPrice] = useState(0);
+  const basketItems: BooksEntity[] = getLocalStorage("basket");
+>>>>>>> feature/mohammad
   const router = useRouter();
 
   useEffect(() => {
@@ -99,7 +108,14 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography sx={{ m: 2, fontSize: "20px", fontWeight: "bold" }}>
             سبد خرید
           </Typography>
+<<<<<<< HEAD
           <Typography sx={{ m: 2, fontWeight: "bold" }} onClick={toggleDrawer(false)}>
+=======
+          <Typography
+            sx={{ m: 2, fontWeight: "bold" }}
+            onClick={toggleDrawer(false)}
+          >
+>>>>>>> feature/mohammad
             <CloseIcon sx={{ fontSize: 16 }} /> بستن{" "}
           </Typography>
         </Box>
@@ -135,6 +151,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                     textAlign: "center",
                   }}
                 >
+<<<<<<< HEAD
                   <Box
                     sx={{
                       display: "flex",
@@ -217,6 +234,15 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
                       />
                     </Box>
                   </Box>
+=======
+                  <ChangeQuantity
+                    item={item.id}
+                    subtractFromNumber={() => subtractFromNumber(item.id)}
+                    disabled={false}
+                    addToNumber={() => addToNumber(item.id)}
+                    quantity={item.quantityInBasket}
+                  />
+>>>>>>> feature/mohammad
                 </Box>
                 <Typography
                   sx={{ display: "flex", flexWrap: "nowrap", fontSize: 15 }}
@@ -239,16 +265,11 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography>
             جمع کل سبد خرید: {formatNumber(totalPrice)} تومان
           </Typography>
-          <Button
-            fullWidth
-            sx={{ bgcolor: "secondary.light", mt: 1 }}
-            onClick={() => router.push(routes.cart)}
-          >
-            مشاهده و سبد خرید
-          </Button>
-          <Button fullWidth sx={{ bgcolor: "secondary.light", mt: 1 }}>
-            تسویه حساب
-          </Button>
+          <ButtonTypeOne
+            text="مشاهده و سبد خرید"
+            handleClick={() => router.push(routes.cart)}
+          />
+          <ButtonTypeOne text="تسویه حساب" />
         </Box>
       </Box>
     </SwipeableDrawer>

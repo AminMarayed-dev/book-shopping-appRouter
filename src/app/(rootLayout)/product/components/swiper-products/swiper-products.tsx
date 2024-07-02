@@ -11,7 +11,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Link from "next/link";
 import { BooksEntity } from "@/type";
-import { routes } from "@/context/routes";
+import { routes } from "@/constant/routes";
 
 function SwiperProducts({ dataBookGenre }: { dataBookGenre: BooksEntity[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,7 +38,7 @@ function SwiperProducts({ dataBookGenre }: { dataBookGenre: BooksEntity[] }) {
           ?.slice(currentIndex, currentIndex + 2)
           .map((book: BooksEntity, index: number) => (
             <Card key={index} sx={{ flex: "0 0 45%", margin: "10px" }}>
-                <Link href={routes.sigleProduct.replace(`:slug` , book.id! )}>
+              <Link href={routes.sigleProduct.replace(`:slug`, book.id!)}>
                 <CardMedia
                   component="img"
                   height="140"

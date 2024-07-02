@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { routes } from "./context/routes";
+import { routes } from "./constant/routes";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
