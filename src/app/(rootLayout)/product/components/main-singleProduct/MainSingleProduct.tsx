@@ -102,7 +102,7 @@ function MainSingleProduct({
         <ChangeQuantity
           item={""}
           subtractFromNumber={() => subtractFromNumber()}
-          disabled={false}
+          disabled={disabled}
           addToNumber={() => addToNumber()}
           quantity={quantity}
         />
@@ -115,6 +115,10 @@ function MainSingleProduct({
             bgcolor: "secondary.light",
             color: "white",
             p: "10px",
+            "&:hover": {
+              color: "white",
+              backgroundColor: "secondary.light",
+            },
           }}
         >
           افزودن به سبد خرید

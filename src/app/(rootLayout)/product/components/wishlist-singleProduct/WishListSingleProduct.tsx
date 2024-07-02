@@ -6,7 +6,6 @@ import { BooksEntity } from "@/type";
 import { useEditUser, useGetUser } from "../../hook";
 import { getCookie } from "cookies-next";
 import { TypeUser } from "@/type";
-import { useQueryClient } from "@tanstack/react-query";
 
 
 function WishListSingleProduct({ book }: { book: BooksEntity }) {

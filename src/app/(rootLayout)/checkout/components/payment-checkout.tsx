@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Card, Container, Divider } from "@mui/material";
+import { Container } from "@mui/material";
 
 import Button from "@mui/material/Button";
 
@@ -12,6 +12,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { getLocalStorage } from "@/utils/localStorage";
+import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
+import { routes } from "@/constant/routes";
 
 function createData(name: string, price: number | string) {
   return { name, price };
@@ -19,16 +21,16 @@ function createData(name: string, price: number | string) {
 
 const allBasket = getLocalStorage("basket");
 const subRows = allBasket.map((item: any) =>
-  createData(item.name, item.totalPriceSingle)
+  createData(item.name, item.quantityInBasket * item.price)
 );
 const totalAllPrice = allBasket.reduce(
-  (acc, curr) => acc + curr.totalPriceSingle,
+  (acc: any, curr: any) => acc + curr.quantityInBasket * curr.price,
   0
 );
 
 const rows = [
   ...subRows,
-  createData("جمع جزء", totalAllPrice),
+  // createData("جمع جزء", totalAllPrice),
   createData("مجموع", totalAllPrice),
 ];
 
@@ -61,15 +63,7 @@ function PaymentCheckOut() {
           </TableBody>
         </Table>
       </TableContainer>
-      <a href="/payment">
-        <Button
-          fullWidth
-          variant="contained"
-          color="secondary"
-        >
-          ثبت سفارش
-        </Button>
-      </a>
+      <ButtonTypeOne text=" ثبت سفارش" handleClick={()=>location.href=(routes.payment)} />
     </Container>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import React from "react";
 
 type TypeProps = {
@@ -11,7 +11,14 @@ const ButtonTypeOne = ({ text, handleClick }: TypeProps) => {
   return (
     <Button
       fullWidth
-      sx={{ bgcolor: "secondary.light", mt: 1 }}
+      sx={{
+        bgcolor: "secondary.light",
+        mt: 1,
+        "&:hover": {
+          color: "white",
+          backgroundColor: "secondary.light",
+        },
+      }}
       onClick={handleClick}
     >
       {text}

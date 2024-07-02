@@ -1,12 +1,6 @@
-import { TypeUserCookie } from "../hook/type";
+import { Typeparams, TypeUserCookie } from "../hook/type";
 import { api } from "@/api/config.api";
 
-
- export type Typeparams = {
-  genre? : string,
-  ageGroup? : string,
-
-}
 
 export const getBookByAge = async (params :Typeparams) => {
   const { data } = await api.get(`/books?genre=${params.genre}&ageGroup=${params.ageGroup}`);
@@ -23,8 +17,8 @@ export const getBookById = async (id: string) => {
 
 
 
-export const getUser = async (user: string) => {
-  const { data } = await api.get(`/users/${user}`);
+export const getUser = async (id: string) => {
+  const { data } = await api.get(`/users/${id}`);
   return data;
 };
 

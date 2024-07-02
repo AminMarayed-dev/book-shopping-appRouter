@@ -11,7 +11,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { Close, DisabledByDefault } from "@mui/icons-material";
 import Image from "next/image";
 import { formatNumber } from "@/utils/formatNumber";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
@@ -19,18 +19,14 @@ import { useEffect, useState } from "react";
 import { BooksEntity } from "@/type";
 import { useRouter } from "next/navigation";
 import { routes } from "@/constant/routes";
+import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
 
 function Cart() {
-<<<<<<< HEAD
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [arrayBook, setArrayBook] = useState<BooksEntity[]>([]);
   const basketItems: BooksEntity[] = getLocalStorage("basket") || [];
+  const [disable, setDisable] = useState(false);
 
-=======
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [arrayBook, setArrayBook] = useState<BooksEntity[] | []>([]);
-  const basketItems: BooksEntity[] = getLocalStorage("basket");
->>>>>>> feature/mohammad
   useEffect(() => {
     setArrayBook(basketItems);
     const price = basketItems.reduce(
@@ -47,6 +43,7 @@ function Cart() {
       basketItems[foundedIndex].quantityInBasket! -= 1;
       setLocalStorage("basket", basketItems);
       setArrayBook([...basketItems]);
+      setDisable(false)
     }
   };
 
@@ -61,7 +58,7 @@ function Cart() {
     if (!(basketItems[foundedIndex].quantityInBasket! >= 3)) {
       basketItems[foundedIndex].quantityInBasket! += 1;
       setTotalPrice((prev) => prev + basketItems[foundedIndex]?.price!);
-    }
+    } else setDisable(true);
     setLocalStorage("basket", basketItems);
     setArrayBook([...basketItems]);
   };
@@ -141,180 +138,13 @@ function Cart() {
                 >
                   تعداد:
                 </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    border: "1px solid gray",
-                    borderRadius: "4px",
-                    backgroundColor: "white",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: "40px",
-                      borderRight: "1px solid gray",
-                      padding: "8px",
-                      justifyContent: "center",
-                      display: "flex",
-                      "&:hover": {
-                        backgroundColor: "secondary.light",
-                        color: "white",
-                      },
-                    }}
-                  >
-                    <Button
-                      onClick={() => subtractFromNumber(item.id!)}
-                      sx={{
-                        fontSize: "13px",
-                        color: "gray",
-                        "&:hover": { color: "white" },
-                      }}
-                    >
-<<<<<<< HEAD
-                      -
-                    </Button>
-=======
-                      <Box
-                        sx={{
-                          width: "40px",
-                          borderRight: "1px solid gray",
-                          padding: "8px",
-                          justifyContent: "center",
-                          display: "flex",
-                          "&:hover": {
-                            backgroundColor: "secondary.light",
-                            color: "white",
-                          },
-                        }}
-                      >
-                        <Button
-                          onClick={() => subtractFromNumber(item?.id!)}
-                          sx={{
-                            fontSize: "13px",
-                            color: "gray",
-                            "&:hover": { color: "white" },
-                          }}
-                        >
-                          -
-                        </Button>
-                      </Box>
-
-                      <Box
-                        sx={{
-                          padding: "8px",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          textAlign: "center",
-                        }}
-                      >
-                        <Typography
-                          variant="h5"
-                          sx={{
-                            width: "20px",
-                            fontSize: "14px",
-                            color: "gray",
-                            textAlign: "center",
-                            m: "auto",
-                          }}
-                        >
-                          {item?.quantityInBasket}
-                        </Typography>
-                      </Box>
-
-                      <Box
-                        sx={{
-                          width: "40px",
-                          borderLeft: "1px solid gray",
-                          display: "flex",
-                          justifyContent: "center",
-                          "&:hover": {
-                            backgroundColor: "secondary.light",
-                            color: "white",
-                          },
-                        }}
-                      >
-                        <Button
-                          onClick={() => addToNumber(item.id!)}
-                          sx={{
-                            fontSize: "13px",
-                            color: "gray",
-                            width: "100%",
-                            display: "flex",
-                            "&:hover": { color: "white" },
-                          }}
-                        >
-                          +
-                        </Button>
-                        <Divider
-                          sx={{
-                            borderStyle: "dashed",
-                            borderWidth: "1px",
-                          }}
-                        />
-                        <Typography
-                          sx={{
-                            display: "flex",
-                            flexWrap: "nowrap",
-                            fontSize: 15,
-                            mt: 1,
-                          }}
-                        >
-                          جمع جز: {formatNumber(item?.price!)} تومان
-                        </Typography>
-                      </Box>
-                    </Box>
->>>>>>> feature/mohammad
-                  </Box>
-                  <Box
-                    sx={{
-                      padding: "8px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                  >
-                    <Typography
-                      variant="h5"
-                      sx={{
-                        width: "20px",
-                        fontSize: "14px",
-                        color: "gray",
-                        textAlign: "center",
-                        m: "auto",
-                      }}
-                    >
-                      {item.quantityInBasket}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      width: "40px",
-                      borderLeft: "1px solid gray",
-                      display: "flex",
-                      justifyContent: "center",
-                      "&:hover": {
-                        backgroundColor: "secondary.light",
-                        color: "white",
-                      },
-                    }}
-                  >
-                    <Button
-                      onClick={() => addToNumber(item.id!)}
-                      sx={{
-                        fontSize: "13px",
-                        color: "gray",
-                        width: "100%",
-                        display: "flex",
-                        "&:hover": { color: "white" },
-                      }}
-                    >
-                      +
-                    </Button>
-                  </Box>
-                </Box>
+                <ChangeQuantity
+                  addToNumber={() => addToNumber(item.id!)}
+                  disabled={disable}
+                  item={item.id!}
+                  quantity={item.quantityInBasket!}
+                  subtractFromNumber={() => subtractFromNumber(item.id!)}
+                />
               </Box>
               <Divider
                 sx={{

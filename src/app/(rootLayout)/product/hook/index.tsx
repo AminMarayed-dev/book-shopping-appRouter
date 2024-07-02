@@ -1,13 +1,7 @@
-import {  useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Typeparams,
-  editUser,
-  getBookByAge,
-  getBookById,
-  getUser,
-} from "../service";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { editUser, getBookByAge, getBookById, getUser } from "../service";
 import { BooksEntity, TypeUser } from "@/type";
-import Swal from "sweetalert2";
+import { Typeparams } from "./type";
 
 export const useGetBookById = (id: string) => {
   return useQuery<BooksEntity>({
@@ -16,14 +10,12 @@ export const useGetBookById = (id: string) => {
   });
 };
 
-export const useGetBookByAge = (params: Typeparams ) => {
+export const useGetBookByAge = (params: Typeparams) => {
   return useQuery<BooksEntity[]>({
     queryKey: ["bookByAge"],
-    queryFn: () => getBookByAge( params ),
+    queryFn: () => getBookByAge(params),
   });
 };
-
-
 
 export const useGetUser = (user: string) => {
   return useQuery<TypeUser>({
