@@ -1,6 +1,6 @@
-import Banner from "./components/Banner";
-import Introduction from "./components/Introduction";
-import ProductWrapper from "./components/ProductWrapper";
+import Banner from "@/app/(rootLayout)/components/Banner";
+import Introduction from "@/app/(rootLayout)/components/Introduction";
+import ProductWrapper from "@/app/(rootLayout)/components/ProductWrapper";
 
 
 

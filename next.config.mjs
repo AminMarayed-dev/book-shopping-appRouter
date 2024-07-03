@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ["http://localhost:5000"],
     remotePatterns: [
       {
         protocol: "https",
@@ -9,7 +10,8 @@ const nextConfig = {
         pathname: "/wp-content/uploads/****/**/**",
       },
     ],
+    
   },
 };
- 
+
 export default nextConfig;

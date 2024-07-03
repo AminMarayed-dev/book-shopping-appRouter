@@ -1,6 +1,11 @@
 "use client";
 
-import Box from "@mui/material/Box";
+import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
+import { routes } from "@/constant/routes";
+import { BooksEntity } from "@/type";
+import { formatNumber } from "@/utils/formatNumber";
+import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
+import { Close } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -11,15 +16,10 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { Close, DisabledByDefault } from "@mui/icons-material";
+import Box from "@mui/material/Box";
 import Image from "next/image";
-import { formatNumber } from "@/utils/formatNumber";
-import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
-import { useEffect, useState } from "react";
-import { BooksEntity } from "@/type";
 import { useRouter } from "next/navigation";
-import { routes } from "@/constant/routes";
-import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
+import { useEffect, useState } from "react";
 
 function Cart() {
   const [totalPrice, setTotalPrice] = useState<number>(0);
@@ -43,7 +43,7 @@ function Cart() {
       basketItems[foundedIndex].quantityInBasket! -= 1;
       setLocalStorage("basket", basketItems);
       setArrayBook([...basketItems]);
-      setDisable(false)
+      setDisable(false);
     }
   };
 
