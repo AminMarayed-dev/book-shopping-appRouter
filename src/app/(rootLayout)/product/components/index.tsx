@@ -1,19 +1,20 @@
 "use client";
 
-import { useGetBookByAge } from "@/app/(rootLayout)/product/hook/index";
-import { useGetBookById } from "@/hooks/useGetBookById";
-import { Box, Divider, Typography } from "@mui/material";
-import {
-  TypeChangeAgeGroup,
-  TypeChangeGenre,
-} from "@/app/(rootLayout)/product/hook/type";
 import ImageSingleProduct from "@/app/(rootLayout)/product/components/image-singleProduct/ImageSingleProduct";
 import MainSingleProduct from "@/app/(rootLayout)/product/components/main-singleProduct/MainSingleProduct";
 import SwiperProducts from "@/app/(rootLayout)/product/components/swiper-products/swiper-products";
 import TitleSingleProduct from "@/app/(rootLayout)/product/components/title-singleProduct/TitleSingleProduct";
+import { useGetBookByAge } from "@/app/(rootLayout)/product/hook/index";
+import {
+  TypeChangeAgeGroup,
+  TypeChangeGenre,
+} from "@/app/(rootLayout)/product/hook/type";
+import { useGetBookById } from "@/hooks/useGetBookById";
+import { Box, Divider, Typography } from "@mui/material";
 
 function SingleProduct({ id }: { id: string }) {
   const { data, isLoading } = useGetBookById(id);
+
   const genre: string = data?.genre || "";
   const ageGroup: string = data?.ageGroup || "";
   const { data: dataBookGenre } = useGetBookByAge({ genre, ageGroup });

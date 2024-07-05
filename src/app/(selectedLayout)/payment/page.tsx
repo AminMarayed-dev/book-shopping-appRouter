@@ -21,15 +21,14 @@ function Payment() {
     location.href = "/result/success";
   }
   return (
-    <Box sx={{mx:2}}>
-    <Typography sx={{textAlign:"center" , py:"70px"}}>
-      آیا مطمئن هستی ؟
-    </Typography>
-      <ButtonTypeOne text="پرداخت" handleClick={pay} />
-      <ButtonTypeOne
-        text="انصراف"
-        handleClick={() => (location.href = "/result/fail")}
-      />
+    <Box sx={{ mx: 2 }}>
+      <Typography sx={{ textAlign: "center", py: "70px" }}>
+        آیا مطمئن هستی ؟
+      </Typography>
+      <ButtonTypeOne onClick={pay}>پرداخت</ButtonTypeOne>
+      <ButtonTypeOne onClick={() => (location.href = "/result/fail")}>
+        انصراف
+      </ButtonTypeOne>
     </Box>
   );
 }

@@ -1,10 +1,14 @@
-import { pink } from '@mui/material/colors';
-import { createTheme } from '@mui/material/styles';
-
-
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-  direction: 'rtl',
+  components: {
+    MuiButton: {
+      defaultProps: {
+        fullWidth: true,
+      },
+    },
+  },
+  direction: "rtl",
   typography: {
     fontFamily: [
       "vazirmatn",
@@ -19,23 +23,22 @@ const theme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(","),
-    h5:{
-      fontSize:13  
+    h5: {
+      fontSize: 13,
     },
-    h4:{
-      fontSize:23
-    }
+    h4: {
+      fontSize: 23,
+    },
   },
   palette: {
     primary: {
-      main: '#fff',
-      dark:'#EFEFEF85'
+      main: "#fff",
+      dark: "#EFEFEF85",
     },
     secondary: {
-      main:"#1A315A",
-      light:"#004e75"
+      main: "#1A315A",
+      light: "#004e75",
     },
-    
   },
 });
 

@@ -1,11 +1,10 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { useEditUser, useGetUser } from "@/app/(rootLayout)/product/hook";
+import { BooksEntity, TypeUser } from "@/type";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import React, { useEffect, useState } from "react";
-import { BooksEntity } from "@/type";
-import { useEditUser, useGetUser } from "@/app/(rootLayout)/product/hook";
+import { Box, IconButton, Typography } from "@mui/material";
 import { getCookie } from "cookies-next";
-import { TypeUser } from "@/type";
+import { useEffect, useState } from "react";
 
 function WishListSingleProduct({ book }: { book: BooksEntity }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -26,7 +25,7 @@ function WishListSingleProduct({ book }: { book: BooksEntity }) {
         setIsFavorite(false);
       }
     }
-  }, [user]);
+  }, [book.id, user]);
 
   const toggleFavorite = async () => {
     if (userRole === "admin" || userRole === "user") {

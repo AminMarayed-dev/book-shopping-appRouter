@@ -1,9 +1,9 @@
 "use client";
 
-import { Container } from "@mui/material";
 import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
 import { routes } from "@/constant/routes";
 import { getLocalStorage } from "@/utils/localStorage";
+import { Container } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -60,10 +60,9 @@ function PaymentCheckOut() {
           </TableBody>
         </Table>
       </TableContainer>
-      <ButtonTypeOne
-        text=" ثبت سفارش"
-        handleClick={() => (location.href = routes.payment)}
-      />
+      <ButtonTypeOne onClick={() => (location.href = routes.payment)}>
+        ثبت سفارش
+      </ButtonTypeOne>
     </Container>
   );
 }
