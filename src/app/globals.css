@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.my-swal {
+    z-index: 99999;
+  }
+  

@@ -12,7 +12,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import "../../../../global.css";
+import "@/app/globals.css";
 
 interface SwipeableTemporaryDrawerProps {
   open: boolean;

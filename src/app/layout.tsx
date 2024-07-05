@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
 import ThemeContextProvider from "@/context/ThemeContextProvider";
 import { CssBaseline } from "@mui/material";
 import QueryContextProvider from "@/context/QueryContextProvider";
 import { Suspense } from "react";
-import Loading from "./loading";
+import Loading from "@/app/loading";
 
 export const metadata: Metadata = {
   title: "کتاب ویدا",
