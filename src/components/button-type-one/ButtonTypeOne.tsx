@@ -1,9 +1,16 @@
 "use client";
-import { Button, ButtonProps } from "@mui/material";
+import { Button } from "@mui/material";
+import React from "react";
 
-const ButtonTypeOne = ({ children, ...rest }: ButtonProps) => {
+type TypeProps = {
+  text: string;
+  handleClick?: () => void;
+};
+
+const ButtonTypeOne = ({ text, handleClick }: TypeProps) => {
   return (
     <Button
+      fullWidth
       sx={{
         bgcolor: "secondary.light",
         mt: 1,
@@ -12,9 +19,9 @@ const ButtonTypeOne = ({ children, ...rest }: ButtonProps) => {
           backgroundColor: "secondary.light",
         },
       }}
-      {...rest}
+      onClick={handleClick}
     >
-      {children}
+      {text}
     </Button>
   );
 };

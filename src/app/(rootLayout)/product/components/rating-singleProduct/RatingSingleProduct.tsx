@@ -1,29 +1,35 @@
-import { Box, Rating, Typography } from "@mui/material";
+import {
+    Box,
+   
+    Rating,
+    Typography,
+  } from "@mui/material";import React from 'react'
 
 function RatingSingleProduct() {
   return (
     <Box
+    sx={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      gap: "10px",
+  
+    }}
+  >
+    <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+    <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
-        gap: "10px",
       }}
     >
-      <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography sx={{ color: "gray", fontSize: "14px" }}>
-          (دیدگاه 0 کاربر)
-        </Typography>
-      </Box>
+      <Typography sx={{ color: "gray", fontSize: "14px" }}>
+        (دیدگاه 0 کاربر)
+      </Typography>
     </Box>
-  );
+  </Box>
+)
 }
 
-export default RatingSingleProduct;
+export default RatingSingleProduct

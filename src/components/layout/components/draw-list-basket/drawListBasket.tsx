@@ -1,4 +1,3 @@
-import "@/app/globals.css";
 import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
 import CardBasket from "@/components/card-basket/CardBasket";
 import { routes } from "@/constant/routes";
@@ -13,6 +12,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import "@/app/globals.css";
 
 interface SwipeableTemporaryDrawerProps {
   open: boolean;
@@ -37,7 +37,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
       0
     );
     setTotalPrice(price);
-  }, [basketItems]);
+  }, [basketItems.length]);
 
   const subtractFromNumber = (id: string) => {
     const foundedIndex = basketItems.findIndex((item) => item.id === id);
@@ -139,10 +139,11 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography>
             جمع کل سبد خرید: {formatNumber(totalPrice)} تومان
           </Typography>
-          <ButtonTypeOne onClick={routeToCart}>مشاهده و سبد خرید</ButtonTypeOne>
-          <ButtonTypeOne onClick={() => (location.href = routes.checkout)}>
-            تسویه حساب
-          </ButtonTypeOne>
+          <ButtonTypeOne text="مشاهده و سبد خرید" handleClick={routeToCart} />
+          <ButtonTypeOne
+            text="تسویه حساب"
+            handleClick={() => (location.href = routes.checkout)}
+          />
         </Box>
       </Box>
     </SwipeableDrawer>
