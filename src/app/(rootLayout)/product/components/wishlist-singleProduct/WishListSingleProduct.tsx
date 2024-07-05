@@ -3,17 +3,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import React, { useEffect, useState } from "react";
 import { BooksEntity } from "@/type";
-import { useEditUser, useGetUser } from "../../hook";
+import { useEditUser, useGetUser } from "@/app/(rootLayout)/product/hook";
 import { getCookie } from "cookies-next";
 import { TypeUser } from "@/type";
-
 
 function WishListSingleProduct({ book }: { book: BooksEntity }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const userId = getCookie("id") as string;
   const userRole = getCookie("role");
-  
-  const { data: user  } = useGetUser(userId);
+
+  const { data: user } = useGetUser(userId);
   const { mutate: editUserMutation } = useEditUser();
 
   useEffect(() => {
@@ -29,7 +28,6 @@ function WishListSingleProduct({ book }: { book: BooksEntity }) {
     }
   }, [user]);
 
-
   const toggleFavorite = async () => {
     if (userRole === "admin" || userRole === "user") {
       if (!isFavorite) {
@@ -42,7 +40,7 @@ function WishListSingleProduct({ book }: { book: BooksEntity }) {
         const newWishlist = user?.wishlist!.filter(
           (item: BooksEntity) => item.id != book.id
         );
-        const newUser : TypeUser = {
+        const newUser: TypeUser = {
           ...user!,
           wishlist: newWishlist || [],
         };
@@ -51,7 +49,6 @@ function WishListSingleProduct({ book }: { book: BooksEntity }) {
     }
     setIsFavorite((prevFavorite) => !prevFavorite);
   };
-
 
   return (
     <Box sx={{ display: "flex", gap: "5px", alignItems: "center" }}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import Product from "./Product";
+import Product from "@/app/(rootLayout)/components/Product";
 
 function ProductWrapper() {
   return (

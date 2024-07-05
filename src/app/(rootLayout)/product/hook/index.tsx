@@ -1,7 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { editUser, getBookByAge, getBookById, getUser } from "../service";
+import {
+  editUser,
+  getBookByAge,
+  getBookById,
+  getUser,
+} from "@/app/(rootLayout)/product/service";
 import { BooksEntity, TypeUser } from "@/type";
-import { Typeparams } from "./type";
+import { Typeparams } from "@/app/(rootLayout)/product/hook/type";
 
 export const useGetBookById = (id: string) => {
   return useQuery<BooksEntity>({

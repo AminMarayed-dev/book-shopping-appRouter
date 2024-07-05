@@ -1,15 +1,18 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
-import React, { useState } from "react";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import WishListSingleProduct from "../wishlist-singleProduct/WishListSingleProduct";
-import { TypeChangeAgeGroup, TypeChangeGenre } from "../../hook/type";
+import DescriptionSingleProduct from "@/app/(rootLayout)/product/components/description-singleProduct/DescriptionSingleProduct";
+import RatingSingleProduct from "@/app/(rootLayout)/product/components/rating-singleProduct/RatingSingleProduct";
+import WishListSingleProduct from "@/app/(rootLayout)/product/components/wishlist-singleProduct/WishListSingleProduct";
+import {
+  TypeChangeAgeGroup,
+  TypeChangeGenre,
+} from "@/app/(rootLayout)/product/hook/type";
+import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
+import { routes } from "@/constant/routes";
 import { BooksEntity } from "@/type";
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { routes } from "@/constant/routes";
-import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
-import RatingSingleProduct from "../rating-singleProduct/RatingSingleProduct";
-import DescriptionSingleProduct from "../description-singleProduct/DescriptionSingleProduct";
+import { useState } from "react";
 
 function MainSingleProduct({
   data,

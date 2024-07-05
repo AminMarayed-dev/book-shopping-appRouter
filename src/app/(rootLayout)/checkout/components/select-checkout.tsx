@@ -1,9 +1,9 @@
-"use client"
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { Typography } from '@mui/material';
+"use client";
+import { Typography } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Select from "@mui/material/Select";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -16,15 +16,23 @@ const MenuProps = {
   },
 };
 
-function SelectCheckOut({ placeholder, menuList, label }) {
+function SelectCheckOut({
+  placeholder,
+  menuList,
+  label,
+}: {
+  placeholder: any;
+  menuList: any;
+  label: any;
+}) {
   return (
     <div>
-      <FormControl sx={{width:"100%", mt: 3 }}>
-        <Typography component="h5" variant="h5" sx={{mb:1}}>{label}</Typography>
+      <FormControl sx={{ width: "100%", mt: 3 }}>
+        <Typography component="h5" variant="h5" sx={{ mb: 1 }}>
+          {label}
+        </Typography>
         <Select
-        fullWidth
-        //   value={personName}
-        //   onChange={handleChange}
+          fullWidth
           input={<OutlinedInput />}
           MenuProps={MenuProps}
           sx={{
@@ -39,17 +47,14 @@ function SelectCheckOut({ placeholder, menuList, label }) {
                 borderColor: "black",
               },
             },
-            color:'primary'
+            color: "primary",
           }}
         >
           <MenuItem disabled value="">
             <em>{placeholder}</em>
           </MenuItem>
-          {menuList.map((menu) => (
-            <MenuItem
-              key={menu}
-              value={menu}
-            >
+          {menuList.map((menu: any) => (
+            <MenuItem key={menu} value={menu}>
               {menu}
             </MenuItem>
           ))}
@@ -58,6 +63,5 @@ function SelectCheckOut({ placeholder, menuList, label }) {
     </div>
   );
 }
-
 
 export default SelectCheckOut;

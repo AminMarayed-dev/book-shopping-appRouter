@@ -1,5 +1,19 @@
 "use client";
 
+import { routes } from "@/constant/routes";
+import { getLocalStorage } from "@/utils/localStorage";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
+import TelegramIcon from "@mui/icons-material/Telegram";
 import {
   Box,
   Divider,
@@ -10,24 +24,8 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
-import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import StoreOutlinedIcon from "@mui/icons-material/StoreOutlined";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-
 import Link from "next/link";
-import link from "next/link";
-import { routes } from "@/constant/routes";
+import { useEffect, useState } from "react";
 
 const firstList = [
   {
@@ -47,6 +45,12 @@ const secondList = [
 ];
 
 function Footer() {
+  const basketBooks = getLocalStorage("basket");
+
+  const [lengthBookBasket, setLengthBookBasket] = useState(0);
+  useEffect(() => {
+    setLengthBookBasket(basketBooks.length);
+  }, [basketBooks]);
   return (
     <>
       <Box
@@ -144,10 +148,29 @@ function Footer() {
               </Box>
             </Link>
           </Grid>
-          <Grid item>
+          <Grid item sx={{ position: "relative" }}>
             <Link href="/cart" passHref>
               <Box textAlign="center">
-                <ShoppingBagOutlinedIcon sx={{ color: "black" }} />
+                {" "}
+                <ShoppingBagOutlinedIcon sx={{ color: "black" }} />{" "}
+                <Box
+                  sx={{
+                    bgcolor: "secondary.light",
+                    borderRadius: 10,
+                    width: 20,
+                    height: 20,
+                    fontSize: "10px",
+                    // textAlign: "center",
+                    // my: "auto",
+                    // display: "flex",
+                    position: "absolute",
+                    top: "-5px",
+                    color: "white",
+                    right: "0px",
+                  }}
+                >
+                  {lengthBookBasket}
+                </Box>
                 <Typography variant="h5">سبد خرید</Typography>
               </Box>
             </Link>

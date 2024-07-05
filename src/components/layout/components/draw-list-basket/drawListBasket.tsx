@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Divider from "@mui/material/Divider";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import { Close } from "@mui/icons-material";
-import Image from "next/image";
-import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
-import { BooksEntity } from "@/type";
-import CloseIcon from "@mui/icons-material/Close";
-import { formatNumber } from "@/utils/formatNumber";
-import { routes } from "@/constant/routes";
-import { useRouter } from "next/navigation";
-import ChangeQuantity from "@/components/change-quantity/ChangeQuantity";
 import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
+import CardBasket from "@/components/card-basket/CardBasket";
+import { routes } from "@/constant/routes";
+import { BooksEntity } from "@/type";
+import { formatNumber } from "@/utils/formatNumber";
+import { getLocalStorage, setLocalStorage } from "@/utils/localStorage";
+import CloseIcon from "@mui/icons-material/Close";
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import "../../../../global.css";
+
 interface SwipeableTemporaryDrawerProps {
   open: boolean;
   toggleDrawer: (
@@ -48,10 +43,11 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
     const foundedIndex = basketItems.findIndex((item) => item.id === id);
     if (basketItems[foundedIndex]?.quantityInBasket! >= 2) {
       setTotalPrice((prev) => prev - basketItems[foundedIndex]?.price!);
-
       basketItems[foundedIndex].quantityInBasket! -= 1;
       setLocalStorage("basket", basketItems);
       setArrayBook([...basketItems]);
+    } else {
+      removeFromBasket(id);
     }
   };
 
@@ -68,10 +64,29 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
 
   const removeFromBasket = (id: string) => {
     const updatedBasketItems = basketItems.filter((item) => item.id !== id);
-    setLocalStorage("basket", updatedBasketItems);
-    setArrayBook(updatedBasketItems);
+    Swal.fire({
+      title: "آیا از حذف این کتاب مطمئن هستید؟",
+      text: "عملیات غیرقابل بازگشت خواهد بود!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "حذف کتاب",
+      cancelButtonText: "انصراف",
+      customClass: {
+        container: "my-swal",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setLocalStorage("basket", updatedBasketItems);
+        setArrayBook(updatedBasketItems);
+      }
+    });
   };
-
+  function routeToCart() {
+    toggleDrawer(false);
+    router.push(routes.cart);
+  }
   return (
     <SwipeableDrawer
       anchor={"right"}
@@ -93,6 +108,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
             display: "flex",
             justifyContent: "space-between",
             alignContent: "center",
+            alignItems: " flex-end",
           }}
         >
           <Typography sx={{ m: 2, fontSize: "20px", fontWeight: "bold" }}>
@@ -108,56 +124,13 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
         <Divider />
         <Box sx={{ flex: 1, overflowY: "auto" }}>
           {arrayBook.map((item) => (
-            <Card
-              sx={{
-                display: "flex",
-                "&:hover": { bgcolor: "primary.dark" },
-                borderBottom: "2px solid #EFEFEF85",
-              }}
+            <CardBasket
+              addToNumber={addToNumber}
+              item={item}
+              removeFromBasket={removeFromBasket}
+              subtractFromNumber={subtractFromNumber}
               key={item.id}
-            >
-              <CardMedia
-                sx={{ display: "grid", alignItems: "center", padding: 1 }}
-              >
-                <Image
-                  alt="img of book"
-                  src={item.imageUrl ? item.imageUrl[0] : ""}
-                  width={300}
-                  height={200}
-                />
-              </CardMedia>
-              <CardContent>
-                <Typography>{item.name}</Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: "10px",
-                    my: "10px",
-                    height: "30px",
-                    textAlign: "center",
-                  }}
-                >
-                  <ChangeQuantity
-                    item={item.id!}
-                    subtractFromNumber={() => subtractFromNumber(item.id!)}
-                    disabled={false}
-                    addToNumber={() => addToNumber(item.id!)}
-                    quantity={item.quantityInBasket!}
-                  />
-                </Box>
-                <Typography
-                  sx={{ display: "flex", flexWrap: "nowrap", fontSize: 15 }}
-                >
-                  {item.quantityInBasket} × {formatNumber(item.price!)} تومان
-                </Typography>
-              </CardContent>
-              <IconButton
-                sx={{ display: "grid", alignItems: "start" }}
-                onClick={() => removeFromBasket(item.id!)}
-              >
-                <Close />
-              </IconButton>
-            </Card>
+            />
           ))}
         </Box>
         <Divider />
@@ -166,10 +139,7 @@ const SwipeableTemporaryDrawer: React.FC<SwipeableTemporaryDrawerProps> = ({
           <Typography>
             جمع کل سبد خرید: {formatNumber(totalPrice)} تومان
           </Typography>
-          <ButtonTypeOne
-            text="مشاهده و سبد خرید"
-            handleClick={() => router.push(routes.cart)}
-          />
+          <ButtonTypeOne text="مشاهده و سبد خرید" handleClick={routeToCart} />
           <ButtonTypeOne
             text="تسویه حساب"
             handleClick={() => (location.href = routes.checkout)}

@@ -88,12 +88,16 @@ function FormDashboard({
               ))}
 
               <SelectForm
-                value={newBook.genre}
-                handleChange={handleGenreChange}
+                item1="وحشت"
+                item2="فانتزی"
+                value={newBook.genre!}
+                handleChange={() => handleGenreChange}
               />
               <SelectForm
-                value={newBook.ageGroup}
-                handleChange={handleAgeGroupChange}
+                item1="جوان"
+                item2="نوجوان"
+                value={newBook.ageGroup!}
+                handleChange={() => handleAgeGroupChange}
               />
 
               <TextFieldForm

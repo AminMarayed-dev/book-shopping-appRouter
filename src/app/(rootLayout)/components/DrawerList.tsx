@@ -1,32 +1,32 @@
 "use client";
 
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import {
-  Tabs,
-  Tab,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
-  Typography,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  Tab,
+  Tabs,
+  Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import PersonIcon from "@mui/icons-material/Person";
-import HomeIcon from "@mui/icons-material/Home";
-import InfoIcon from "@mui/icons-material/Info";
-import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
-import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { getCookie, setCookie } from "cookies-next";
 import Link from "next/link";
-import {  getCookie, setCookie } from 'cookies-next';
+import { useEffect, useState } from "react";
 
 function DrawerList({ toggleDrawer }: any) {
-  const role = getCookie("role");
+  const role: any = getCookie("role");
   const [roleText, setRoleText] = useState("");
 
   useEffect(() => {
@@ -140,9 +140,8 @@ function DrawerList({ toggleDrawer }: any) {
                   <ListItemButton
                     onClick={() => {
                       menu.text === "خروج"
-                        ? (
-                          handleListItemClick(),
-                          setCookie('role', "" ),
+                        ? (handleListItemClick(),
+                          setCookie("role", ""),
                           setRoleText(""))
                         : "";
                     }}
@@ -157,7 +156,6 @@ function DrawerList({ toggleDrawer }: any) {
         </Box>
       )}
       {value === 1 && (
-      
         <Box>
           {categoryList.map((category, index) => (
             <Accordion key={index} elevation={0}>

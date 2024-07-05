@@ -1,5 +1,5 @@
-import PageAgeGroup from "../components/pageAgeGroup/pageAgeGroup";
-import PageGenre from "../components/pageGenre/pageGenre";
+import PageAgeGroup from "@/app/(rootLayout)/product-category/components/pageAgeGroup/pageAgeGroup";
+import PageGenre from "@/app/(rootLayout)/product-category/components/pageGenre/pageGenre";
 
 export default function Page({ params }: { params: { slug: string[] } }) {
   const { slug } = params;

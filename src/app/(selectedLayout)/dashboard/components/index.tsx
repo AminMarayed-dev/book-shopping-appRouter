@@ -152,6 +152,7 @@ const Dashboard: React.FC = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "حذف کتاب",
+      cancelButtonText: "انصراف",
     }).then((result) => {
       if (result.isConfirmed) {
         handleDeleteClick(id);

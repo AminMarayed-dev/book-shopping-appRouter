@@ -1,19 +1,16 @@
 "use client";
 
 import { Container } from "@mui/material";
-
-import Button from "@mui/material/Button";
-
+import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
+import { routes } from "@/constant/routes";
+import { getLocalStorage } from "@/utils/localStorage";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { getLocalStorage } from "@/utils/localStorage";
-import ButtonTypeOne from "@/components/button-type-one/ButtonTypeOne";
-import { routes } from "@/constant/routes";
 
 function createData(name: string, price: number | string) {
   return { name, price };
@@ -63,7 +60,10 @@ function PaymentCheckOut() {
           </TableBody>
         </Table>
       </TableContainer>
-      <ButtonTypeOne text=" ثبت سفارش" handleClick={()=>location.href=(routes.payment)} />
+      <ButtonTypeOne
+        text=" ثبت سفارش"
+        handleClick={() => (location.href = routes.payment)}
+      />
     </Container>
   );
 }
