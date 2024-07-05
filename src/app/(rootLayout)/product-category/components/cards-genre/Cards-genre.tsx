@@ -1,7 +1,6 @@
 import { routes } from "@/constant/routes";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 function CardsGenre({
   ageGroupEn,
@@ -46,6 +45,7 @@ function CardsGenre({
         {items.map((item) => {
           return (
             <Card
+              key={item.src}
               sx={{ boxShadow: 4 }}
               onClick={() =>
                 router.push(
